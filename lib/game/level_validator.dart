@@ -22,52 +22,64 @@ abstract class LevelValidator {
     // Grid size boundary check (PRD 2.1: 3x3 to 8x8)
     if (level.gridSize < GameConfig.minGridSize ||
         level.gridSize > GameConfig.maxGridSize) {
-      errors.add(LevelValidationError(
-        'gridSize',
-        'Grid size ${level.gridSize} must be between ${GameConfig.minGridSize} and ${GameConfig.maxGridSize}.',
-      ));
+      errors.add(
+        LevelValidationError(
+          'gridSize',
+          'Grid size ${level.gridSize} must be between ${GameConfig.minGridSize} and ${GameConfig.maxGridSize}.',
+        ),
+      );
     }
 
     // Color count boundary check
     if (level.colorCount < GameConfig.minColorCount ||
         level.colorCount > GameConfig.maxColorCount) {
-      errors.add(LevelValidationError(
-        'colorCount',
-        'Color count ${level.colorCount} must be between ${GameConfig.minColorCount} and ${GameConfig.maxColorCount}.',
-      ));
+      errors.add(
+        LevelValidationError(
+          'colorCount',
+          'Color count ${level.colorCount} must be between ${GameConfig.minColorCount} and ${GameConfig.maxColorCount}.',
+        ),
+      );
     }
 
     // Target color range check
     if (level.targetColor < 0 || level.targetColor >= level.colorCount) {
-      errors.add(LevelValidationError(
-        'targetColor',
-        'Target color index ${level.targetColor} is out of bounds for colorCount ${level.colorCount}.',
-      ));
+      errors.add(
+        LevelValidationError(
+          'targetColor',
+          'Target color index ${level.targetColor} is out of bounds for colorCount ${level.colorCount}.',
+        ),
+      );
     }
 
     // Initial board dimension check
     if (level.initialBoard.length != level.gridSize) {
-      errors.add(LevelValidationError(
-        'initialBoard',
-        'Initial board row count ${level.initialBoard.length} does not match gridSize ${level.gridSize}.',
-      ));
+      errors.add(
+        LevelValidationError(
+          'initialBoard',
+          'Initial board row count ${level.initialBoard.length} does not match gridSize ${level.gridSize}.',
+        ),
+      );
     } else {
       for (int i = 0; i < level.initialBoard.length; i++) {
         if (level.initialBoard[i].length != level.gridSize) {
-          errors.add(LevelValidationError(
-            'initialBoard[$i]',
-            'Row $i length ${level.initialBoard[i].length} does not match gridSize ${level.gridSize}.',
-          ));
+          errors.add(
+            LevelValidationError(
+              'initialBoard[$i]',
+              'Row $i length ${level.initialBoard[i].length} does not match gridSize ${level.gridSize}.',
+            ),
+          );
         }
       }
     }
 
     // Time limit check
     if (level.timeLimitSeconds <= 0.0) {
-      errors.add(LevelValidationError(
-        'timeLimitSeconds',
-        'Time limit must be positive.',
-      ));
+      errors.add(
+        LevelValidationError(
+          'timeLimitSeconds',
+          'Time limit must be positive.',
+        ),
+      );
     }
 
     // Special tiles coordinate check
@@ -76,10 +88,12 @@ abstract class LevelValidator {
           tileDef.row >= level.gridSize ||
           tileDef.column < 0 ||
           tileDef.column >= level.gridSize) {
-        errors.add(LevelValidationError(
-          'specialTiles',
-          'Special tile position (${tileDef.row}, ${tileDef.column}) is outside grid dimensions.',
-        ));
+        errors.add(
+          LevelValidationError(
+            'specialTiles',
+            'Special tile position (${tileDef.row}, ${tileDef.column}) is outside grid dimensions.',
+          ),
+        );
       }
     }
 
@@ -104,20 +118,26 @@ abstract class LevelValidator {
         final st = specialMap[key];
 
         if (st != null) {
-          row.add(TileModel(
-            row: r,
-            col: c,
-            colorIndex: colorIndex,
-            type: st.type,
-            lockRemainingSeconds: st.type == TileType.lock ? st.lockDuration : 0.0,
-          ));
+          row.add(
+            TileModel(
+              row: r,
+              col: c,
+              colorIndex: colorIndex,
+              type: st.type,
+              lockRemainingSeconds: st.type == TileType.lock
+                  ? st.lockDuration
+                  : 0.0,
+            ),
+          );
         } else {
-          row.add(TileModel(
-            row: r,
-            col: c,
-            colorIndex: colorIndex,
-            type: TileType.normal,
-          ));
+          row.add(
+            TileModel(
+              row: r,
+              col: c,
+              colorIndex: colorIndex,
+              type: TileType.normal,
+            ),
+          );
         }
       }
       board.add(row);

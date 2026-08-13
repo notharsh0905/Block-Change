@@ -28,10 +28,7 @@ abstract class TileManager {
     required int colorCount,
     double defaultFreezeDuration = 3.0,
   }) {
-    if (row < 0 ||
-        row >= board.length ||
-        col < 0 ||
-        col >= board[row].length) {
+    if (row < 0 || row >= board.length || col < 0 || col >= board[row].length) {
       return TileTapResult(newBoard: board);
     }
 
@@ -57,7 +54,10 @@ abstract class TileManager {
 
       case TileType.freeze:
         // Freeze tile activates freeze timer and cycles tile color
-        final newColor = GameRules.cycleColor(targetTile.colorIndex, colorCount);
+        final newColor = GameRules.cycleColor(
+          targetTile.colorIndex,
+          colorCount,
+        );
         final newBoard = _cloneBoard(board);
         newBoard[row][col] = targetTile.copyWith(colorIndex: newColor);
         return TileTapResult(
@@ -72,22 +72,22 @@ abstract class TileManager {
         if (targetTile.lockRemainingSeconds > 0.0) {
           return TileTapResult(newBoard: board);
         }
-        final newColor = GameRules.cycleColor(targetTile.colorIndex, colorCount);
+        final newColor = GameRules.cycleColor(
+          targetTile.colorIndex,
+          colorCount,
+        );
         final newBoard = _cloneBoard(board);
         newBoard[row][col] = targetTile.copyWith(colorIndex: newColor);
-        return TileTapResult(
-          newBoard: newBoard,
-          isTileChanged: true,
-        );
+        return TileTapResult(newBoard: newBoard, isTileChanged: true);
 
       case TileType.normal:
-        final newColor = GameRules.cycleColor(targetTile.colorIndex, colorCount);
+        final newColor = GameRules.cycleColor(
+          targetTile.colorIndex,
+          colorCount,
+        );
         final newBoard = _cloneBoard(board);
         newBoard[row][col] = targetTile.copyWith(colorIndex: newColor);
-        return TileTapResult(
-          newBoard: newBoard,
-          isTileChanged: true,
-        );
+        return TileTapResult(newBoard: newBoard, isTileChanged: true);
     }
   }
 
@@ -121,9 +121,7 @@ abstract class TileManager {
   /// Helper to create a deep mutable copy of 2D board matrix.
   static List<List<TileModel>> _cloneBoard(List<List<TileModel>> board) {
     return board
-        .map((row) => row
-            .map((tile) => tile.copyWith())
-            .toList())
+        .map((row) => row.map((tile) => tile.copyWith()).toList())
         .toList();
   }
 }

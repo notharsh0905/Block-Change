@@ -39,14 +39,14 @@ class PlayerProgress {
   }
 
   Map<String, dynamic> toJson() => {
-        'highestUnlockedLevel': highestUnlockedLevel,
-        'levelStars': levelStars.map((k, v) => MapEntry(k.toString(), v)),
-        'levelBestMoves': levelBestMoves.map((k, v) => MapEntry(k.toString(), v)),
-        'levelBestTimes': levelBestTimes.map((k, v) => MapEntry(k.toString(), v)),
-        'equippedSkinId': equippedSkinId,
-        'unlockedSkinIds': unlockedSkinIds,
-        'removeAdsPurchased': removeAdsPurchased,
-      };
+    'highestUnlockedLevel': highestUnlockedLevel,
+    'levelStars': levelStars.map((k, v) => MapEntry(k.toString(), v)),
+    'levelBestMoves': levelBestMoves.map((k, v) => MapEntry(k.toString(), v)),
+    'levelBestTimes': levelBestTimes.map((k, v) => MapEntry(k.toString(), v)),
+    'equippedSkinId': equippedSkinId,
+    'unlockedSkinIds': unlockedSkinIds,
+    'removeAdsPurchased': removeAdsPurchased,
+  };
 
   factory PlayerProgress.fromJson(Map<String, dynamic> json) {
     final rawStars = json['levelStars'] as Map<String, dynamic>? ?? {};
@@ -56,9 +56,12 @@ class PlayerProgress {
     final moves = rawMoves.map((k, v) => MapEntry(int.parse(k), v as int));
 
     final rawTimes = json['levelBestTimes'] as Map<String, dynamic>? ?? {};
-    final times = rawTimes.map((k, v) => MapEntry(int.parse(k), (v as num).toDouble()));
+    final times = rawTimes.map(
+      (k, v) => MapEntry(int.parse(k), (v as num).toDouble()),
+    );
 
-    final skins = (json['unlockedSkinIds'] as List<dynamic>?)
+    final skins =
+        (json['unlockedSkinIds'] as List<dynamic>?)
             ?.map((e) => e as String)
             .toList() ??
         const ['skin_classic'];

@@ -16,11 +16,11 @@ class TileDefinition {
   });
 
   Map<String, dynamic> toJson() => {
-        'row': row,
-        'column': column,
-        'type': type.name,
-        'lockDuration': lockDuration,
-      };
+    'row': row,
+    'column': column,
+    'type': type.name,
+    'lockDuration': lockDuration,
+  };
 
   factory TileDefinition.fromJson(Map<String, dynamic> json) {
     return TileDefinition(
@@ -67,12 +67,12 @@ class TileModel {
   }
 
   Map<String, dynamic> toJson() => {
-        'row': row,
-        'col': col,
-        'colorIndex': colorIndex,
-        'type': type.name,
-        'lockRemainingSeconds': lockRemainingSeconds,
-      };
+    'row': row,
+    'col': col,
+    'colorIndex': colorIndex,
+    'type': type.name,
+    'lockRemainingSeconds': lockRemainingSeconds,
+  };
 
   factory TileModel.fromJson(Map<String, dynamic> json) {
     return TileModel(

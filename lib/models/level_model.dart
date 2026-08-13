@@ -18,19 +18,17 @@ class ChaosConfig {
   });
 
   Map<String, dynamic> toJson() => {
-        'enabled': enabled,
-        'initialInterval': initialInterval,
-        'minimumInterval': minimumInterval,
-        'adaptive': adaptive,
-      };
+    'enabled': enabled,
+    'initialInterval': initialInterval,
+    'minimumInterval': minimumInterval,
+    'adaptive': adaptive,
+  };
 
   factory ChaosConfig.fromJson(Map<String, dynamic> json) {
     return ChaosConfig(
       enabled: json['enabled'] as bool? ?? false,
-      initialInterval:
-          (json['initialInterval'] as num?)?.toDouble() ?? 2.0,
-      minimumInterval:
-          (json['minimumInterval'] as num?)?.toDouble() ?? 0.35,
+      initialInterval: (json['initialInterval'] as num?)?.toDouble() ?? 2.0,
+      minimumInterval: (json['minimumInterval'] as num?)?.toDouble() ?? 0.35,
       adaptive: json['adaptive'] as bool? ?? false,
     );
   }
@@ -51,11 +49,11 @@ class StarRules {
   });
 
   Map<String, dynamic> toJson() => {
-        'threeStarMaxMoves': threeStarMaxMoves,
-        'threeStarMinRemainingSeconds': threeStarMinRemainingSeconds,
-        'twoStarMaxMoves': twoStarMaxMoves,
-        'twoStarMinRemainingSeconds': twoStarMinRemainingSeconds,
-      };
+    'threeStarMaxMoves': threeStarMaxMoves,
+    'threeStarMinRemainingSeconds': threeStarMinRemainingSeconds,
+    'twoStarMaxMoves': twoStarMaxMoves,
+    'twoStarMinRemainingSeconds': twoStarMinRemainingSeconds,
+  };
 
   factory StarRules.fromJson(Map<String, dynamic> json) {
     return StarRules(
@@ -63,8 +61,8 @@ class StarRules {
       threeStarMinRemainingSeconds:
           (json['threeStarMinRemainingSeconds'] as num).toDouble(),
       twoStarMaxMoves: json['twoStarMaxMoves'] as int,
-      twoStarMinRemainingSeconds:
-          (json['twoStarMinRemainingSeconds'] as num).toDouble(),
+      twoStarMinRemainingSeconds: (json['twoStarMinRemainingSeconds'] as num)
+          .toDouble(),
     );
   }
 }
@@ -106,22 +104,22 @@ class LevelModel {
   });
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'worldId': worldId,
-        'name': name,
-        'gridSize': gridSize,
-        'colorCount': colorCount,
-        'targetColor': targetColor,
-        'initialBoard': initialBoard,
-        'specialTiles': specialTiles.map((t) => t.toJson()).toList(),
-        'timeLimitSeconds': timeLimitSeconds,
-        'chaosConfig': chaosConfig.toJson(),
-        'starRules': starRules.toJson(),
-        'seed': seed,
-        'difficulty': difficulty.name,
-        'tutorialStep': tutorialStep,
-        'rulesVersion': rulesVersion,
-      };
+    'id': id,
+    'worldId': worldId,
+    'name': name,
+    'gridSize': gridSize,
+    'colorCount': colorCount,
+    'targetColor': targetColor,
+    'initialBoard': initialBoard,
+    'specialTiles': specialTiles.map((t) => t.toJson()).toList(),
+    'timeLimitSeconds': timeLimitSeconds,
+    'chaosConfig': chaosConfig.toJson(),
+    'starRules': starRules.toJson(),
+    'seed': seed,
+    'difficulty': difficulty.name,
+    'tutorialStep': tutorialStep,
+    'rulesVersion': rulesVersion,
+  };
 
   factory LevelModel.fromJson(Map<String, dynamic> json) {
     final rawBoard = json['initialBoard'] as List<dynamic>;
@@ -144,8 +142,9 @@ class LevelModel {
       initialBoard: board,
       specialTiles: specialTiles,
       timeLimitSeconds: (json['timeLimitSeconds'] as num).toDouble(),
-      chaosConfig:
-          ChaosConfig.fromJson(json['chaosConfig'] as Map<String, dynamic>),
+      chaosConfig: ChaosConfig.fromJson(
+        json['chaosConfig'] as Map<String, dynamic>,
+      ),
       starRules: StarRules.fromJson(json['starRules'] as Map<String, dynamic>),
       seed: json['seed'] as int,
       difficulty: Difficulty.values.byName(json['difficulty'] as String),

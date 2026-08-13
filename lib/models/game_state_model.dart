@@ -5,7 +5,16 @@ import 'tile_model.dart';
 enum GameStatus { ready, playing, paused, won, timeUp, offlineBlocked }
 
 /// Recent event triggers for particle and audio triggers.
-enum EngineEvent { none, tileTapped, bombExploded, freezeTriggered, lockExpired, chaosTriggered, win, timeUp }
+enum EngineEvent {
+  none,
+  tileTapped,
+  bombExploded,
+  freezeTriggered,
+  lockExpired,
+  chaosTriggered,
+  win,
+  timeUp,
+}
 
 /// Immutable snapshot of live gameplay state.
 class GameStateModel {

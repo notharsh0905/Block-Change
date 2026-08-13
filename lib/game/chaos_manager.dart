@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import '../models/tile_model.dart';
 
 /// Result of chaos automatic mutation pass.
@@ -55,8 +56,7 @@ abstract class ChaosManager {
         .map((row) => row.map((tile) => tile.copyWith()).toList())
         .toList();
 
-    newBoard[target.row][target.col] =
-        target.copyWith(colorIndex: newColor);
+    newBoard[target.row][target.col] = target.copyWith(colorIndex: newColor);
 
     return ChaosMutationResult(
       newBoard: newBoard,

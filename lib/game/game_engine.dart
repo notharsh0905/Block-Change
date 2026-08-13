@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 
 import '../models/game_state_model.dart';
@@ -16,8 +17,8 @@ class GameEngine extends ValueNotifier<GameStateModel> {
   math.Random _rng;
 
   GameEngine(LevelModel level, {int? seed})
-      : _rng = math.Random(seed ?? level.seed),
-        super(_createInitialState(level, seed ?? level.seed));
+    : _rng = math.Random(seed ?? level.seed),
+      super(_createInitialState(level, seed ?? level.seed));
 
   static GameStateModel _createInitialState(LevelModel level, int seed) {
     final board = LevelValidator.buildBoardFromLevel(level);
@@ -87,7 +88,9 @@ class GameEngine extends ValueNotifier<GameStateModel> {
       colorCount: value.level.colorCount,
     );
 
-    if (!tapResult.isTileChanged && !tapResult.isBombExploded && !tapResult.isFreezeTriggered) {
+    if (!tapResult.isTileChanged &&
+        !tapResult.isBombExploded &&
+        !tapResult.isFreezeTriggered) {
       return;
     }
 
@@ -133,23 +136,27 @@ class GameEngine extends ValueNotifier<GameStateModel> {
 
     // 2. Update locked tiles duration
     bool isAnyLockUpdated = false;
-    final newBoard = currentBoard.map((row) => row.map((tile) {
-      if (tile.type == TileType.lock && tile.lockRemainingSeconds > 0.0) {
-        final remaining = math.max(0.0, tile.lockRemainingSeconds - dt);
-        if (remaining != tile.lockRemainingSeconds) {
-          isAnyLockUpdated = true;
-          if (remaining == 0.0) {
-            event = EngineEvent.lockExpired;
-            return tile.copyWith(
-              type: TileType.normal,
-              lockRemainingSeconds: 0.0,
-            );
-          }
-          return tile.copyWith(lockRemainingSeconds: remaining);
-        }
-      }
-      return tile;
-    }).toList()).toList();
+    final newBoard = currentBoard
+        .map(
+          (row) => row.map((tile) {
+            if (tile.type == TileType.lock && tile.lockRemainingSeconds > 0.0) {
+              final remaining = math.max(0.0, tile.lockRemainingSeconds - dt);
+              if (remaining != tile.lockRemainingSeconds) {
+                isAnyLockUpdated = true;
+                if (remaining == 0.0) {
+                  event = EngineEvent.lockExpired;
+                  return tile.copyWith(
+                    type: TileType.normal,
+                    lockRemainingSeconds: 0.0,
+                  );
+                }
+                return tile.copyWith(lockRemainingSeconds: remaining);
+              }
+            }
+            return tile;
+          }).toList(),
+        )
+        .toList();
 
     if (isAnyLockUpdated) {
       currentBoard = newBoard;

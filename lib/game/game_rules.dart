@@ -26,7 +26,9 @@ abstract class GameRules {
 
   /// Calculates the fraction of tiles on the board matching [targetColor].
   static double calculateSimilarityRatio(
-      List<List<TileModel>> board, int targetColor) {
+    List<List<TileModel>> board,
+    int targetColor,
+  ) {
     if (board.isEmpty || board.first.isEmpty) return 0.0;
 
     int matchCount = 0;

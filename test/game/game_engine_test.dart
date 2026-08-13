@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:block_change/game/game_engine.dart';
 import 'package:block_change/game/game_rules.dart';
-import 'package:block_change/game/tile_manager.dart';
+
 import 'package:block_change/models/game_state_model.dart';
 import 'package:block_change/models/level_model.dart';
 import 'package:block_change/models/tile_model.dart';
@@ -52,9 +52,7 @@ void main() {
           [1, 2, 1],
           [1, 1, 1],
         ],
-        specialTiles: [
-          TileDefinition(row: 1, column: 1, type: TileType.bomb),
-        ],
+        specialTiles: [TileDefinition(row: 1, column: 1, type: TileType.bomb)],
         timeLimitSeconds: 60.0,
         chaosConfig: ChaosConfig(enabled: false),
         starRules: StarRules(
@@ -80,7 +78,12 @@ void main() {
           [0, 0, 0],
         ],
         specialTiles: [
-          TileDefinition(row: 1, column: 1, type: TileType.lock, lockDuration: 3.0),
+          TileDefinition(
+            row: 1,
+            column: 1,
+            type: TileType.lock,
+            lockDuration: 3.0,
+          ),
         ],
         timeLimitSeconds: 60.0,
         chaosConfig: ChaosConfig(enabled: false),
@@ -191,9 +194,7 @@ void main() {
           [0, 0, 0],
           [0, 0, 0],
         ],
-        specialTiles: [
-          TileDefinition(row: 0, column: 0, type: TileType.bomb),
-        ],
+        specialTiles: [TileDefinition(row: 0, column: 0, type: TileType.bomb)],
         timeLimitSeconds: 60.0,
         chaosConfig: ChaosConfig(enabled: false),
         starRules: StarRules(
@@ -273,6 +274,14 @@ void main() {
       // Board should NOT change because chaos is frozen
       expect(engine.value.isFrozen, isTrue);
       expect(engine.value.chaosTimerSeconds, 0.0);
+      for (int r = 0; r < 3; r++) {
+        for (int c = 0; c < 3; c++) {
+          expect(
+            engine.value.board[r][c].colorIndex,
+            equals(boardBeforeTick[r][c].colorIndex),
+          );
+        }
+      }
     });
 
     test('7. Freeze expires correctly', () {
@@ -302,7 +311,8 @@ void main() {
       bool mutated = false;
       for (int r = 0; r < 3; r++) {
         for (int c = 0; c < 3; c++) {
-          if (engine.value.board[r][c].colorIndex != initialBoard[r][c].colorIndex) {
+          if (engine.value.board[r][c].colorIndex !=
+              initialBoard[r][c].colorIndex) {
             mutated = true;
             break;
           }
@@ -355,7 +365,10 @@ void main() {
       final engine = GameEngine(basicLevel);
       engine.start();
 
-      expect(GameRules.checkWin(engine.value.board, engine.value.targetColor), isFalse);
+      expect(
+        GameRules.checkWin(engine.value.board, engine.value.targetColor),
+        isFalse,
+      );
       expect(engine.value.status, GameStatus.playing);
     });
 
