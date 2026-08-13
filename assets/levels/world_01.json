@@ -1,0 +1,37 @@
+{
+  "worldId": 1,
+  "worldName": "First Change",
+  "levels": [
+    {
+      "id": 1,
+      "worldId": 1,
+      "name": "First Tap",
+      "gridSize": 3,
+      "colorCount": 3,
+      "targetColor": 0,
+      "initialBoard": [
+        [1, 1, 1],
+        [1, 0, 1],
+        [1, 1, 1]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 60.0,
+      "chaosConfig": {
+        "enabled": false,
+        "initialInterval": 2.0,
+        "minimumInterval": 0.5,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 5,
+        "threeStarMinRemainingSeconds": 45.0,
+        "twoStarMaxMoves": 10,
+        "twoStarMinRemainingSeconds": 30.0
+      },
+      "seed": 1001,
+      "difficulty": "easy",
+      "tutorialStep": "tap_to_change",
+      "rulesVersion": 1
+    }
+  ]
+}
