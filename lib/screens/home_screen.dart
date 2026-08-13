@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../theme/app_colors.dart';
 import '../widgets/game_button.dart';
 
@@ -47,7 +48,8 @@ class HomeScreen extends StatelessWidget {
                 style: TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 32,
-                  fontWeight: FontWeight.black,
+                  fontWeight: FontWeight.w900,
+
                   letterSpacing: 1.5,
                 ),
               ),
@@ -91,7 +93,9 @@ class HomeScreen extends StatelessWidget {
                       onPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Level Map unlocked in future phase!'),
+                            content: Text(
+                              'Level Map unlocked in future phase!',
+                            ),
                             duration: Duration(seconds: 1),
                           ),
                         );

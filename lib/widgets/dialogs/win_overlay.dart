@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../theme/app_colors.dart';
 import '../game_button.dart';
 
@@ -26,9 +27,7 @@ class WinOverlay extends StatelessWidget {
     return Dialog(
       backgroundColor: AppColors.surfaceElevated,
       elevation: 12,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(28.0),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28.0)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
         child: Column(
@@ -40,7 +39,8 @@ class WinOverlay extends StatelessWidget {
               style: TextStyle(
                 color: AppColors.sunshine,
                 fontSize: 24,
-                fontWeight: FontWeight.black,
+                fontWeight: FontWeight.w900,
+
                 letterSpacing: 1.2,
               ),
             ),
@@ -64,7 +64,9 @@ class WinOverlay extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 6.0),
                   child: Icon(
                     isEarned ? Icons.star_rounded : Icons.star_outline_rounded,
-                    color: isEarned ? AppColors.sunshine : AppColors.textSecondary,
+                    color: isEarned
+                        ? AppColors.sunshine
+                        : AppColors.textSecondary,
                     size: 44,
                   ),
                 );
@@ -138,7 +140,7 @@ class _StatItem extends StatelessWidget {
           style: const TextStyle(
             color: AppColors.textPrimary,
             fontSize: 20,
-            fontWeight: FontWeight.black,
+            fontWeight: FontWeight.w900,
           ),
         ),
       ],

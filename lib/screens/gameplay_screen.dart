@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../data/level_loader.dart';
@@ -35,12 +36,16 @@ class _GameplayScreenState extends State<GameplayScreen> {
   }
 
   Future<void> _initLevelsAndStart() async {
-    _availableLevels = LevelLoader.getFallbackWorldLevels(1);
+    final fallbackLevels = LevelLoader.getFallbackWorldLevels(1);
     if (widget.initialLevel != null) {
-      _currentLevelIndex = _availableLevels
-          .indexWhere((l) => l.id == widget.initialLevel!.id);
-      if (_currentLevelIndex < 0) _currentLevelIndex = 0;
+      _availableLevels = [
+        widget.initialLevel!,
+        ...fallbackLevels.where((l) => l.id != widget.initialLevel!.id),
+      ];
+    } else {
+      _availableLevels = fallbackLevels;
     }
+    _currentLevelIndex = 0;
 
     _loadCurrentLevel();
   }
@@ -160,15 +165,17 @@ class _GameplayScreenState extends State<GameplayScreen> {
     return ValueListenableBuilder<GameStateModel>(
       valueListenable: _engine!,
       builder: (context, state, child) {
-        final targetColor =
-            AppColors.gamePalette[state.targetColor % AppColors.gamePalette.length];
+        final targetColor = AppColors
+            .gamePalette[state.targetColor % AppColors.gamePalette.length];
 
         return Scaffold(
           backgroundColor: AppColors.background,
           body: SafeArea(
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 12.0,
+              ),
               child: Column(
                 children: [
                   // Top HUD Header
@@ -184,7 +191,7 @@ class _GameplayScreenState extends State<GameplayScreen> {
                             style: const TextStyle(
                               color: AppColors.textPrimary,
                               fontSize: 20,
-                              fontWeight: FontWeight.black,
+                              fontWeight: FontWeight.w900,
                             ),
                           ),
                           Text(
@@ -201,7 +208,9 @@ class _GameplayScreenState extends State<GameplayScreen> {
                       // Target Color Indicator
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 12.0, vertical: 6.0),
+                          horizontal: 12.0,
+                          vertical: 6.0,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.surface,
                           borderRadius: BorderRadius.circular(16.0),
@@ -245,7 +254,9 @@ class _GameplayScreenState extends State<GameplayScreen> {
                   // Metrics Bar (Timer, Moves, Freeze)
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 10.0),
+                      horizontal: 16.0,
+                      vertical: 10.0,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.surface,
                       borderRadius: BorderRadius.circular(16.0),
@@ -255,8 +266,11 @@ class _GameplayScreenState extends State<GameplayScreen> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.timer_rounded,
-                                color: AppColors.sky, size: 20),
+                            const Icon(
+                              Icons.timer_rounded,
+                              color: AppColors.sky,
+                              size: 20,
+                            ),
                             const SizedBox(width: 6),
                             Text(
                               '${state.timeRemainingSeconds.ceil()}s',
@@ -270,8 +284,11 @@ class _GameplayScreenState extends State<GameplayScreen> {
                         ),
                         Row(
                           children: [
-                            const Icon(Icons.touch_app_rounded,
-                                color: AppColors.mint, size: 20),
+                            const Icon(
+                              Icons.touch_app_rounded,
+                              color: AppColors.mint,
+                              size: 20,
+                            ),
                             const SizedBox(width: 6),
                             Text(
                               '${state.movesCount}',
@@ -286,15 +303,20 @@ class _GameplayScreenState extends State<GameplayScreen> {
                         if (state.isFrozen)
                           Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
                             decoration: BoxDecoration(
                               color: AppColors.sky,
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Row(
                               children: [
-                                const Icon(Icons.ac_unit_rounded,
-                                    color: Colors.white, size: 14),
+                                const Icon(
+                                  Icons.ac_unit_rounded,
+                                  color: Colors.white,
+                                  size: 14,
+                                ),
                                 const SizedBox(width: 4),
                                 Text(
                                   '${state.freezeRemainingSeconds.ceil()}s',
@@ -311,15 +333,14 @@ class _GameplayScreenState extends State<GameplayScreen> {
                     ),
                   ),
 
-                  const Spacer(),
-
-                  // Main Gameplay Puzzle Board
-                  GameBoardWidget(
-                    board: state.board,
-                    onTileTap: (r, c) => _engine?.tapTile(r, c),
+                  Expanded(
+                    child: Center(
+                      child: GameBoardWidget(
+                        board: state.board,
+                        onTileTap: (r, c) => _engine?.tapTile(r, c),
+                      ),
+                    ),
                   ),
-
-                  const Spacer(),
 
                   // Contextual Tutorial Step Banner
                   if (state.level.tutorialStep != null)

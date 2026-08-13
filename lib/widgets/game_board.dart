@@ -1,5 +1,7 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+
 import '../models/tile_model.dart';
 import 'game_tile.dart';
 

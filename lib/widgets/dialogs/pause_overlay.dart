@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../theme/app_colors.dart';
 import '../game_button.dart';
 
@@ -20,9 +21,7 @@ class PauseOverlay extends StatelessWidget {
     return Dialog(
       backgroundColor: AppColors.surfaceElevated,
       elevation: 12,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(28.0),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28.0)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
         child: Column(
@@ -34,7 +33,8 @@ class PauseOverlay extends StatelessWidget {
               style: TextStyle(
                 color: AppColors.textPrimary,
                 fontSize: 24,
-                fontWeight: FontWeight.black,
+                fontWeight: FontWeight.w900,
+
                 letterSpacing: 1.2,
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/tile_model.dart';
 import '../theme/app_colors.dart';
 
@@ -68,8 +69,12 @@ class _GameTileWidgetState extends State<GameTileWidget>
     final shadowColor = AppColors.gamePaletteDark[colorIdx];
     final isLocked = widget.tile.isLocked;
 
-    final actualColor = isLocked ? Color.lerp(baseColor, Colors.black, 0.4)! : baseColor;
-    final actualShadow = isLocked ? Color.lerp(shadowColor, Colors.black, 0.5)! : shadowColor;
+    final actualColor = isLocked
+        ? Color.lerp(baseColor, Colors.black, 0.4)!
+        : baseColor;
+    final actualShadow = isLocked
+        ? Color.lerp(shadowColor, Colors.black, 0.5)!
+        : shadowColor;
 
     return GestureDetector(
       onTap: _handleTap,

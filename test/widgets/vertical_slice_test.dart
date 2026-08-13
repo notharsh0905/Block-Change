@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:block_change/app.dart';
 import 'package:block_change/game/game_engine.dart';
+import 'package:block_change/models/game_state_model.dart';
 import 'package:block_change/models/level_model.dart';
-import 'package:block_change/models/tile_model.dart';
+
 import 'package:block_change/screens/gameplay_screen.dart';
 import 'package:block_change/widgets/game_tile.dart';
 
@@ -46,7 +47,9 @@ void main() {
       expect(find.text('SETTINGS'), findsOneWidget);
     });
 
-    testWidgets('2. Start Game opens gameplay screen', (WidgetTester tester) async {
+    testWidgets('2. Start Game opens gameplay screen', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(const BlockChangeApp());
       await tester.pumpAndSettle();
 
@@ -59,9 +62,7 @@ void main() {
 
     testWidgets('3. Gameplay board renders', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: GameplayScreen(initialLevel: testLevel1),
-        ),
+        MaterialApp(home: GameplayScreen(initialLevel: testLevel1)),
       );
       await tester.pumpAndSettle();
 
@@ -69,12 +70,11 @@ void main() {
       expect(find.byType(GameTileWidget), findsNWidgets(9));
     });
 
-    testWidgets('4. Correct number of tiles renders for 3x3 grid',
-        (WidgetTester tester) async {
+    testWidgets('4. Correct number of tiles renders for 3x3 grid', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: GameplayScreen(initialLevel: testLevel1),
-        ),
+        MaterialApp(home: GameplayScreen(initialLevel: testLevel1)),
       );
       await tester.pumpAndSettle();
 
@@ -97,12 +97,11 @@ void main() {
       expect(engine.value.status, GameStatus.won);
     });
 
-    testWidgets('6. Pause overlay appears on pause button tap',
-        (WidgetTester tester) async {
+    testWidgets('6. Pause overlay appears on pause button tap', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: GameplayScreen(initialLevel: testLevel1),
-        ),
+        MaterialApp(home: GameplayScreen(initialLevel: testLevel1)),
       );
       await tester.pumpAndSettle();
 
@@ -116,12 +115,11 @@ void main() {
       expect(find.text('EXIT TO HOME'), findsOneWidget);
     });
 
-    testWidgets('7. Win overlay appears when level is completed',
-        (WidgetTester tester) async {
+    testWidgets('7. Win overlay appears when level is completed', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: GameplayScreen(initialLevel: testLevel1),
-        ),
+        MaterialApp(home: GameplayScreen(initialLevel: testLevel1)),
       );
       await tester.pumpAndSettle();
 
@@ -138,12 +136,11 @@ void main() {
       expect(find.text('REPLAY'), findsOneWidget);
     });
 
-    testWidgets('8. Next Level loads another level from win overlay',
-        (WidgetTester tester) async {
+    testWidgets('8. Next Level loads another level from win overlay', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: GameplayScreen(initialLevel: testLevel1),
-        ),
+        MaterialApp(home: GameplayScreen(initialLevel: testLevel1)),
       );
       await tester.pumpAndSettle();
 
@@ -161,12 +158,11 @@ void main() {
       expect(find.text('LEVEL 2'), findsOneWidget);
     });
 
-    testWidgets('9. Replay resets current level from win overlay',
-        (WidgetTester tester) async {
+    testWidgets('9. Replay resets current level from win overlay', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: GameplayScreen(initialLevel: testLevel1),
-        ),
+        MaterialApp(home: GameplayScreen(initialLevel: testLevel1)),
       );
       await tester.pumpAndSettle();
 
