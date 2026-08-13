@@ -30,7 +30,162 @@
       },
       "seed": 1001,
       "difficulty": "easy",
-      "tutorialStep": "tap_to_change",
+      "tutorialStep": "Tap blocks to change color until all blocks match target!",
+      "rulesVersion": 1
+    },
+    {
+      "id": 2,
+      "worldId": 1,
+      "name": "Rising Chaos",
+      "gridSize": 3,
+      "colorCount": 3,
+      "targetColor": 1,
+      "initialBoard": [
+        [0, 1, 0],
+        [1, 2, 1],
+        [0, 1, 0]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 60.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 2.5,
+        "minimumInterval": 1.0,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 8,
+        "threeStarMinRemainingSeconds": 45.0,
+        "twoStarMaxMoves": 14,
+        "twoStarMinRemainingSeconds": 30.0
+      },
+      "seed": 1002,
+      "difficulty": "easy",
+      "tutorialStep": "Chaos will change random blocks! Act quickly.",
+      "rulesVersion": 1
+    },
+    {
+      "id": 3,
+      "worldId": 1,
+      "name": "Boom Blocks",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 2,
+      "initialBoard": [
+        [1, 1, 1, 1],
+        [1, 2, 2, 1],
+        [1, 2, 2, 1],
+        [1, 1, 1, 1]
+      ],
+      "specialTiles": [
+        {
+          "row": 1,
+          "column": 1,
+          "type": "bomb",
+          "lockDuration": 0.0
+        }
+      ],
+      "timeLimitSeconds": 70.0,
+      "chaosConfig": {
+        "enabled": false,
+        "initialInterval": 3.0,
+        "minimumInterval": 1.5,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 6,
+        "threeStarMinRemainingSeconds": 50.0,
+        "twoStarMaxMoves": 12,
+        "twoStarMinRemainingSeconds": 35.0
+      },
+      "seed": 1003,
+      "difficulty": "medium",
+      "tutorialStep": "Tap the Bomb tile to explode its surrounding 3x3 blocks!",
+      "rulesVersion": 1
+    },
+    {
+      "id": 4,
+      "worldId": 1,
+      "name": "Frozen Path",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 0,
+      "initialBoard": [
+        [0, 2, 2, 0],
+        [2, 0, 0, 2],
+        [2, 0, 0, 2],
+        [0, 2, 2, 0]
+      ],
+      "specialTiles": [
+        {
+          "row": 2,
+          "column": 2,
+          "type": "freeze",
+          "lockDuration": 0.0
+        }
+      ],
+      "timeLimitSeconds": 60.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.5,
+        "minimumInterval": 0.5,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 10,
+        "threeStarMinRemainingSeconds": 45.0,
+        "twoStarMaxMoves": 18,
+        "twoStarMinRemainingSeconds": 30.0
+      },
+      "seed": 1004,
+      "difficulty": "medium",
+      "tutorialStep": "Tap the Freeze tile to freeze chaos for 3 seconds!",
+      "rulesVersion": 1
+    },
+    {
+      "id": 5,
+      "worldId": 1,
+      "name": "Locked Down",
+      "gridSize": 5,
+      "colorCount": 4,
+      "targetColor": 1,
+      "initialBoard": [
+        [1, 1, 1, 1, 1],
+        [1, 0, 1, 0, 1],
+        [1, 1, 2, 1, 1],
+        [1, 0, 1, 0, 1],
+        [1, 1, 1, 1, 1]
+      ],
+      "specialTiles": [
+        {
+          "row": 2,
+          "column": 2,
+          "type": "lock",
+          "lockDuration": 5.0
+        },
+        {
+          "row": 0,
+          "column": 0,
+          "type": "bomb",
+          "lockDuration": 0.0
+        }
+      ],
+      "timeLimitSeconds": 80.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 2.0,
+        "minimumInterval": 0.8,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 14,
+        "threeStarMinRemainingSeconds": 55.0,
+        "twoStarMaxMoves": 22,
+        "twoStarMinRemainingSeconds": 35.0
+      },
+      "seed": 1005,
+      "difficulty": "hard",
+      "tutorialStep": "Locked blocks cannot be tapped until their timer runs out!",
       "rulesVersion": 1
     }
   ]
