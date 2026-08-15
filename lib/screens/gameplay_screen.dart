@@ -12,8 +12,9 @@ import '../theme/app_colors.dart';
 import '../widgets/dialogs/pause_overlay.dart';
 import '../widgets/dialogs/win_overlay.dart';
 import '../widgets/game_board.dart';
+import '../widgets/game_button.dart';
 
-/// Main Playable Puzzle Screen.
+/// Main Playable Puzzle Screen — Refactored Single Source of Truth for Campaign Progression.
 class GameplayScreen extends StatefulWidget {
   final LevelModel? initialLevel;
   final List<LevelModel>? availableLevels;
@@ -26,8 +27,9 @@ class GameplayScreen extends StatefulWidget {
 
 class _GameplayScreenState extends State<GameplayScreen> {
   LevelModel? _currentLevel;
-  List<LevelModel>? _availableLevels;
-  int _currentLevelIndex = 0;
+  List<LevelModel>? _testAvailableLevels;
+  int _testLevelIndex = 0;
+
   GameEngine? _engine;
   Timer? _tickerTimer;
   bool _isOverlayShowing = false;
@@ -40,18 +42,14 @@ class _GameplayScreenState extends State<GameplayScreen> {
 
   Future<void> _initLevelsAndStart() async {
     if (widget.availableLevels != null && widget.availableLevels!.isNotEmpty) {
-      _availableLevels = widget.availableLevels;
-      _currentLevelIndex = 0;
-      _currentLevel = _availableLevels!.first;
+      // Direct widget test injection
+      _testAvailableLevels = widget.availableLevels;
+      _testLevelIndex = 0;
+      _currentLevel = _testAvailableLevels!.first;
     } else if (widget.initialLevel != null) {
-      final fallbackLevels = LevelLoader.getFallbackWorldLevels(1);
-      _availableLevels = [
-        widget.initialLevel!,
-        ...fallbackLevels.where((l) => l.id != widget.initialLevel!.id),
-      ];
-      _currentLevelIndex = 0;
       _currentLevel = widget.initialLevel;
     } else {
+      // Single Source of Truth: load current highest unlocked level
       final progress = await ProgressService.instance.loadProgress();
       _currentLevel = await LevelLoader.loadLevelById(
         progress.highestUnlockedLevel,
@@ -102,7 +100,7 @@ class _GameplayScreenState extends State<GameplayScreen> {
       timeRemainingSeconds: state.timeRemainingSeconds,
     );
 
-    // Save player progress & high scores locally
+    // Save player progress & high scores locally via Single Source of Truth ProgressService
     ProgressService.instance.recordLevelCompletion(
       levelId: state.level.id,
       stars: stars,
@@ -158,27 +156,109 @@ class _GameplayScreenState extends State<GameplayScreen> {
   }
 
   void _nextLevel() async {
-    if (_availableLevels != null && _availableLevels!.length > 1) {
-      if (_currentLevelIndex < _availableLevels!.length - 1) {
-        _currentLevelIndex++;
+    // 1. Handle widget test injection override if explicitly provided
+    if (_testAvailableLevels != null && _testAvailableLevels!.length > 1) {
+      if (_testLevelIndex < _testAvailableLevels!.length - 1) {
+        _testLevelIndex++;
       } else {
-        _currentLevelIndex = 0;
+        _testLevelIndex = 0;
       }
-      _currentLevel = _availableLevels![_currentLevelIndex];
+      _currentLevel = _testAvailableLevels![_testLevelIndex];
       _loadCurrentLevel();
       return;
     }
 
     if (_currentLevel == null) return;
-    final nextId = _currentLevel!.id + 1;
-    final nextLevel = await LevelLoader.loadLevelById(nextId);
+    final currentId = _currentLevel!.id;
 
-    if (nextLevel != null) {
-      _currentLevel = nextLevel;
-      _loadCurrentLevel();
-    } else {
-      if (mounted) Navigator.pop(context);
+    // 2. Handle Level 100 Endgame (PRD Part A2: Never wrap Level 100 -> Level 1!)
+    if (currentId >= 100) {
+      _showCampaignClearedDialog();
+      return;
     }
+
+    // 3. Single Source of Truth Campaign Progression (Next Level = currentId + 1)
+    final nextId = ProgressService.instance.getNextLevelId(currentId);
+
+    LevelModel? nextLevel = await LevelLoader.loadLevelById(nextId);
+
+    // 4. Safe fallback for unit test environments
+    nextLevel ??= LevelLoader.getFallbackWorldLevels((nextId - 1) ~/ 10 + 1)
+        .firstWhere(
+          (l) => l.id == nextId,
+          orElse: () => LevelLoader.getFallbackWorldLevels(1).first,
+        );
+
+    if (nextLevel.id == 1 && currentId >= 1) {
+      // Diagnostic Guard: Prevent invalid fallback wraparound to Level 1
+      debugPrint(
+        'CRITICAL PROGRESSION GUARD: Prevented wraparound from Level $currentId to Level 1',
+      );
+      _showCampaignClearedDialog();
+      return;
+    }
+
+    _currentLevel = nextLevel;
+    _loadCurrentLevel();
+  }
+
+  void _showCampaignClearedDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: AppColors.surface,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  Icons.emoji_events_rounded,
+                  color: AppColors.sunshine,
+                  size: 64,
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'CAMPAIGN CLEARED!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: AppColors.textPrimary,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  'Congratulations! You have completed all 100 levels of Block Change!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: AppColors.textSecondary,
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                GameButton(
+                  label: 'CAMPAIGN MAP',
+                  icon: Icons.map_rounded,
+                  color: AppColors.mint,
+                  darkColor: AppColors.mintDark,
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override

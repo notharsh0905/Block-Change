@@ -76,7 +76,7 @@ class InMemoryProgressStorage implements IProgressStorage {
   }
 }
 
-/// Progress Service repository managing local player state and save safety.
+/// Authoritative Campaign Progress Controller & Service repository managing local player state and save safety.
 class ProgressService {
   static ProgressService? _instance;
   static ProgressService get instance => _instance ??= ProgressService();
@@ -98,6 +98,20 @@ class ProgressService {
 
   /// Current in-memory cached player progress instance.
   PlayerProgressModel get currentProgress => progressNotifier.value;
+
+  /// Authoritative campaign progress getters.
+  int get highestUnlockedLevel => progressNotifier.value.highestUnlockedLevel;
+  bool isLevelUnlocked(int levelId) =>
+      progressNotifier.value.isLevelUnlocked(levelId);
+
+  /// Authoritative Next Level ID calculator (PRD Part A2):
+  /// - For levels 1–99: returns levelId + 1
+  /// - For Level 100: returns 100 (never wraps to 1!)
+  int getNextLevelId(int currentLevelId) {
+    if (currentLevelId <= 0) return 1;
+    if (currentLevelId >= 100) return 100;
+    return currentLevelId + 1;
+  }
 
   /// Loads stored progress from local storage, fallback to initial state on fresh install.
   Future<PlayerProgressModel> loadProgress() async {

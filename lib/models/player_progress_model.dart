@@ -37,15 +37,17 @@ class PlayerProgressModel {
     );
   }
 
-  /// Checks if a given level ID is accessible to the player.
+  /// Checks if a given level ID (1..100) is unlocked.
   bool isLevelUnlocked(int levelId) {
     if (levelId <= 1) return true;
+    if (levelId > 100) return false;
     return levelId <= highestUnlockedLevel;
   }
 
-  /// Checks if a given world ID (1..10) is accessible.
+  /// Checks if a given world ID (1..10) is unlocked.
   bool isWorldUnlocked(int worldId) {
     if (worldId <= 1) return true;
+    if (worldId > 10) return false;
     final firstLevelOfWorld = (worldId - 1) * 10 + 1;
     return isLevelUnlocked(firstLevelOfWorld);
   }
@@ -77,7 +79,11 @@ class PlayerProgressModel {
     return total;
   }
 
-  /// Records a successful level completion and unlocks next level without downgrading best scores.
+  /// Single Authoritative Progression Calculation Rule (PRD Phase 4.1):
+  /// - Completing Level N (N < 100) unlocks N + 1.
+  /// - Completing Level 100 finishes campaign (never wraps to 1).
+  /// - Replaying Level M (M < highestUnlockedLevel) updates scores if improved,
+  ///   BUT PRESERVES highestUnlockedLevel.
   PlayerProgressModel recordCompletion({
     required int levelId,
     required int stars,
@@ -85,31 +91,33 @@ class PlayerProgressModel {
     required int moves,
     required double timeRemainingSeconds,
   }) {
-    final nextLevel = math.min(100, levelId + 1);
-    final newHighest = math.max(highestUnlockedLevel, nextLevel);
+    // 1. Calculate new highest unlocked level (never decreases)
+    final bool isNewUnlockingCompletion = (levelId == highestUnlockedLevel);
+    final int nextLevelCandidate = (levelId < 100) ? levelId + 1 : 100;
 
-    final newCompleted = Set<int>.from(completedLevels)..add(levelId);
+    final int newHighest = isNewUnlockingCompletion
+        ? math.min(100, math.max(highestUnlockedLevel, nextLevelCandidate))
+        : highestUnlockedLevel;
 
-    // Keep highest stars earned
-    final currentStars = getStars(levelId);
-    final newStars = Map<int, int>.from(starsByLevel);
+    final Set<int> newCompleted = Set<int>.from(completedLevels)..add(levelId);
+
+    // 2. High score non-downgrading updates
+    final int currentStars = getStars(levelId);
+    final Map<int, int> newStars = Map<int, int>.from(starsByLevel);
     newStars[levelId] = math.max(currentStars, stars);
 
-    // Keep highest score
-    final currentScore = getBestScore(levelId);
-    final newScore = Map<int, int>.from(bestScoreByLevel);
+    final int currentScore = getBestScore(levelId);
+    final Map<int, int> newScore = Map<int, int>.from(bestScoreByLevel);
     newScore[levelId] = math.max(currentScore, score);
 
-    // Keep lowest (best) move count
-    final currentMoves = getBestMoves(levelId);
-    final newMoves = Map<int, int>.from(bestMovesByLevel);
+    final int currentMoves = getBestMoves(levelId);
+    final Map<int, int> newMoves = Map<int, int>.from(bestMovesByLevel);
     newMoves[levelId] = (currentMoves == 0)
         ? moves
         : math.min(currentMoves, moves);
 
-    // Keep highest remaining time
-    final currentTime = getBestTime(levelId);
-    final newTime = Map<int, double>.from(bestTimeByLevel);
+    final double currentTime = getBestTime(levelId);
+    final Map<int, double> newTime = Map<int, double>.from(bestTimeByLevel);
     newTime[levelId] = math.max(currentTime, timeRemainingSeconds);
 
     return copyWith(
@@ -119,8 +127,8 @@ class PlayerProgressModel {
       bestScoreByLevel: newScore,
       bestMovesByLevel: newMoves,
       bestTimeByLevel: newTime,
-      currentLevelId: nextLevel,
-      selectedWorldId: (nextLevel - 1) ~/ 10 + 1,
+      currentLevelId: newHighest,
+      selectedWorldId: (newHighest - 1) ~/ 10 + 1,
     );
   }
 
