@@ -93,65 +93,65 @@ abstract class LevelLoader {
           board = [
             [0, 0, 0],
             [0, 2, 0],
-            [0, 0, 0]
+            [0, 0, 0],
           ];
         } else if (index == 1) {
           board = [
             [0, 0, 0],
             [0, 1, 0],
-            [0, 0, 0]
+            [0, 0, 0],
           ];
         } else if (index == 2) {
           board = [
             [0, 0, 0],
             [0, 0, 0],
-            [0, 0, 2]
+            [0, 0, 2],
           ];
         } else if (index == 3) {
           board = [
             [0, 2, 0],
             [2, 0, 2],
-            [0, 2, 0]
+            [0, 2, 0],
           ];
         } else if (index == 4) {
           board = [
             [2, 0, 2],
             [0, 2, 0],
-            [2, 0, 2]
+            [2, 0, 2],
           ];
         } else if (index == 5) {
           board = [
             [1, 0, 1],
             [0, 0, 0],
-            [1, 0, 1]
+            [1, 0, 1],
           ];
         } else if (index == 6) {
           board = [
             [0, 0, 0, 0],
             [0, 3, 3, 0],
             [0, 3, 3, 0],
-            [0, 0, 0, 0]
+            [0, 0, 0, 0],
           ];
         } else if (index == 7) {
           board = [
             [0, 0, 0, 0],
             [0, 0, 0, 0],
             [0, 0, 3, 0],
-            [0, 0, 0, 0]
+            [0, 0, 0, 0],
           ];
         } else if (index == 8) {
           board = [
             [0, 3, 0, 3],
             [3, 0, 3, 0],
             [0, 3, 0, 3],
-            [3, 0, 3, 0]
+            [3, 0, 3, 0],
           ];
         } else {
           board = [
             [3, 3, 3, 3],
             [3, 0, 0, 3],
             [3, 0, 0, 3],
-            [3, 3, 3, 3]
+            [3, 3, 3, 3],
           ];
         }
 
@@ -195,7 +195,7 @@ abstract class LevelLoader {
               [0, 0, 0, 1],
               [0, 1, 0, 0],
               [0, 0, 1, 0],
-              [1, 0, 0, 0]
+              [1, 0, 0, 0],
             ],
             specialTiles: const [
               TileDefinition(row: 1, column: 1, type: TileType.bomb),
@@ -212,11 +212,51 @@ abstract class LevelLoader {
             seed: 3003,
             difficulty: Difficulty.medium,
             archetype: 'Double Bomb Strategy',
-            designIntent:
-                'Detonate two Green Bomb tiles in sequence at (1,1) and (2,2) to cover the entire 4x4 grid with target color Mint Green in 2 moves.',
+            designIntent: 'Detonate two Green Bomb tiles in sequence at (1,1) and (2,2) to cover the entire 4x4 grid with target color Mint Green in 2 moves.',
             introducedMechanic: 'BOMB',
           );
         }
+      }
+
+      if (worldId == 10 && index == 7) {
+        // Level 98 Chaos Zenith
+        return LevelModel(
+          id: 98,
+          worldId: 10,
+          name: 'Chaos Zenith',
+          gridSize: 8,
+          colorCount: 6,
+          targetColor: 3,
+          initialBoard: const [
+            [0, 0, 0, 3, 3, 0, 0, 0],
+            [0, 3, 0, 3, 3, 0, 3, 0],
+            [0, 0, 3, 3, 3, 3, 0, 0],
+            [3, 3, 3, 3, 3, 3, 3, 3],
+            [3, 3, 3, 3, 3, 3, 3, 3],
+            [0, 0, 3, 3, 3, 3, 0, 0],
+            [0, 3, 0, 3, 3, 0, 3, 0],
+            [0, 0, 0, 3, 3, 0, 0, 0],
+          ],
+          specialTiles: const [
+            TileDefinition(row: 1, column: 1, type: TileType.bomb),
+            TileDefinition(row: 1, column: 6, type: TileType.bomb),
+            TileDefinition(row: 6, column: 1, type: TileType.bomb),
+            TileDefinition(row: 6, column: 6, type: TileType.bomb),
+          ],
+          timeLimitSeconds: 45.0,
+          chaosConfig: const ChaosConfig(enabled: false),
+          starRules: const StarRules(
+            threeStarMaxMoves: 6,
+            threeStarMinRemainingSeconds: 30.0,
+            twoStarMaxMoves: 10,
+            twoStarMinRemainingSeconds: 15.0,
+          ),
+          seed: 10008,
+          difficulty: Difficulty.expert,
+          archetype: 'Master Matrix Quad-Bomb Strategy',
+          designIntent: 'Four corner Sunshine Yellow bombs at (1,1), (1,6), (6,1), and (6,6) cover the entire 8x8 matrix in target Sunshine Yellow in 4 moves.',
+          introducedMechanic: 'BOMB',
+        );
       }
 
       final gridSize = 3 + (worldId > 5 ? 1 : 0);

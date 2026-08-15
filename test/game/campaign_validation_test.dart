@@ -204,7 +204,7 @@ void main() {
         }
       }
 
-      // 100% of campaign levels are categorized as SOLVABLE or NEEDS_MANUAL_REVIEW under bounded search
+      // 100% of campaign levels are schema valid and categorized as SOLVABLE or NEEDS_MANUAL_REVIEW under bounded search
       expect(totalSolvable + totalManualReview, equals(100));
       expect(
         totalSolvable,

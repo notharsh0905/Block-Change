@@ -284,37 +284,41 @@
       "colorCount": 6,
       "targetColor": 3,
       "initialBoard": [
-        [2, 2, 2, 2, 2, 2, 2, 2],
-        [2, 3, 3, 3, 3, 3, 3, 2],
-        [2, 3, 2, 2, 2, 2, 3, 2],
-        [2, 3, 2, 3, 3, 2, 3, 2],
-        [2, 3, 2, 3, 3, 2, 3, 2],
-        [2, 3, 2, 2, 2, 2, 3, 2],
-        [2, 3, 3, 3, 3, 3, 3, 2],
-        [2, 2, 2, 2, 2, 2, 2, 2]
+        [0, 0, 0, 3, 3, 0, 0, 0],
+        [0, 3, 0, 3, 3, 0, 3, 0],
+        [0, 0, 3, 3, 3, 3, 0, 0],
+        [3, 3, 3, 3, 3, 3, 3, 3],
+        [3, 3, 3, 3, 3, 3, 3, 3],
+        [0, 0, 3, 3, 3, 3, 0, 0],
+        [0, 3, 0, 3, 3, 0, 3, 0],
+        [0, 0, 0, 3, 3, 0, 0, 0]
       ],
       "specialTiles": [
-        { "row": 0, "column": 0, "type": "freeze", "lockDuration": 0.0 },
-        { "row": 0, "column": 7, "type": "bomb", "lockDuration": 0.0 },
-        { "row": 7, "column": 0, "type": "lock", "lockDuration": 5.0 },
-        { "row": 7, "column": 7, "type": "freeze", "lockDuration": 0.0 }
+        { "row": 1, "column": 1, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 1, "column": 6, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 6, "column": 1, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 6, "column": 6, "type": "bomb", "lockDuration": 0.0 }
       ],
-      "timeLimitSeconds": 38.0,
+      "timeLimitSeconds": 45.0,
       "chaosConfig": {
         "enabled": true,
-        "initialInterval": 0.2,
-        "minimumInterval": 0.05,
+        "initialInterval": 2.0,
+        "minimumInterval": 0.8,
         "adaptive": false
       },
       "starRules": {
-        "threeStarMaxMoves": 28,
-        "threeStarMinRemainingSeconds": 24.0,
-        "twoStarMaxMoves": 34,
-        "twoStarMinRemainingSeconds": 12.0
+        "threeStarMaxMoves": 6,
+        "threeStarMinRemainingSeconds": 30.0,
+        "twoStarMaxMoves": 10,
+        "twoStarMinRemainingSeconds": 15.0
       },
       "seed": 10008,
       "difficulty": "expert",
-      "rulesVersion": 1
+      "rulesVersion": 1,
+      "archetype": "Master Matrix Quad-Bomb Strategy",
+      "designIntent": "Four corner Sunshine Yellow bombs at (1,1), (1,6), (6,1), and (6,6) cover the entire 8x8 matrix in target Sunshine Yellow in 4 moves.",
+      "introducedMechanic": "BOMB",
+      "isMiniBoss": false
     },
     {
       "id": 99,

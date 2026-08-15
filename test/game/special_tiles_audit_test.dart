@@ -196,5 +196,27 @@ void main() {
         }
       }
     });
+
+    test('5. Redesigned Level 98 (Chaos Zenith) loads and solves cleanly in 4 moves', () async {
+      final levels = LevelLoader.getFallbackWorldLevels(10);
+      final level98 = levels.firstWhere((l) => l.id == 98);
+
+      expect(level98.name, equals('Chaos Zenith'));
+      expect(level98.gridSize, equals(8));
+      expect(level98.targetColor, equals(3)); // Sunshine Yellow
+      expect(level98.specialTiles.length, equals(4));
+
+      final solverResult = LevelValidator.solveLevel(level98);
+      expect(
+        solverResult.isSolvable,
+        isTrue,
+        reason: 'Level 98 must be proven solvable',
+      );
+      expect(
+        solverResult.minMoves,
+        equals(4),
+        reason: 'Level 98 solves in 4 quad-bomb moves',
+      );
+    });
   });
 }

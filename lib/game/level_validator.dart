@@ -33,6 +33,13 @@ class SolverResult {
   });
 }
 
+class _SolverNode {
+  final List<List<TileModel>> board;
+  final int moves;
+
+  const _SolverNode({required this.board, required this.moves});
+}
+
 /// Level Data Integrity, Schema Validator, & Bounded Puzzle Solver.
 abstract class LevelValidator {
   /// Validates a level model definition against non-negotiable PRD constraints.
@@ -61,17 +68,17 @@ abstract class LevelValidator {
       );
     }
 
-    // Target color range check
+    // Target color boundary check
     if (level.targetColor < 0 || level.targetColor >= level.colorCount) {
       errors.add(
         LevelValidationError(
           'targetColor',
-          'Target color index ${level.targetColor} is out of bounds for colorCount ${level.colorCount}.',
+          'Target color index ${level.targetColor} must be valid index within 0..${level.colorCount - 1}.',
         ),
       );
     }
 
-    // Initial board dimension check
+    // Board dimension check
     if (level.initialBoard.length != level.gridSize) {
       errors.add(
         LevelValidationError(
@@ -80,38 +87,28 @@ abstract class LevelValidator {
         ),
       );
     } else {
-      for (int i = 0; i < level.initialBoard.length; i++) {
-        if (level.initialBoard[i].length != level.gridSize) {
+      for (int r = 0; r < level.gridSize; r++) {
+        if (level.initialBoard[r].length != level.gridSize) {
           errors.add(
             LevelValidationError(
-              'initialBoard[$i]',
-              'Row $i length ${level.initialBoard[i].length} does not match gridSize ${level.gridSize}.',
+              'initialBoard',
+              'Initial board row $r length ${level.initialBoard[r].length} does not match gridSize ${level.gridSize}.',
             ),
           );
         }
       }
     }
 
-    // Time limit check
-    if (level.timeLimitSeconds <= 0.0) {
-      errors.add(
-        LevelValidationError(
-          'timeLimitSeconds',
-          'Time limit must be positive.',
-        ),
-      );
-    }
-
     // Special tiles coordinate check
-    for (final tileDef in level.specialTiles) {
-      if (tileDef.row < 0 ||
-          tileDef.row >= level.gridSize ||
-          tileDef.column < 0 ||
-          tileDef.column >= level.gridSize) {
+    for (final st in level.specialTiles) {
+      if (st.row < 0 ||
+          st.row >= level.gridSize ||
+          st.column < 0 ||
+          st.column >= level.gridSize) {
         errors.add(
           LevelValidationError(
             'specialTiles',
-            'Special tile position (${tileDef.row}, ${tileDef.column}) is outside grid dimensions.',
+            'Special tile (${st.row}, ${st.column}) out of grid bounds for size ${level.gridSize}.',
           ),
         );
       }
@@ -120,12 +117,11 @@ abstract class LevelValidator {
     return errors;
   }
 
-  /// Constructs live initial tile board matrix from [LevelModel].
+  /// Builds a complete 2D TileModel board matrix from authored LevelModel definition.
   static List<List<TileModel>> buildBoardFromLevel(LevelModel level) {
     final board = <List<TileModel>>[];
-
-    // Map special tiles lookup
     final specialMap = <String, TileDefinition>{};
+
     for (final st in level.specialTiles) {
       specialMap['${st.row}_${st.column}'] = st;
     }
@@ -181,15 +177,20 @@ abstract class LevelValidator {
       );
     }
 
-    // Serialized state representation string for BFS visited queue
     String serializeState(List<List<TileModel>> b) {
       final sb = StringBuffer();
       for (final r in b) {
         for (final t in r) {
-          sb.write('${t.colorIndex}');
+          sb.write('${t.colorIndex}_${t.isLocked ? 1 : 0}_');
         }
       }
       return sb.toString();
+    }
+
+    List<List<TileModel>> cloneBoard(List<List<TileModel>> b) {
+      return b
+          .map((row) => row.map((tile) => tile.copyWith()).toList())
+          .toList();
     }
 
     final queue = Queue<_SolverNode>();
@@ -207,44 +208,64 @@ abstract class LevelValidator {
 
       final gridSize = level.gridSize;
 
+      final coords = <(int, int)>[];
+      // Put special tiles first in search order
       for (int r = 0; r < gridSize; r++) {
         for (int c = 0; c < gridSize; c++) {
-          final tile = current.board[r][c];
-          if (tile.isLocked) continue;
-          if (tile.type == TileType.normal &&
-              tile.colorIndex == level.targetColor) {
-            continue;
+          if (current.board[r][c].type != TileType.normal) {
+            coords.add((r, c));
           }
-
-          final res = TileManager.tapTile(
-            board: current.board,
-            row: r,
-            col: c,
-            colorCount: level.colorCount,
-          );
-
-          if (!res.isTileChanged &&
-              !res.isBombExploded &&
-              !res.isFreezeTriggered) {
-            continue;
+        }
+      }
+      for (int r = 0; r < gridSize; r++) {
+        for (int c = 0; c < gridSize; c++) {
+          if (current.board[r][c].type == TileType.normal) {
+            coords.add((r, c));
           }
+        }
+      }
 
-          if (GameRules.checkWin(res.newBoard, level.targetColor)) {
-            return SolverResult(
-              isSolvable: true,
-              minMoves: current.moves + 1,
-              statesVisited: statesVisited,
-              validationStatus: 'SOLVABLE',
-            );
-          }
+      for (final (r, c) in coords) {
+        final tile = current.board[r][c];
 
-          final key = serializeState(res.newBoard);
+        // 1. Simulate lock expiration (waiting 5s in gameplay unlocks the tile)
+        if (tile.isLocked) {
+          final unlockedBoard = cloneBoard(current.board);
+          unlockedBoard[r][c] = tile.copyWith(lockRemainingSeconds: 0.0);
+          final key = serializeState(unlockedBoard);
           if (!visited.contains(key)) {
             visited.add(key);
-            queue.add(
-              _SolverNode(board: res.newBoard, moves: current.moves + 1),
-            );
+            queue.add(_SolverNode(board: unlockedBoard, moves: current.moves));
           }
+          continue;
+        }
+
+        final res = TileManager.tapTile(
+          board: current.board,
+          row: r,
+          col: c,
+          colorCount: level.colorCount,
+        );
+
+        if (!res.isTileChanged &&
+            !res.isBombExploded &&
+            !res.isFreezeTriggered) {
+          continue;
+        }
+
+        if (GameRules.checkWin(res.newBoard, level.targetColor)) {
+          return SolverResult(
+            isSolvable: true,
+            minMoves: current.moves + 1,
+            statesVisited: statesVisited,
+            validationStatus: 'SOLVABLE',
+          );
+        }
+
+        final key = serializeState(res.newBoard);
+        if (!visited.contains(key)) {
+          visited.add(key);
+          queue.add(_SolverNode(board: res.newBoard, moves: current.moves + 1));
         }
       }
     }
@@ -262,14 +283,7 @@ abstract class LevelValidator {
       isSolvable: false,
       minMoves: -1,
       statesVisited: statesVisited,
-      validationStatus: 'NEEDS_MANUAL_REVIEW',
+      validationStatus: 'UNSOLVABLE',
     );
   }
-}
-
-class _SolverNode {
-  final List<List<TileModel>> board;
-  final int moves;
-
-  const _SolverNode({required this.board, required this.moves});
 }
