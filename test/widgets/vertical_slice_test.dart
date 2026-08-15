@@ -8,8 +8,16 @@ import 'package:block_change/models/level_model.dart';
 import 'package:block_change/screens/gameplay_screen.dart';
 import 'package:block_change/widgets/game_tile.dart';
 
+import 'package:block_change/services/progress_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+    ProgressService.resetInstanceForTesting(InMemoryProgressStorage());
+  });
 
   final testLevel1 = const LevelModel(
     id: 1,
@@ -43,7 +51,7 @@ void main() {
 
       expect(find.text('BLOCK CHANGE'), findsOneWidget);
       expect(find.text('START GAME'), findsOneWidget);
-      expect(find.text('MAP'), findsOneWidget);
+      expect(find.text('CAMPAIGN MAP'), findsOneWidget);
       expect(find.text('SETTINGS'), findsOneWidget);
     });
 

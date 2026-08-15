@@ -7,6 +7,7 @@ import '../game/game_engine.dart';
 import '../game/star_calculator.dart';
 import '../models/game_state_model.dart';
 import '../models/level_model.dart';
+import '../services/progress_service.dart';
 import '../theme/app_colors.dart';
 import '../widgets/dialogs/pause_overlay.dart';
 import '../widgets/dialogs/win_overlay.dart';
@@ -15,15 +16,17 @@ import '../widgets/game_board.dart';
 /// Main Playable Puzzle Screen.
 class GameplayScreen extends StatefulWidget {
   final LevelModel? initialLevel;
+  final List<LevelModel>? availableLevels;
 
-  const GameplayScreen({super.key, this.initialLevel});
+  const GameplayScreen({super.key, this.initialLevel, this.availableLevels});
 
   @override
   State<GameplayScreen> createState() => _GameplayScreenState();
 }
 
 class _GameplayScreenState extends State<GameplayScreen> {
-  late List<LevelModel> _availableLevels;
+  LevelModel? _currentLevel;
+  List<LevelModel>? _availableLevels;
   int _currentLevelIndex = 0;
   GameEngine? _engine;
   Timer? _tickerTimer;
@@ -36,26 +39,35 @@ class _GameplayScreenState extends State<GameplayScreen> {
   }
 
   Future<void> _initLevelsAndStart() async {
-    final fallbackLevels = LevelLoader.getFallbackWorldLevels(1);
-    if (widget.initialLevel != null) {
+    if (widget.availableLevels != null && widget.availableLevels!.isNotEmpty) {
+      _availableLevels = widget.availableLevels;
+      _currentLevelIndex = 0;
+      _currentLevel = _availableLevels!.first;
+    } else if (widget.initialLevel != null) {
+      final fallbackLevels = LevelLoader.getFallbackWorldLevels(1);
       _availableLevels = [
         widget.initialLevel!,
         ...fallbackLevels.where((l) => l.id != widget.initialLevel!.id),
       ];
+      _currentLevelIndex = 0;
+      _currentLevel = widget.initialLevel;
     } else {
-      _availableLevels = fallbackLevels;
+      final progress = await ProgressService.instance.loadProgress();
+      _currentLevel = await LevelLoader.loadLevelById(
+        progress.highestUnlockedLevel,
+      );
+      _currentLevel ??= LevelLoader.getFallbackWorldLevels(1).first;
     }
-    _currentLevelIndex = 0;
 
     _loadCurrentLevel();
   }
 
   void _loadCurrentLevel() {
+    if (_currentLevel == null) return;
     _tickerTimer?.cancel();
     _isOverlayShowing = false;
 
-    final level = _availableLevels[_currentLevelIndex];
-    _engine = GameEngine(level);
+    _engine = GameEngine(_currentLevel!);
     _engine!.addListener(_onEngineStateChanged);
     _engine!.start();
 
@@ -87,6 +99,15 @@ class _GameplayScreenState extends State<GameplayScreen> {
     final stars = StarCalculator.calculateStars(
       starRules: state.level.starRules,
       movesCount: state.movesCount,
+      timeRemainingSeconds: state.timeRemainingSeconds,
+    );
+
+    // Save player progress & high scores locally
+    ProgressService.instance.recordLevelCompletion(
+      levelId: state.level.id,
+      stars: stars,
+      score: state.score,
+      moves: state.movesCount,
       timeRemainingSeconds: state.timeRemainingSeconds,
     );
 
@@ -136,13 +157,28 @@ class _GameplayScreenState extends State<GameplayScreen> {
     );
   }
 
-  void _nextLevel() {
-    if (_currentLevelIndex < _availableLevels.length - 1) {
-      _currentLevelIndex++;
-    } else {
-      _currentLevelIndex = 0; // Loop back for vertical slice demo
+  void _nextLevel() async {
+    if (_availableLevels != null && _availableLevels!.length > 1) {
+      if (_currentLevelIndex < _availableLevels!.length - 1) {
+        _currentLevelIndex++;
+      } else {
+        _currentLevelIndex = 0;
+      }
+      _currentLevel = _availableLevels![_currentLevelIndex];
+      _loadCurrentLevel();
+      return;
     }
-    _loadCurrentLevel();
+
+    if (_currentLevel == null) return;
+    final nextId = _currentLevel!.id + 1;
+    final nextLevel = await LevelLoader.loadLevelById(nextId);
+
+    if (nextLevel != null) {
+      _currentLevel = nextLevel;
+      _loadCurrentLevel();
+    } else {
+      if (mounted) Navigator.pop(context);
+    }
   }
 
   @override

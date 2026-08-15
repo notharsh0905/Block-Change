@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'screens/gameplay_screen.dart';
 import 'screens/home_screen.dart';
+import 'screens/level_map_screen.dart';
 import 'theme/app_theme.dart';
 
 /// Root Application shell widget.
@@ -18,6 +19,7 @@ class BlockChangeApp extends StatelessWidget {
       routes: {
         '/': (context) => const HomeScreen(),
         '/gameplay': (context) => const GameplayScreen(),
+        '/map': (context) => const LevelMapScreen(),
       },
     );
   }

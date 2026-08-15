@@ -1,11 +1,47 @@
 import 'package:flutter/material.dart';
 
+import '../data/level_loader.dart';
+import '../models/player_progress_model.dart';
+import '../services/progress_service.dart';
 import '../theme/app_colors.dart';
 import '../widgets/game_button.dart';
+import 'gameplay_screen.dart';
 
-/// Playful 2.5D Home Screen dashboard with background decoration.
-class HomeScreen extends StatelessWidget {
+/// Playful 2.5D Home Screen dashboard with campaign progression integration.
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    ProgressService.instance.loadProgress();
+  }
+
+  void _startGame(BuildContext context, PlayerProgressModel progress) async {
+    final navigator = Navigator.of(context);
+    final targetLevelId = progress.highestUnlockedLevel;
+    final levelModel = await LevelLoader.loadLevelById(targetLevelId);
+
+    if (levelModel != null) {
+      navigator.push(
+        MaterialPageRoute(
+          builder: (context) => GameplayScreen(initialLevel: levelModel),
+        ),
+      );
+    } else {
+      final fallbackLevel = LevelLoader.getFallbackWorldLevels(1).first;
+      navigator.push(
+        MaterialPageRoute(
+          builder: (context) => GameplayScreen(initialLevel: fallbackLevel),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +56,7 @@ class HomeScreen extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            // Subtle floating decorative background shapes
+            // Floating background shapes
             Positioned(
               top: -30,
               left: -20,
@@ -52,147 +88,143 @@ class HomeScreen extends StatelessWidget {
                   horizontal: 24.0,
                   vertical: 32.0,
                 ),
-                child: Column(
-                  children: [
-                    const Spacer(),
-
-                    // Multi-color 2.5D Logo Block Motif
-                    Container(
-                      width: 110,
-                      height: 110,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: AppColors.surfaceElevated,
-                        borderRadius: BorderRadius.circular(28.0),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color(0x66000000),
-                            offset: Offset(0, 8),
-                            blurRadius: 16,
-                          ),
-                        ],
-                      ),
-                      child: GridView.count(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 6,
-                        crossAxisSpacing: 6,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: [
-                          _MiniBlock(
-                            color: AppColors.coral,
-                            darkColor: AppColors.coralDark,
-                          ),
-                          _MiniBlock(
-                            color: AppColors.mint,
-                            darkColor: AppColors.mintDark,
-                          ),
-                          _MiniBlock(
-                            color: AppColors.sky,
-                            darkColor: AppColors.skyDark,
-                          ),
-                          _MiniBlock(
-                            color: AppColors.sunshine,
-                            darkColor: AppColors.sunshineDark,
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    const SizedBox(height: 24),
-
-                    const Text(
-                      'BLOCK CHANGE',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: AppColors.textPrimary,
-                        fontSize: 34,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 1.6,
-                        shadows: [
-                          Shadow(
-                            color: Colors.black45,
-                            offset: Offset(0, 3),
-                            blurRadius: 6,
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    const SizedBox(height: 8),
-
-                    const Text(
-                      'Color Chaos Puzzle Game',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: AppColors.textSecondary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-
-                    const Spacer(),
-
-                    // Primary Action Buttons
-                    GameButton(
-                      label: 'START GAME',
-                      icon: Icons.play_arrow_rounded,
-                      color: AppColors.mint,
-                      darkColor: AppColors.mintDark,
-                      height: 60,
-                      fontSize: 20,
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/gameplay');
-                      },
-                    ),
-
-                    const SizedBox(height: 16),
-
-                    Row(
+                child: ValueListenableBuilder<PlayerProgressModel>(
+                  valueListenable: ProgressService.instance.progressNotifier,
+                  builder: (context, progress, child) {
+                    return Column(
                       children: [
-                        Expanded(
-                          child: GameButton(
-                            label: 'MAP',
-                            icon: Icons.map_rounded,
-                            color: AppColors.sky,
-                            darkColor: AppColors.skyDark,
-                            fontSize: 15,
-                            onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'Level Map unlocked in future phase!',
-                                  ),
-                                  duration: Duration(seconds: 1),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: GameButton(
-                            label: 'SETTINGS',
-                            icon: Icons.settings_rounded,
-                            color: AppColors.surfaceElevated,
-                            darkColor: const Color(0xFF222238),
-                            fontSize: 15,
-                            onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'Settings unlocked in future phase!',
-                                  ),
-                                  duration: Duration(seconds: 1),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
+                        const Spacer(),
 
-                    const SizedBox(height: 16),
-                  ],
+                        // Multi-color 2.5D Logo Block Motif
+                        Container(
+                          width: 110,
+                          height: 110,
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: AppColors.surfaceElevated,
+                            borderRadius: BorderRadius.circular(28.0),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0x66000000),
+                                offset: Offset(0, 8),
+                                blurRadius: 16,
+                              ),
+                            ],
+                          ),
+                          child: GridView.count(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 6,
+                            crossAxisSpacing: 6,
+                            physics: const NeverScrollableScrollPhysics(),
+                            children: const [
+                              _MiniBlock(
+                                color: AppColors.coral,
+                                darkColor: AppColors.coralDark,
+                              ),
+                              _MiniBlock(
+                                color: AppColors.mint,
+                                darkColor: AppColors.mintDark,
+                              ),
+                              _MiniBlock(
+                                color: AppColors.sky,
+                                darkColor: AppColors.skyDark,
+                              ),
+                              _MiniBlock(
+                                color: AppColors.sunshine,
+                                darkColor: AppColors.sunshineDark,
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        const SizedBox(height: 24),
+
+                        const Text(
+                          'BLOCK CHANGE',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: AppColors.textPrimary,
+                            fontSize: 34,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 1.6,
+                            shadows: [
+                              Shadow(
+                                color: Colors.black45,
+                                offset: Offset(0, 3),
+                                blurRadius: 6,
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        const SizedBox(height: 8),
+
+                        Text(
+                          'Level ${progress.highestUnlockedLevel} Unlocked',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: AppColors.sunshine,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+
+                        const Spacer(),
+
+                        // Primary Action Buttons
+                        GameButton(
+                          label: 'START GAME',
+                          icon: Icons.play_arrow_rounded,
+                          color: AppColors.mint,
+                          darkColor: AppColors.mintDark,
+                          height: 60,
+                          fontSize: 20,
+                          onPressed: () => _startGame(context, progress),
+                        ),
+
+                        const SizedBox(height: 16),
+
+                        Row(
+                          children: [
+                            Expanded(
+                              child: GameButton(
+                                label: 'CAMPAIGN MAP',
+                                icon: Icons.map_rounded,
+                                color: AppColors.sky,
+                                darkColor: AppColors.skyDark,
+                                fontSize: 15,
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/map');
+                                },
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: GameButton(
+                                label: 'SETTINGS',
+                                icon: Icons.settings_rounded,
+                                color: AppColors.surfaceElevated,
+                                darkColor: const Color(0xFF222238),
+                                fontSize: 15,
+                                onPressed: () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        'Settings unlocked in future phase!',
+                                      ),
+                                      duration: Duration(seconds: 1),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 16),
+                      ],
+                    );
+                  },
                 ),
               ),
             ),

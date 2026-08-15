@@ -20,6 +20,17 @@ abstract class LevelLoader {
     }
   }
 
+  /// Loads specific level by ID (1..100) from campaign world JSON asset.
+  static Future<LevelModel?> loadLevelById(int levelId) async {
+    if (levelId < 1 || levelId > 100) return null;
+    final worldId = (levelId - 1) ~/ 10 + 1;
+    final levels = await loadWorldLevels(worldId);
+    for (final l in levels) {
+      if (l.id == levelId) return l;
+    }
+    return null;
+  }
+
   /// Loads all 100 campaign levels across 10 worlds.
   static Future<List<LevelModel>> loadAllCampaignLevels() async {
     final allLevels = <LevelModel>[];
