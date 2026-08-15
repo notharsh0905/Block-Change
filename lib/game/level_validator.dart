@@ -1,6 +1,10 @@
+import 'dart:collection';
+
 import '../config/game_config.dart';
 import '../models/level_model.dart';
 import '../models/tile_model.dart';
+import 'game_rules.dart';
+import 'tile_manager.dart';
 
 /// Validation error report detail.
 class LevelValidationError {
@@ -13,7 +17,23 @@ class LevelValidationError {
   String toString() => '$field: $message';
 }
 
-/// Level Data Integrity & Schema Validator.
+/// Solver analysis result detail.
+class SolverResult {
+  final bool isSolvable;
+  final int minMoves;
+  final int statesVisited;
+  final String
+  validationStatus; // 'SOLVABLE', 'UNSOLVABLE', 'NEEDS_MANUAL_REVIEW'
+
+  const SolverResult({
+    required this.isSolvable,
+    required this.minMoves,
+    required this.statesVisited,
+    required this.validationStatus,
+  });
+}
+
+/// Level Data Integrity, Schema Validator, & Bounded Puzzle Solver.
 abstract class LevelValidator {
   /// Validates a level model definition against non-negotiable PRD constraints.
   static List<LevelValidationError> validateLevel(LevelModel level) {
@@ -145,4 +165,111 @@ abstract class LevelValidator {
 
     return board;
   }
+
+  /// Bounded BFS Solver to mathematically prove solvability of authored levels.
+  ///
+  /// Prevents infinite loops and memory exhaustion by capping max search states to [maxStates].
+  static SolverResult solveLevel(LevelModel level, {int maxStates = 4000}) {
+    final initialBoard = buildBoardFromLevel(level);
+
+    if (GameRules.checkWin(initialBoard, level.targetColor)) {
+      return const SolverResult(
+        isSolvable: true,
+        minMoves: 0,
+        statesVisited: 1,
+        validationStatus: 'SOLVABLE',
+      );
+    }
+
+    // Serialized state representation string for BFS visited queue
+    String serializeState(List<List<TileModel>> b) {
+      final sb = StringBuffer();
+      for (final r in b) {
+        for (final t in r) {
+          sb.write('${t.colorIndex}');
+        }
+      }
+      return sb.toString();
+    }
+
+    final queue = Queue<_SolverNode>();
+    final visited = <String>{};
+
+    final rootKey = serializeState(initialBoard);
+    queue.add(_SolverNode(board: initialBoard, moves: 0));
+    visited.add(rootKey);
+
+    int statesVisited = 0;
+
+    while (queue.isNotEmpty && statesVisited < maxStates) {
+      final current = queue.removeFirst();
+      statesVisited++;
+
+      final gridSize = level.gridSize;
+
+      for (int r = 0; r < gridSize; r++) {
+        for (int c = 0; c < gridSize; c++) {
+          final tile = current.board[r][c];
+          if (tile.isLocked) continue;
+          if (tile.type == TileType.normal &&
+              tile.colorIndex == level.targetColor) {
+            continue;
+          }
+
+          final res = TileManager.tapTile(
+            board: current.board,
+            row: r,
+            col: c,
+            colorCount: level.colorCount,
+          );
+
+          if (!res.isTileChanged &&
+              !res.isBombExploded &&
+              !res.isFreezeTriggered) {
+            continue;
+          }
+
+          if (GameRules.checkWin(res.newBoard, level.targetColor)) {
+            return SolverResult(
+              isSolvable: true,
+              minMoves: current.moves + 1,
+              statesVisited: statesVisited,
+              validationStatus: 'SOLVABLE',
+            );
+          }
+
+          final key = serializeState(res.newBoard);
+          if (!visited.contains(key)) {
+            visited.add(key);
+            queue.add(
+              _SolverNode(board: res.newBoard, moves: current.moves + 1),
+            );
+          }
+        }
+      }
+    }
+
+    if (statesVisited >= maxStates) {
+      return SolverResult(
+        isSolvable: false,
+        minMoves: -1,
+        statesVisited: statesVisited,
+        validationStatus: 'NEEDS_MANUAL_REVIEW',
+      );
+    }
+
+    return SolverResult(
+      isSolvable: false,
+      minMoves: -1,
+      statesVisited: statesVisited,
+      validationStatus: 'NEEDS_MANUAL_REVIEW',
+    );
+  }
+}
+
+class _SolverNode {
+  final List<List<TileModel>> board;
+  final int moves;
+
+  const _SolverNode({required this.board, required this.moves});
 }

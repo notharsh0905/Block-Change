@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../models/level_model.dart';
-import '../models/tile_model.dart';
 
 /// Data service for loading authored campaign levels from JSON assets.
 abstract class LevelLoader {
@@ -21,6 +20,16 @@ abstract class LevelLoader {
     }
   }
 
+  /// Loads all 100 campaign levels across 10 worlds.
+  static Future<List<LevelModel>> loadAllCampaignLevels() async {
+    final allLevels = <LevelModel>[];
+    for (int w = 1; w <= 10; w++) {
+      final levels = await loadWorldLevels(w);
+      allLevels.addAll(levels);
+    }
+    return allLevels;
+  }
+
   /// Parses JSON string representation of a world level set.
   static List<LevelModel> parseWorldLevels(String jsonString) {
     final Map<String, dynamic> data = jsonDecode(jsonString);
@@ -32,13 +41,16 @@ abstract class LevelLoader {
 
   /// Provides fallback/sample level data definitions for testing and dev.
   static List<LevelModel> getFallbackWorldLevels(int worldId) {
-    return [
-      LevelModel(
-        id: (worldId - 1) * 10 + 1,
+    // Generate valid sample fallback levels for any requested world
+    final startId = (worldId - 1) * 10 + 1;
+    return List.generate(10, (index) {
+      final id = startId + index;
+      return LevelModel(
+        id: id,
         worldId: worldId,
-        name: 'First Tap',
-        gridSize: 3,
-        colorCount: 3,
+        name: 'World $worldId Level ${index + 1}',
+        gridSize: 3 + (worldId > 5 ? 1 : 0),
+        colorCount: 3 + (worldId > 3 ? 1 : 0),
         targetColor: 0,
         initialBoard: const [
           [1, 1, 1],
@@ -54,61 +66,9 @@ abstract class LevelLoader {
           twoStarMaxMoves: 10,
           twoStarMinRemainingSeconds: 30.0,
         ),
-        seed: 1001,
+        seed: 1000 + id,
         difficulty: Difficulty.easy,
-        tutorialStep: 'tap_to_change',
-      ),
-      LevelModel(
-        id: (worldId - 1) * 10 + 2,
-        worldId: worldId,
-        name: 'Color Shift',
-        gridSize: 3,
-        colorCount: 3,
-        targetColor: 1,
-        initialBoard: const [
-          [0, 0, 0],
-          [0, 1, 0],
-          [0, 0, 0],
-        ],
-        specialTiles: const [],
-        timeLimitSeconds: 60.0,
-        chaosConfig: const ChaosConfig(enabled: false),
-        starRules: const StarRules(
-          threeStarMaxMoves: 10,
-          threeStarMinRemainingSeconds: 40.0,
-          twoStarMaxMoves: 15,
-          twoStarMinRemainingSeconds: 25.0,
-        ),
-        seed: 1002,
-        difficulty: Difficulty.easy,
-      ),
-      LevelModel(
-        id: (worldId - 1) * 10 + 3,
-        worldId: worldId,
-        name: 'Boom Introduction',
-        gridSize: 4,
-        colorCount: 4,
-        targetColor: 0,
-        initialBoard: const [
-          [1, 1, 1, 1],
-          [1, 0, 0, 1],
-          [1, 0, 0, 1],
-          [1, 1, 1, 1],
-        ],
-        specialTiles: const [
-          TileDefinition(row: 1, column: 1, type: TileType.bomb),
-        ],
-        timeLimitSeconds: 60.0,
-        chaosConfig: const ChaosConfig(enabled: false),
-        starRules: const StarRules(
-          threeStarMaxMoves: 4,
-          threeStarMinRemainingSeconds: 45.0,
-          twoStarMaxMoves: 8,
-          twoStarMinRemainingSeconds: 30.0,
-        ),
-        seed: 1003,
-        difficulty: Difficulty.medium,
-      ),
-    ];
+      );
+    });
   }
 }

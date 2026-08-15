@@ -1,6 +1,6 @@
 {
   "worldId": 1,
-  "worldName": "First Change",
+  "worldName": "First Steps",
   "levels": [
     {
       "id": 1,
@@ -30,13 +30,13 @@
       },
       "seed": 1001,
       "difficulty": "easy",
-      "tutorialStep": "Tap blocks to change color until all blocks match target!",
+      "tutorialStep": "Tap blocks to cycle colors until all match the Target Color!",
       "rulesVersion": 1
     },
     {
       "id": 2,
       "worldId": 1,
-      "name": "Rising Chaos",
+      "name": "Little Shift",
       "gridSize": 3,
       "colorCount": 3,
       "targetColor": 1,
@@ -48,6 +48,218 @@
       "specialTiles": [],
       "timeLimitSeconds": 60.0,
       "chaosConfig": {
+        "enabled": false,
+        "initialInterval": 2.0,
+        "minimumInterval": 0.5,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 6,
+        "threeStarMinRemainingSeconds": 45.0,
+        "twoStarMaxMoves": 12,
+        "twoStarMinRemainingSeconds": 30.0
+      },
+      "seed": 1002,
+      "difficulty": "easy",
+      "tutorialStep": "Match all blocks to Target Color Green!",
+      "rulesVersion": 1
+    },
+    {
+      "id": 3,
+      "worldId": 1,
+      "name": "Green Dream",
+      "gridSize": 3,
+      "colorCount": 3,
+      "targetColor": 1,
+      "initialBoard": [
+        [1, 0, 1],
+        [0, 1, 0],
+        [1, 0, 1]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 60.0,
+      "chaosConfig": {
+        "enabled": false,
+        "initialInterval": 2.0,
+        "minimumInterval": 0.5,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 8,
+        "threeStarMinRemainingSeconds": 40.0,
+        "twoStarMaxMoves": 14,
+        "twoStarMinRemainingSeconds": 25.0
+      },
+      "seed": 1003,
+      "difficulty": "easy",
+      "rulesVersion": 1
+    },
+    {
+      "id": 4,
+      "worldId": 1,
+      "name": "Gentle Chaos",
+      "gridSize": 3,
+      "colorCount": 3,
+      "targetColor": 0,
+      "initialBoard": [
+        [0, 2, 0],
+        [2, 0, 2],
+        [0, 2, 0]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 60.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 4.0,
+        "minimumInterval": 2.0,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 6,
+        "threeStarMinRemainingSeconds": 45.0,
+        "twoStarMaxMoves": 12,
+        "twoStarMinRemainingSeconds": 30.0
+      },
+      "seed": 1004,
+      "difficulty": "easy",
+      "tutorialStep": "Watch out! Chaos will automatically change random blocks periodically.",
+      "rulesVersion": 1
+    },
+    {
+      "id": 5,
+      "worldId": 1,
+      "name": "Color Drift",
+      "gridSize": 3,
+      "colorCount": 3,
+      "targetColor": 2,
+      "initialBoard": [
+        [2, 1, 2],
+        [1, 2, 1],
+        [2, 1, 2]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 60.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 3.5,
+        "minimumInterval": 1.5,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 6,
+        "threeStarMinRemainingSeconds": 45.0,
+        "twoStarMaxMoves": 12,
+        "twoStarMinRemainingSeconds": 30.0
+      },
+      "seed": 1005,
+      "difficulty": "easy",
+      "rulesVersion": 1
+    },
+    {
+      "id": 6,
+      "worldId": 1,
+      "name": "Tiny Trouble",
+      "gridSize": 3,
+      "colorCount": 3,
+      "targetColor": 0,
+      "initialBoard": [
+        [0, 1, 2],
+        [2, 0, 1],
+        [1, 2, 0]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 60.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 3.0,
+        "minimumInterval": 1.5,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 9,
+        "threeStarMinRemainingSeconds": 40.0,
+        "twoStarMaxMoves": 15,
+        "twoStarMinRemainingSeconds": 25.0
+      },
+      "seed": 1006,
+      "difficulty": "easy",
+      "rulesVersion": 1
+    },
+    {
+      "id": 7,
+      "worldId": 1,
+      "name": "Sky High",
+      "gridSize": 3,
+      "colorCount": 3,
+      "targetColor": 2,
+      "initialBoard": [
+        [1, 2, 1],
+        [2, 0, 2],
+        [1, 2, 1]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 60.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 3.0,
+        "minimumInterval": 1.2,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 8,
+        "threeStarMinRemainingSeconds": 40.0,
+        "twoStarMaxMoves": 14,
+        "twoStarMinRemainingSeconds": 25.0
+      },
+      "seed": 1007,
+      "difficulty": "easy",
+      "rulesVersion": 1
+    },
+    {
+      "id": 8,
+      "worldId": 1,
+      "name": "Center Cross",
+      "gridSize": 3,
+      "colorCount": 3,
+      "targetColor": 0,
+      "initialBoard": [
+        [2, 0, 2],
+        [0, 2, 0],
+        [2, 0, 2]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 60.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 2.8,
+        "minimumInterval": 1.0,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 7,
+        "threeStarMinRemainingSeconds": 42.0,
+        "twoStarMaxMoves": 13,
+        "twoStarMinRemainingSeconds": 28.0
+      },
+      "seed": 1008,
+      "difficulty": "easy",
+      "rulesVersion": 1
+    },
+    {
+      "id": 9,
+      "worldId": 1,
+      "name": "Triple Shift",
+      "gridSize": 3,
+      "colorCount": 3,
+      "targetColor": 1,
+      "initialBoard": [
+        [2, 2, 2],
+        [0, 1, 0],
+        [2, 2, 2]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 60.0,
+      "chaosConfig": {
         "enabled": true,
         "initialInterval": 2.5,
         "minimumInterval": 1.0,
@@ -55,137 +267,42 @@
       },
       "starRules": {
         "threeStarMaxMoves": 8,
-        "threeStarMinRemainingSeconds": 45.0,
+        "threeStarMinRemainingSeconds": 40.0,
         "twoStarMaxMoves": 14,
-        "twoStarMinRemainingSeconds": 30.0
+        "twoStarMinRemainingSeconds": 25.0
       },
-      "seed": 1002,
+      "seed": 1009,
       "difficulty": "easy",
-      "tutorialStep": "Chaos will change random blocks! Act quickly.",
       "rulesVersion": 1
     },
     {
-      "id": 3,
+      "id": 10,
       "worldId": 1,
-      "name": "Boom Blocks",
-      "gridSize": 4,
-      "colorCount": 4,
-      "targetColor": 2,
-      "initialBoard": [
-        [1, 1, 1, 1],
-        [1, 2, 2, 1],
-        [1, 2, 2, 1],
-        [1, 1, 1, 1]
-      ],
-      "specialTiles": [
-        {
-          "row": 1,
-          "column": 1,
-          "type": "bomb",
-          "lockDuration": 0.0
-        }
-      ],
-      "timeLimitSeconds": 70.0,
-      "chaosConfig": {
-        "enabled": false,
-        "initialInterval": 3.0,
-        "minimumInterval": 1.5,
-        "adaptive": false
-      },
-      "starRules": {
-        "threeStarMaxMoves": 6,
-        "threeStarMinRemainingSeconds": 50.0,
-        "twoStarMaxMoves": 12,
-        "twoStarMinRemainingSeconds": 35.0
-      },
-      "seed": 1003,
-      "difficulty": "medium",
-      "tutorialStep": "Tap the Bomb tile to explode its surrounding 3x3 blocks!",
-      "rulesVersion": 1
-    },
-    {
-      "id": 4,
-      "worldId": 1,
-      "name": "Frozen Path",
-      "gridSize": 4,
-      "colorCount": 4,
+      "name": "World One Finale",
+      "gridSize": 3,
+      "colorCount": 3,
       "targetColor": 0,
       "initialBoard": [
-        [0, 2, 2, 0],
-        [2, 0, 0, 2],
-        [2, 0, 0, 2],
-        [0, 2, 2, 0]
+        [1, 2, 1],
+        [2, 1, 2],
+        [1, 2, 1]
       ],
-      "specialTiles": [
-        {
-          "row": 2,
-          "column": 2,
-          "type": "freeze",
-          "lockDuration": 0.0
-        }
-      ],
+      "specialTiles": [],
       "timeLimitSeconds": 60.0,
       "chaosConfig": {
         "enabled": true,
-        "initialInterval": 1.5,
-        "minimumInterval": 0.5,
-        "adaptive": false
-      },
-      "starRules": {
-        "threeStarMaxMoves": 10,
-        "threeStarMinRemainingSeconds": 45.0,
-        "twoStarMaxMoves": 18,
-        "twoStarMinRemainingSeconds": 30.0
-      },
-      "seed": 1004,
-      "difficulty": "medium",
-      "tutorialStep": "Tap the Freeze tile to freeze chaos for 3 seconds!",
-      "rulesVersion": 1
-    },
-    {
-      "id": 5,
-      "worldId": 1,
-      "name": "Locked Down",
-      "gridSize": 5,
-      "colorCount": 4,
-      "targetColor": 1,
-      "initialBoard": [
-        [1, 1, 1, 1, 1],
-        [1, 0, 1, 0, 1],
-        [1, 1, 2, 1, 1],
-        [1, 0, 1, 0, 1],
-        [1, 1, 1, 1, 1]
-      ],
-      "specialTiles": [
-        {
-          "row": 2,
-          "column": 2,
-          "type": "lock",
-          "lockDuration": 5.0
-        },
-        {
-          "row": 0,
-          "column": 0,
-          "type": "bomb",
-          "lockDuration": 0.0
-        }
-      ],
-      "timeLimitSeconds": 80.0,
-      "chaosConfig": {
-        "enabled": true,
-        "initialInterval": 2.0,
+        "initialInterval": 2.2,
         "minimumInterval": 0.8,
         "adaptive": false
       },
       "starRules": {
-        "threeStarMaxMoves": 14,
-        "threeStarMinRemainingSeconds": 55.0,
-        "twoStarMaxMoves": 22,
-        "twoStarMinRemainingSeconds": 35.0
+        "threeStarMaxMoves": 10,
+        "threeStarMinRemainingSeconds": 40.0,
+        "twoStarMaxMoves": 16,
+        "twoStarMinRemainingSeconds": 25.0
       },
-      "seed": 1005,
-      "difficulty": "hard",
-      "tutorialStep": "Locked blocks cannot be tapped until their timer runs out!",
+      "seed": 1010,
+      "difficulty": "easy",
       "rulesVersion": 1
     }
   ]

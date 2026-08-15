@@ -1,0 +1,401 @@
+{
+  "worldId": 10,
+  "worldName": "Color Chaos",
+  "levels": [
+    {
+      "id": 91,
+      "worldId": 10,
+      "name": "Chaos Citadel",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 2,
+      "initialBoard": [
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 2, 2, 2, 2, 2, 2, 1],
+        [1, 2, 1, 1, 1, 1, 2, 1],
+        [1, 2, 1, 2, 2, 1, 2, 1],
+        [1, 2, 1, 2, 2, 1, 2, 1],
+        [1, 2, 1, 1, 1, 1, 2, 1],
+        [1, 2, 2, 2, 2, 2, 2, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 7, "column": 7, "type": "bomb", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 45.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.35,
+        "minimumInterval": 0.1,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 22,
+        "threeStarMinRemainingSeconds": 28.0,
+        "twoStarMaxMoves": 28,
+        "twoStarMinRemainingSeconds": 14.0
+      },
+      "seed": 10001,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 92,
+      "worldId": 10,
+      "name": "Vortex Master",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 3,
+      "initialBoard": [
+        [2, 2, 2, 2, 2, 2, 2, 2],
+        [2, 3, 3, 3, 3, 3, 3, 2],
+        [2, 3, 2, 2, 2, 2, 3, 2],
+        [2, 3, 2, 3, 3, 2, 3, 2],
+        [2, 3, 2, 3, 3, 2, 3, 2],
+        [2, 3, 2, 2, 2, 2, 3, 2],
+        [2, 3, 3, 3, 3, 3, 3, 2],
+        [2, 2, 2, 2, 2, 2, 2, 2]
+      ],
+      "specialTiles": [
+        { "row": 1, "column": 1, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 6, "column": 6, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 42.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.3,
+        "minimumInterval": 0.1,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 24,
+        "threeStarMinRemainingSeconds": 26.0,
+        "twoStarMaxMoves": 30,
+        "twoStarMinRemainingSeconds": 13.0
+      },
+      "seed": 10002,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 93,
+      "worldId": 10,
+      "name": "Glacial Tempest",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 4,
+      "initialBoard": [
+        [3, 3, 3, 3, 3, 3, 3, 3],
+        [3, 4, 4, 4, 4, 4, 4, 3],
+        [3, 4, 3, 3, 3, 3, 4, 3],
+        [3, 4, 3, 4, 4, 3, 4, 3],
+        [3, 4, 3, 4, 4, 3, 4, 3],
+        [3, 4, 3, 3, 3, 3, 4, 3],
+        [3, 4, 4, 4, 4, 4, 4, 3],
+        [3, 3, 3, 3, 3, 3, 3, 3]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 3, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 7, "column": 3, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 3, "column": 3, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 40.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.25,
+        "minimumInterval": 0.08,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 24,
+        "threeStarMinRemainingSeconds": 25.0,
+        "twoStarMaxMoves": 30,
+        "twoStarMinRemainingSeconds": 12.0
+      },
+      "seed": 10003,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 94,
+      "worldId": 10,
+      "name": "Cataclysm",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 5,
+      "initialBoard": [
+        [4, 4, 4, 4, 4, 4, 4, 4],
+        [4, 5, 5, 5, 5, 5, 5, 4],
+        [4, 5, 4, 4, 4, 4, 5, 4],
+        [4, 5, 4, 5, 5, 4, 5, 4],
+        [4, 5, 4, 5, 5, 4, 5, 4],
+        [4, 5, 4, 4, 4, 4, 5, 4],
+        [4, 5, 5, 5, 5, 5, 5, 4],
+        [4, 4, 4, 4, 4, 4, 4, 4]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 0, "column": 7, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 7, "column": 0, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 40.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.25,
+        "minimumInterval": 0.08,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 24,
+        "threeStarMinRemainingSeconds": 25.0,
+        "twoStarMaxMoves": 30,
+        "twoStarMinRemainingSeconds": 12.0
+      },
+      "seed": 10004,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 95,
+      "worldId": 10,
+      "name": "Absolute Zero",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 0,
+      "initialBoard": [
+        [5, 5, 5, 5, 5, 5, 5, 5],
+        [5, 0, 0, 0, 0, 0, 0, 5],
+        [5, 0, 5, 5, 5, 5, 0, 5],
+        [5, 0, 5, 0, 0, 5, 0, 5],
+        [5, 0, 5, 0, 0, 5, 0, 5],
+        [5, 0, 5, 5, 5, 5, 0, 5],
+        [5, 0, 0, 0, 0, 0, 0, 5],
+        [5, 5, 5, 5, 5, 5, 5, 5]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 0, "column": 7, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 7, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 7, "column": 7, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 40.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.2,
+        "minimumInterval": 0.06,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 26,
+        "threeStarMinRemainingSeconds": 25.0,
+        "twoStarMaxMoves": 32,
+        "twoStarMinRemainingSeconds": 12.0
+      },
+      "seed": 10005,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 96,
+      "worldId": 10,
+      "name": "Chains of Fate",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 1,
+      "initialBoard": [
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 1, 1, 1, 0],
+        [0, 1, 0, 0, 0, 0, 1, 0],
+        [0, 1, 0, 1, 1, 0, 1, 0],
+        [0, 1, 0, 1, 1, 0, 1, 0],
+        [0, 1, 0, 0, 0, 0, 1, 0],
+        [0, 1, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0]
+      ],
+      "specialTiles": [
+        { "row": 2, "column": 2, "type": "lock", "lockDuration": 5.0 },
+        { "row": 2, "column": 5, "type": "lock", "lockDuration": 5.0 },
+        { "row": 5, "column": 2, "type": "lock", "lockDuration": 5.0 },
+        { "row": 5, "column": 5, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 40.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.2,
+        "minimumInterval": 0.06,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 26,
+        "threeStarMinRemainingSeconds": 25.0,
+        "twoStarMaxMoves": 32,
+        "twoStarMinRemainingSeconds": 12.0
+      },
+      "seed": 10006,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 97,
+      "worldId": 10,
+      "name": "Super Nova II",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 2,
+      "initialBoard": [
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 2, 2, 2, 2, 2, 2, 1],
+        [1, 2, 1, 1, 1, 1, 2, 1],
+        [1, 2, 1, 2, 2, 1, 2, 1],
+        [1, 2, 1, 2, 2, 1, 2, 1],
+        [1, 2, 1, 1, 1, 1, 2, 1],
+        [1, 2, 2, 2, 2, 2, 2, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 0, "column": 7, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 7, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 7, "column": 7, "type": "bomb", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 38.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.2,
+        "minimumInterval": 0.05,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 26,
+        "threeStarMinRemainingSeconds": 24.0,
+        "twoStarMaxMoves": 32,
+        "twoStarMinRemainingSeconds": 12.0
+      },
+      "seed": 10007,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 98,
+      "worldId": 10,
+      "name": "Chaos Zenith",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 3,
+      "initialBoard": [
+        [2, 2, 2, 2, 2, 2, 2, 2],
+        [2, 3, 3, 3, 3, 3, 3, 2],
+        [2, 3, 2, 2, 2, 2, 3, 2],
+        [2, 3, 2, 3, 3, 2, 3, 2],
+        [2, 3, 2, 3, 3, 2, 3, 2],
+        [2, 3, 2, 2, 2, 2, 3, 2],
+        [2, 3, 3, 3, 3, 3, 3, 2],
+        [2, 2, 2, 2, 2, 2, 2, 2]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 0, "column": 7, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 7, "column": 0, "type": "lock", "lockDuration": 5.0 },
+        { "row": 7, "column": 7, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 38.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.2,
+        "minimumInterval": 0.05,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 28,
+        "threeStarMinRemainingSeconds": 24.0,
+        "twoStarMaxMoves": 34,
+        "twoStarMinRemainingSeconds": 12.0
+      },
+      "seed": 10008,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 99,
+      "worldId": 10,
+      "name": "Omega Challenge",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 4,
+      "initialBoard": [
+        [3, 3, 3, 3, 3, 3, 3, 3],
+        [3, 4, 4, 4, 4, 4, 4, 3],
+        [3, 4, 3, 3, 3, 3, 4, 3],
+        [3, 4, 3, 4, 4, 3, 4, 3],
+        [3, 4, 3, 4, 4, 3, 4, 3],
+        [3, 4, 3, 3, 3, 3, 4, 3],
+        [3, 4, 4, 4, 4, 4, 4, 3],
+        [3, 3, 3, 3, 3, 3, 3, 3]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 0, "column": 7, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 7, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 7, "column": 7, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 35.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.18,
+        "minimumInterval": 0.05,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 28,
+        "threeStarMinRemainingSeconds": 22.0,
+        "twoStarMaxMoves": 34,
+        "twoStarMinRemainingSeconds": 10.0
+      },
+      "seed": 10009,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 100,
+      "worldId": 10,
+      "name": "Block Change Master",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 5,
+      "initialBoard": [
+        [4, 4, 4, 4, 4, 4, 4, 4],
+        [4, 5, 5, 5, 5, 5, 5, 4],
+        [4, 5, 4, 4, 4, 4, 5, 4],
+        [4, 5, 4, 5, 5, 4, 5, 4],
+        [4, 5, 4, 5, 5, 4, 5, 4],
+        [4, 5, 4, 4, 4, 4, 5, 4],
+        [4, 5, 5, 5, 5, 5, 5, 4],
+        [4, 4, 4, 4, 4, 4, 4, 4]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 0, "column": 7, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 7, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 7, "column": 7, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 35.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.15,
+        "minimumInterval": 0.05,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 30,
+        "threeStarMinRemainingSeconds": 20.0,
+        "twoStarMaxMoves": 36,
+        "twoStarMinRemainingSeconds": 10.0
+      },
+      "seed": 10010,
+      "difficulty": "expert",
+      "tutorialStep": "The ultimate test of speed and strategy! Master of Block Change!",
+      "rulesVersion": 1
+    }
+  ]
+}

@@ -1,0 +1,354 @@
+{
+  "worldId": 4,
+  "worldName": "Freeze",
+  "levels": [
+    {
+      "id": 31,
+      "worldId": 4,
+      "name": "Frozen Moment",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 1,
+      "initialBoard": [
+        [0, 0, 0, 0],
+        [0, 1, 1, 0],
+        [0, 1, 1, 0],
+        [0, 0, 0, 0]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.2,
+        "minimumInterval": 0.5,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 6,
+        "threeStarMinRemainingSeconds": 40.0,
+        "twoStarMaxMoves": 12,
+        "twoStarMinRemainingSeconds": 25.0
+      },
+      "seed": 4001,
+      "difficulty": "medium",
+      "tutorialStep": "Tap the FREEZE block to freeze automatic chaos for 3 seconds!",
+      "rulesVersion": 1
+    },
+    {
+      "id": 32,
+      "worldId": 4,
+      "name": "Ice Shield",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 2,
+      "initialBoard": [
+        [1, 1, 1, 1],
+        [1, 2, 2, 1],
+        [1, 2, 2, 1],
+        [1, 1, 1, 1]
+      ],
+      "specialTiles": [
+        { "row": 1, "column": 1, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.0,
+        "minimumInterval": 0.4,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 8,
+        "threeStarMinRemainingSeconds": 38.0,
+        "twoStarMaxMoves": 14,
+        "twoStarMinRemainingSeconds": 22.0
+      },
+      "seed": 4002,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 33,
+      "worldId": 4,
+      "name": "Fifth Shade",
+      "gridSize": 4,
+      "colorCount": 5,
+      "targetColor": 4,
+      "initialBoard": [
+        [3, 3, 3, 3],
+        [3, 4, 4, 3],
+        [3, 4, 4, 3],
+        [3, 3, 3, 3]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 3, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.5,
+        "minimumInterval": 0.6,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 8,
+        "threeStarMinRemainingSeconds": 40.0,
+        "twoStarMaxMoves": 14,
+        "twoStarMinRemainingSeconds": 25.0
+      },
+      "seed": 4003,
+      "difficulty": "medium",
+      "tutorialStep": "Introducing a 5th color: Sunshine Gold!",
+      "rulesVersion": 1
+    },
+    {
+      "id": 34,
+      "worldId": 4,
+      "name": "Sub-Zero",
+      "gridSize": 5,
+      "colorCount": 4,
+      "targetColor": 0,
+      "initialBoard": [
+        [3, 3, 3, 3, 3],
+        [3, 0, 0, 0, 3],
+        [3, 0, 0, 0, 3],
+        [3, 0, 0, 0, 3],
+        [3, 3, 3, 3, 3]
+      ],
+      "specialTiles": [
+        { "row": 2, "column": 2, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.0,
+        "minimumInterval": 0.4,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 12,
+        "threeStarMinRemainingSeconds": 36.0,
+        "twoStarMaxMoves": 18,
+        "twoStarMinRemainingSeconds": 22.0
+      },
+      "seed": 4004,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 35,
+      "worldId": 4,
+      "name": "Glacial Pace",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 3,
+      "initialBoard": [
+        [2, 2, 2, 2, 2],
+        [2, 3, 3, 3, 2],
+        [2, 3, 3, 3, 2],
+        [2, 3, 3, 3, 2],
+        [2, 2, 2, 2, 2]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 4, "column": 4, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.9,
+        "minimumInterval": 0.3,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 12,
+        "threeStarMinRemainingSeconds": 38.0,
+        "twoStarMaxMoves": 18,
+        "twoStarMinRemainingSeconds": 24.0
+      },
+      "seed": 4005,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 36,
+      "worldId": 4,
+      "name": "Frost Pulse",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 1,
+      "initialBoard": [
+        [0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 0],
+        [0, 1, 1, 1, 0],
+        [0, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 2, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 4, "column": 2, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.8,
+        "minimumInterval": 0.3,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 12,
+        "threeStarMinRemainingSeconds": 36.0,
+        "twoStarMaxMoves": 18,
+        "twoStarMinRemainingSeconds": 20.0
+      },
+      "seed": 4006,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 37,
+      "worldId": 4,
+      "name": "Ice Barrier",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 4,
+      "initialBoard": [
+        [3, 3, 3, 3, 3],
+        [3, 4, 4, 4, 3],
+        [3, 4, 4, 4, 3],
+        [3, 4, 4, 4, 3],
+        [3, 3, 3, 3, 3]
+      ],
+      "specialTiles": [
+        { "row": 2, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 2, "column": 4, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.8,
+        "minimumInterval": 0.3,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 12,
+        "threeStarMinRemainingSeconds": 36.0,
+        "twoStarMaxMoves": 18,
+        "twoStarMinRemainingSeconds": 20.0
+      },
+      "seed": 4007,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 38,
+      "worldId": 4,
+      "name": "Permafrost",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 2,
+      "initialBoard": [
+        [1, 1, 1, 1, 1],
+        [1, 2, 2, 2, 1],
+        [1, 2, 2, 2, 1],
+        [1, 2, 2, 2, 1],
+        [1, 1, 1, 1, 1]
+      ],
+      "specialTiles": [
+        { "row": 1, "column": 1, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 3, "column": 3, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 48.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.7,
+        "minimumInterval": 0.25,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 14,
+        "threeStarMinRemainingSeconds": 32.0,
+        "twoStarMaxMoves": 20,
+        "twoStarMinRemainingSeconds": 18.0
+      },
+      "seed": 4008,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 39,
+      "worldId": 4,
+      "name": "Flash Freeze",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 0,
+      "initialBoard": [
+        [4, 4, 4, 4, 4],
+        [4, 0, 0, 0, 4],
+        [4, 0, 0, 0, 4],
+        [4, 0, 0, 0, 4],
+        [4, 4, 4, 4, 4]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 2, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 2, "column": 2, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 4, "column": 2, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 45.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.6,
+        "minimumInterval": 0.2,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 14,
+        "threeStarMinRemainingSeconds": 30.0,
+        "twoStarMaxMoves": 20,
+        "twoStarMinRemainingSeconds": 15.0
+      },
+      "seed": 4009,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 40,
+      "worldId": 4,
+      "name": "World Four Finale",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 1,
+      "initialBoard": [
+        [0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 0],
+        [0, 1, 1, 1, 0],
+        [0, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 0, "column": 4, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 4, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 4, "column": 4, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 45.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.5,
+        "minimumInterval": 0.2,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 14,
+        "threeStarMinRemainingSeconds": 30.0,
+        "twoStarMaxMoves": 20,
+        "twoStarMinRemainingSeconds": 15.0
+      },
+      "seed": 4010,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    }
+  ]
+}

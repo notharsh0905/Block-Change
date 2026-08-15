@@ -1,0 +1,358 @@
+{
+  "worldId": 5,
+  "worldName": "Locked",
+  "levels": [
+    {
+      "id": 41,
+      "worldId": 5,
+      "name": "Locked In",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 0,
+      "initialBoard": [
+        [0, 0, 0, 0],
+        [0, 1, 1, 0],
+        [0, 1, 1, 0],
+        [0, 0, 0, 0]
+      ],
+      "specialTiles": [
+        { "row": 1, "column": 1, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": false,
+        "initialInterval": 2.0,
+        "minimumInterval": 0.5,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 6,
+        "threeStarMinRemainingSeconds": 40.0,
+        "twoStarMaxMoves": 12,
+        "twoStarMinRemainingSeconds": 25.0
+      },
+      "seed": 5001,
+      "difficulty": "medium",
+      "tutorialStep": "LOCK blocks are temporarily frozen! Wait for lock timer to expire before tapping.",
+      "rulesVersion": 1
+    },
+    {
+      "id": 42,
+      "worldId": 5,
+      "name": "Dual Lock",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 2,
+      "initialBoard": [
+        [1, 1, 1, 1],
+        [1, 2, 2, 1],
+        [1, 2, 2, 1],
+        [1, 1, 1, 1]
+      ],
+      "specialTiles": [
+        { "row": 1, "column": 1, "type": "lock", "lockDuration": 5.0 },
+        { "row": 2, "column": 2, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 2.0,
+        "minimumInterval": 0.8,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 8,
+        "threeStarMinRemainingSeconds": 38.0,
+        "twoStarMaxMoves": 14,
+        "twoStarMinRemainingSeconds": 22.0
+      },
+      "seed": 5002,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 43,
+      "worldId": 5,
+      "name": "Corner Shackles",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 3,
+      "initialBoard": [
+        [3, 3, 3, 3, 3],
+        [3, 0, 0, 0, 3],
+        [3, 0, 3, 0, 3],
+        [3, 0, 0, 0, 3],
+        [3, 3, 3, 3, 3]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "lock", "lockDuration": 5.0 },
+        { "row": 4, "column": 4, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.8,
+        "minimumInterval": 0.6,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 10,
+        "threeStarMinRemainingSeconds": 38.0,
+        "twoStarMaxMoves": 16,
+        "twoStarMinRemainingSeconds": 22.0
+      },
+      "seed": 5003,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 44,
+      "worldId": 5,
+      "name": "Lockstep",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 1,
+      "initialBoard": [
+        [2, 2, 2, 2, 2],
+        [2, 1, 1, 1, 2],
+        [2, 1, 1, 1, 2],
+        [2, 1, 1, 1, 2],
+        [2, 2, 2, 2, 2]
+      ],
+      "specialTiles": [
+        { "row": 2, "column": 2, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.5,
+        "minimumInterval": 0.5,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 12,
+        "threeStarMinRemainingSeconds": 35.0,
+        "twoStarMaxMoves": 18,
+        "twoStarMinRemainingSeconds": 20.0
+      },
+      "seed": 5004,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 45,
+      "worldId": 5,
+      "name": "Quad Chains",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 4,
+      "initialBoard": [
+        [4, 4, 4, 4, 4],
+        [4, 0, 0, 0, 4],
+        [4, 0, 4, 0, 4],
+        [4, 0, 0, 0, 4],
+        [4, 4, 4, 4, 4]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "lock", "lockDuration": 5.0 },
+        { "row": 0, "column": 4, "type": "lock", "lockDuration": 5.0 },
+        { "row": 4, "column": 0, "type": "lock", "lockDuration": 5.0 },
+        { "row": 4, "column": 4, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.2,
+        "minimumInterval": 0.4,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 12,
+        "threeStarMinRemainingSeconds": 35.0,
+        "twoStarMaxMoves": 18,
+        "twoStarMinRemainingSeconds": 20.0
+      },
+      "seed": 5005,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 46,
+      "worldId": 5,
+      "name": "Iron Gate",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 0,
+      "initialBoard": [
+        [1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 1],
+        [1, 0, 0, 0, 1],
+        [1, 0, 0, 0, 1],
+        [1, 1, 1, 1, 1]
+      ],
+      "specialTiles": [
+        { "row": 1, "column": 2, "type": "lock", "lockDuration": 5.0 },
+        { "row": 3, "column": 2, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.0,
+        "minimumInterval": 0.4,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 12,
+        "threeStarMinRemainingSeconds": 35.0,
+        "twoStarMaxMoves": 18,
+        "twoStarMinRemainingSeconds": 20.0
+      },
+      "seed": 5006,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 47,
+      "worldId": 5,
+      "name": "Lock Wall",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 2,
+      "initialBoard": [
+        [3, 3, 3, 3, 3],
+        [3, 2, 2, 2, 3],
+        [3, 2, 2, 2, 3],
+        [3, 2, 2, 2, 3],
+        [3, 3, 3, 3, 3]
+      ],
+      "specialTiles": [
+        { "row": 2, "column": 1, "type": "lock", "lockDuration": 5.0 },
+        { "row": 2, "column": 3, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 48.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.8,
+        "minimumInterval": 0.3,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 14,
+        "threeStarMinRemainingSeconds": 32.0,
+        "twoStarMaxMoves": 20,
+        "twoStarMinRemainingSeconds": 18.0
+      },
+      "seed": 5007,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 48,
+      "worldId": 5,
+      "name": "Countdown Chaos",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 3,
+      "initialBoard": [
+        [0, 0, 0, 0, 0],
+        [0, 3, 3, 3, 0],
+        [0, 3, 3, 3, 0],
+        [0, 3, 3, 3, 0],
+        [0, 0, 0, 0, 0]
+      ],
+      "specialTiles": [
+        { "row": 1, "column": 1, "type": "lock", "lockDuration": 5.0 },
+        { "row": 3, "column": 3, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 45.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.7,
+        "minimumInterval": 0.25,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 14,
+        "threeStarMinRemainingSeconds": 30.0,
+        "twoStarMaxMoves": 20,
+        "twoStarMinRemainingSeconds": 15.0
+      },
+      "seed": 5008,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 49,
+      "worldId": 5,
+      "name": "Heavy Chains",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 1,
+      "initialBoard": [
+        [2, 2, 2, 2, 2],
+        [2, 1, 1, 1, 2],
+        [2, 1, 1, 1, 2],
+        [2, 1, 1, 1, 2],
+        [2, 2, 2, 2, 2]
+      ],
+      "specialTiles": [
+        { "row": 1, "column": 2, "type": "lock", "lockDuration": 5.0 },
+        { "row": 2, "column": 2, "type": "lock", "lockDuration": 5.0 },
+        { "row": 3, "column": 2, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 45.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.6,
+        "minimumInterval": 0.2,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 14,
+        "threeStarMinRemainingSeconds": 30.0,
+        "twoStarMaxMoves": 20,
+        "twoStarMinRemainingSeconds": 15.0
+      },
+      "seed": 5009,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 50,
+      "worldId": 5,
+      "name": "World Five Finale",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 4,
+      "initialBoard": [
+        [1, 1, 1, 1, 1],
+        [1, 4, 4, 4, 1],
+        [1, 4, 4, 4, 1],
+        [1, 4, 4, 4, 1],
+        [1, 1, 1, 1, 1]
+      ],
+      "specialTiles": [
+        { "row": 1, "column": 1, "type": "lock", "lockDuration": 5.0 },
+        { "row": 1, "column": 3, "type": "lock", "lockDuration": 5.0 },
+        { "row": 3, "column": 1, "type": "lock", "lockDuration": 5.0 },
+        { "row": 3, "column": 3, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 45.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.5,
+        "minimumInterval": 0.2,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 14,
+        "threeStarMinRemainingSeconds": 30.0,
+        "twoStarMaxMoves": 20,
+        "twoStarMinRemainingSeconds": 15.0
+      },
+      "seed": 5010,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    }
+  ]
+}

@@ -1,0 +1,393 @@
+{
+  "worldId": 9,
+  "worldName": "Master",
+  "levels": [
+    {
+      "id": 81,
+      "worldId": 9,
+      "name": "Master Domain",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 4,
+      "initialBoard": [
+        [3, 3, 3, 3, 3, 3, 3, 3],
+        [3, 4, 4, 4, 4, 4, 4, 3],
+        [3, 4, 3, 3, 3, 3, 4, 3],
+        [3, 4, 3, 4, 4, 3, 4, 3],
+        [3, 4, 3, 4, 4, 3, 4, 3],
+        [3, 4, 3, 3, 3, 3, 4, 3],
+        [3, 4, 4, 4, 4, 4, 4, 3],
+        [3, 3, 3, 3, 3, 3, 3, 3]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.5,
+        "minimumInterval": 0.15,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 18,
+        "threeStarMinRemainingSeconds": 34.0,
+        "twoStarMaxMoves": 24,
+        "twoStarMinRemainingSeconds": 18.0
+      },
+      "seed": 9001,
+      "difficulty": "expert",
+      "tutorialStep": "Mastering the 8x8 grid! 64 total blocks to control.",
+      "rulesVersion": 1
+    },
+    {
+      "id": 82,
+      "worldId": 9,
+      "name": "Octo Surge",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 5,
+      "initialBoard": [
+        [4, 4, 4, 4, 4, 4, 4, 4],
+        [4, 5, 5, 5, 5, 5, 5, 4],
+        [4, 5, 4, 4, 4, 4, 5, 4],
+        [4, 5, 4, 5, 5, 4, 5, 4],
+        [4, 5, 4, 5, 5, 4, 5, 4],
+        [4, 5, 4, 4, 4, 4, 5, 4],
+        [4, 5, 5, 5, 5, 5, 5, 4],
+        [4, 4, 4, 4, 4, 4, 4, 4]
+      ],
+      "specialTiles": [
+        { "row": 2, "column": 2, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 5, "column": 5, "type": "bomb", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 48.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.45,
+        "minimumInterval": 0.15,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 20,
+        "threeStarMinRemainingSeconds": 32.0,
+        "twoStarMaxMoves": 26,
+        "twoStarMinRemainingSeconds": 16.0
+      },
+      "seed": 9002,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 83,
+      "worldId": 9,
+      "name": "Frozen Octo",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 0,
+      "initialBoard": [
+        [5, 5, 5, 5, 5, 5, 5, 5],
+        [5, 0, 0, 0, 0, 0, 0, 5],
+        [5, 0, 5, 5, 5, 5, 0, 5],
+        [5, 0, 5, 0, 0, 5, 0, 5],
+        [5, 0, 5, 0, 0, 5, 0, 5],
+        [5, 0, 5, 5, 5, 5, 0, 5],
+        [5, 0, 0, 0, 0, 0, 0, 5],
+        [5, 5, 5, 5, 5, 5, 5, 5]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 3, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 7, "column": 3, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 45.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.4,
+        "minimumInterval": 0.12,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 20,
+        "threeStarMinRemainingSeconds": 30.0,
+        "twoStarMaxMoves": 26,
+        "twoStarMinRemainingSeconds": 15.0
+      },
+      "seed": 9003,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 84,
+      "worldId": 9,
+      "name": "Iron Octo",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 1,
+      "initialBoard": [
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 1, 1, 1, 0],
+        [0, 1, 0, 0, 0, 0, 1, 0],
+        [0, 1, 0, 1, 1, 0, 1, 0],
+        [0, 1, 0, 1, 1, 0, 1, 0],
+        [0, 1, 0, 0, 0, 0, 1, 0],
+        [0, 1, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0]
+      ],
+      "specialTiles": [
+        { "row": 2, "column": 2, "type": "lock", "lockDuration": 5.0 },
+        { "row": 5, "column": 5, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 45.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.4,
+        "minimumInterval": 0.12,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 20,
+        "threeStarMinRemainingSeconds": 30.0,
+        "twoStarMaxMoves": 26,
+        "twoStarMinRemainingSeconds": 15.0
+      },
+      "seed": 9004,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 85,
+      "worldId": 9,
+      "name": "Triple Element",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 2,
+      "initialBoard": [
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 2, 2, 2, 2, 2, 2, 1],
+        [1, 2, 1, 1, 1, 1, 2, 1],
+        [1, 2, 1, 2, 2, 1, 2, 1],
+        [1, 2, 1, 2, 2, 1, 2, 1],
+        [1, 2, 1, 1, 1, 1, 2, 1],
+        [1, 2, 2, 2, 2, 2, 2, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 0, "column": 7, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 7, "column": 0, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 42.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.35,
+        "minimumInterval": 0.1,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 22,
+        "threeStarMinRemainingSeconds": 28.0,
+        "twoStarMaxMoves": 28,
+        "twoStarMinRemainingSeconds": 14.0
+      },
+      "seed": 9005,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 86,
+      "worldId": 9,
+      "name": "Octo Storm",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 3,
+      "initialBoard": [
+        [2, 2, 2, 2, 2, 2, 2, 2],
+        [2, 3, 3, 3, 3, 3, 3, 2],
+        [2, 3, 2, 2, 2, 2, 3, 2],
+        [2, 3, 2, 3, 3, 2, 3, 2],
+        [2, 3, 2, 3, 3, 2, 3, 2],
+        [2, 3, 2, 2, 2, 2, 3, 2],
+        [2, 3, 3, 3, 3, 3, 3, 2],
+        [2, 2, 2, 2, 2, 2, 2, 2]
+      ],
+      "specialTiles": [
+        { "row": 1, "column": 1, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 6, "column": 6, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 42.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.35,
+        "minimumInterval": 0.1,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 22,
+        "threeStarMinRemainingSeconds": 28.0,
+        "twoStarMaxMoves": 28,
+        "twoStarMinRemainingSeconds": 14.0
+      },
+      "seed": 9006,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 87,
+      "worldId": 9,
+      "name": "Chrono Lock",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 4,
+      "initialBoard": [
+        [3, 3, 3, 3, 3, 3, 3, 3],
+        [3, 4, 4, 4, 4, 4, 4, 3],
+        [3, 4, 3, 3, 3, 3, 4, 3],
+        [3, 4, 3, 4, 4, 3, 4, 3],
+        [3, 4, 3, 4, 4, 3, 4, 3],
+        [3, 4, 3, 3, 3, 3, 4, 3],
+        [3, 4, 4, 4, 4, 4, 4, 3],
+        [3, 3, 3, 3, 3, 3, 3, 3]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 4, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 4, "column": 4, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 40.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.3,
+        "minimumInterval": 0.1,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 22,
+        "threeStarMinRemainingSeconds": 26.0,
+        "twoStarMaxMoves": 28,
+        "twoStarMinRemainingSeconds": 13.0
+      },
+      "seed": 9007,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 88,
+      "worldId": 9,
+      "name": "Titan Blast",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 5,
+      "initialBoard": [
+        [4, 4, 4, 4, 4, 4, 4, 4],
+        [4, 5, 5, 5, 5, 5, 5, 4],
+        [4, 5, 4, 4, 4, 4, 5, 4],
+        [4, 5, 4, 5, 5, 4, 5, 4],
+        [4, 5, 4, 5, 5, 4, 5, 4],
+        [4, 5, 4, 4, 4, 4, 5, 4],
+        [4, 5, 5, 5, 5, 5, 5, 4],
+        [4, 4, 4, 4, 4, 4, 4, 4]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 0, "column": 7, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 7, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 7, "column": 7, "type": "bomb", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 40.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.3,
+        "minimumInterval": 0.1,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 24,
+        "threeStarMinRemainingSeconds": 26.0,
+        "twoStarMaxMoves": 30,
+        "twoStarMinRemainingSeconds": 13.0
+      },
+      "seed": 9008,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 89,
+      "worldId": 9,
+      "name": "Apex Trial",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 0,
+      "initialBoard": [
+        [5, 5, 5, 5, 5, 5, 5, 5],
+        [5, 0, 0, 0, 0, 0, 0, 5],
+        [5, 0, 5, 5, 5, 5, 0, 5],
+        [5, 0, 5, 0, 0, 5, 0, 5],
+        [5, 0, 5, 0, 0, 5, 0, 5],
+        [5, 0, 5, 5, 5, 5, 0, 5],
+        [5, 0, 0, 0, 0, 0, 0, 5],
+        [5, 5, 5, 5, 5, 5, 5, 5]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 0, "column": 7, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 7, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 7, "column": 7, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 38.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.25,
+        "minimumInterval": 0.08,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 24,
+        "threeStarMinRemainingSeconds": 24.0,
+        "twoStarMaxMoves": 30,
+        "twoStarMinRemainingSeconds": 12.0
+      },
+      "seed": 9009,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    },
+    {
+      "id": 90,
+      "worldId": 9,
+      "name": "World Nine Finale",
+      "gridSize": 8,
+      "colorCount": 6,
+      "targetColor": 1,
+      "initialBoard": [
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 1, 1, 1, 0],
+        [0, 1, 0, 0, 0, 0, 1, 0],
+        [0, 1, 0, 1, 1, 0, 1, 0],
+        [0, 1, 0, 1, 1, 0, 1, 0],
+        [0, 1, 0, 0, 0, 0, 1, 0],
+        [0, 1, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 0, "column": 7, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 7, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 7, "column": 7, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 38.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.25,
+        "minimumInterval": 0.08,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 24,
+        "threeStarMinRemainingSeconds": 24.0,
+        "twoStarMaxMoves": 30,
+        "twoStarMinRemainingSeconds": 12.0
+      },
+      "seed": 9010,
+      "difficulty": "expert",
+      "rulesVersion": 1
+    }
+  ]
+}

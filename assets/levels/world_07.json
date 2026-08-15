@@ -1,0 +1,373 @@
+{
+  "worldId": 7,
+  "worldName": "Pressure",
+  "levels": [
+    {
+      "id": 61,
+      "worldId": 7,
+      "name": "Pressure Surge",
+      "gridSize": 6,
+      "colorCount": 6,
+      "targetColor": 5,
+      "initialBoard": [
+        [4, 4, 4, 4, 4, 4],
+        [4, 5, 5, 5, 5, 4],
+        [4, 5, 4, 4, 5, 4],
+        [4, 5, 4, 4, 5, 4],
+        [4, 5, 5, 5, 5, 4],
+        [4, 4, 4, 4, 4, 4]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.8,
+        "minimumInterval": 0.3,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 14,
+        "threeStarMinRemainingSeconds": 38.0,
+        "twoStarMaxMoves": 20,
+        "twoStarMinRemainingSeconds": 22.0
+      },
+      "seed": 7001,
+      "difficulty": "hard",
+      "tutorialStep": "Introducing the 6th color: Cyan Aqua! Navigate high-density 6x6 grids.",
+      "rulesVersion": 1
+    },
+    {
+      "id": 62,
+      "worldId": 7,
+      "name": "Heavy Pressure",
+      "gridSize": 6,
+      "colorCount": 6,
+      "targetColor": 0,
+      "initialBoard": [
+        [5, 5, 5, 5, 5, 5],
+        [5, 0, 0, 0, 0, 5],
+        [5, 0, 5, 5, 0, 5],
+        [5, 0, 5, 5, 0, 5],
+        [5, 0, 0, 0, 0, 5],
+        [5, 5, 5, 5, 5, 5]
+      ],
+      "specialTiles": [
+        { "row": 2, "column": 2, "type": "bomb", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.7,
+        "minimumInterval": 0.25,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 14,
+        "threeStarMinRemainingSeconds": 35.0,
+        "twoStarMaxMoves": 20,
+        "twoStarMinRemainingSeconds": 18.0
+      },
+      "seed": 7002,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 63,
+      "worldId": 7,
+      "name": "Seventh Wave",
+      "gridSize": 7,
+      "colorCount": 5,
+      "targetColor": 1,
+      "initialBoard": [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 1, 1, 0],
+        [0, 1, 0, 0, 0, 1, 0],
+        [0, 1, 0, 1, 0, 1, 0],
+        [0, 1, 0, 0, 0, 1, 0],
+        [0, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 3, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 6, "column": 3, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.8,
+        "minimumInterval": 0.3,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 16,
+        "threeStarMinRemainingSeconds": 38.0,
+        "twoStarMaxMoves": 22,
+        "twoStarMinRemainingSeconds": 20.0
+      },
+      "seed": 7003,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 64,
+      "worldId": 7,
+      "name": "Rapid Burst",
+      "gridSize": 6,
+      "colorCount": 6,
+      "targetColor": 2,
+      "initialBoard": [
+        [1, 1, 1, 1, 1, 1],
+        [1, 2, 2, 2, 2, 1],
+        [1, 2, 1, 1, 2, 1],
+        [1, 2, 1, 1, 2, 1],
+        [1, 2, 2, 2, 2, 1],
+        [1, 1, 1, 1, 1, 1]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 5, "column": 5, "type": "bomb", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 48.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.6,
+        "minimumInterval": 0.2,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 16,
+        "threeStarMinRemainingSeconds": 32.0,
+        "twoStarMaxMoves": 22,
+        "twoStarMinRemainingSeconds": 16.0
+      },
+      "seed": 7004,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 65,
+      "worldId": 7,
+      "name": "Titan Grid",
+      "gridSize": 7,
+      "colorCount": 6,
+      "targetColor": 3,
+      "initialBoard": [
+        [2, 2, 2, 2, 2, 2, 2],
+        [2, 3, 3, 3, 3, 3, 2],
+        [2, 3, 2, 2, 2, 3, 2],
+        [2, 3, 2, 3, 2, 3, 2],
+        [2, 3, 2, 2, 2, 3, 2],
+        [2, 3, 3, 3, 3, 3, 2],
+        [2, 2, 2, 2, 2, 2, 2]
+      ],
+      "specialTiles": [
+        { "row": 3, "column": 3, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.7,
+        "minimumInterval": 0.25,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 18,
+        "threeStarMinRemainingSeconds": 36.0,
+        "twoStarMaxMoves": 24,
+        "twoStarMinRemainingSeconds": 18.0
+      },
+      "seed": 7005,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 66,
+      "worldId": 7,
+      "name": "Hyper Surge",
+      "gridSize": 6,
+      "colorCount": 6,
+      "targetColor": 4,
+      "initialBoard": [
+        [3, 3, 3, 3, 3, 3],
+        [3, 4, 4, 4, 4, 3],
+        [3, 4, 3, 3, 4, 3],
+        [3, 4, 3, 3, 4, 3],
+        [3, 4, 4, 4, 4, 3],
+        [3, 3, 3, 3, 3, 3]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 3, "type": "lock", "lockDuration": 5.0 },
+        { "row": 5, "column": 3, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 45.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.5,
+        "minimumInterval": 0.2,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 16,
+        "threeStarMinRemainingSeconds": 30.0,
+        "twoStarMaxMoves": 22,
+        "twoStarMinRemainingSeconds": 15.0
+      },
+      "seed": 7006,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 67,
+      "worldId": 7,
+      "name": "Dense Matrix",
+      "gridSize": 7,
+      "colorCount": 6,
+      "targetColor": 0,
+      "initialBoard": [
+        [5, 5, 5, 5, 5, 5, 5],
+        [5, 0, 0, 0, 0, 0, 5],
+        [5, 0, 5, 5, 5, 0, 5],
+        [5, 0, 5, 0, 5, 0, 5],
+        [5, 0, 5, 5, 5, 0, 5],
+        [5, 0, 0, 0, 0, 0, 5],
+        [5, 5, 5, 5, 5, 5, 5]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 6, "column": 6, "type": "bomb", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.6,
+        "minimumInterval": 0.2,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 18,
+        "threeStarMinRemainingSeconds": 32.0,
+        "twoStarMaxMoves": 24,
+        "twoStarMinRemainingSeconds": 16.0
+      },
+      "seed": 7007,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 68,
+      "worldId": 7,
+      "name": "Vortex Surge",
+      "gridSize": 7,
+      "colorCount": 6,
+      "targetColor": 1,
+      "initialBoard": [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 1, 1, 0],
+        [0, 1, 0, 0, 0, 1, 0],
+        [0, 1, 0, 1, 0, 1, 0],
+        [0, 1, 0, 0, 0, 1, 0],
+        [0, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0]
+      ],
+      "specialTiles": [
+        { "row": 1, "column": 1, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 5, "column": 5, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 45.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.5,
+        "minimumInterval": 0.2,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 18,
+        "threeStarMinRemainingSeconds": 30.0,
+        "twoStarMaxMoves": 24,
+        "twoStarMinRemainingSeconds": 15.0
+      },
+      "seed": 7008,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 69,
+      "worldId": 7,
+      "name": "Crushing Force",
+      "gridSize": 7,
+      "colorCount": 6,
+      "targetColor": 2,
+      "initialBoard": [
+        [1, 1, 1, 1, 1, 1, 1],
+        [1, 2, 2, 2, 2, 2, 1],
+        [1, 2, 1, 1, 1, 2, 1],
+        [1, 2, 1, 2, 1, 2, 1],
+        [1, 2, 1, 1, 1, 2, 1],
+        [1, 2, 2, 2, 2, 2, 1],
+        [1, 1, 1, 1, 1, 1, 1]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 3, "column": 3, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 6, "column": 6, "type": "bomb", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 45.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.5,
+        "minimumInterval": 0.2,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 18,
+        "threeStarMinRemainingSeconds": 30.0,
+        "twoStarMaxMoves": 24,
+        "twoStarMinRemainingSeconds": 15.0
+      },
+      "seed": 7009,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 70,
+      "worldId": 7,
+      "name": "World Seven Finale",
+      "gridSize": 7,
+      "colorCount": 6,
+      "targetColor": 3,
+      "initialBoard": [
+        [2, 2, 2, 2, 2, 2, 2],
+        [2, 3, 3, 3, 3, 3, 2],
+        [2, 3, 2, 2, 2, 3, 2],
+        [2, 3, 2, 3, 2, 3, 2],
+        [2, 3, 2, 2, 2, 3, 2],
+        [2, 3, 3, 3, 3, 3, 2],
+        [2, 2, 2, 2, 2, 2, 2]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 0, "column": 6, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 6, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 6, "column": 6, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 45.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.4,
+        "minimumInterval": 0.15,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 20,
+        "threeStarMinRemainingSeconds": 30.0,
+        "twoStarMaxMoves": 26,
+        "twoStarMinRemainingSeconds": 15.0
+      },
+      "seed": 7010,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    }
+  ]
+}

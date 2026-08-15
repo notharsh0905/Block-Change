@@ -1,0 +1,368 @@
+{
+  "worldId": 6,
+  "worldName": "Mix It Up",
+  "levels": [
+    {
+      "id": 51,
+      "worldId": 6,
+      "name": "Frost & Fire",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 0,
+      "initialBoard": [
+        [1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 1],
+        [1, 0, 0, 0, 1],
+        [1, 0, 0, 0, 1],
+        [1, 1, 1, 1, 1]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 4, "column": 4, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.2,
+        "minimumInterval": 0.4,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 8,
+        "threeStarMinRemainingSeconds": 40.0,
+        "twoStarMaxMoves": 14,
+        "twoStarMinRemainingSeconds": 25.0
+      },
+      "seed": 6001,
+      "difficulty": "medium",
+      "tutorialStep": "Mechanics combined! Use BOMB for mass clearing and FREEZE to stop chaos.",
+      "rulesVersion": 1
+    },
+    {
+      "id": 52,
+      "worldId": 6,
+      "name": "Locked Blast",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 2,
+      "initialBoard": [
+        [3, 3, 3, 3, 3],
+        [3, 2, 2, 2, 3],
+        [3, 2, 2, 2, 3],
+        [3, 2, 2, 2, 3],
+        [3, 3, 3, 3, 3]
+      ],
+      "specialTiles": [
+        { "row": 2, "column": 2, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 0, "column": 0, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.0,
+        "minimumInterval": 0.4,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 10,
+        "threeStarMinRemainingSeconds": 36.0,
+        "twoStarMaxMoves": 16,
+        "twoStarMinRemainingSeconds": 22.0
+      },
+      "seed": 6002,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 53,
+      "worldId": 6,
+      "name": "Frozen Chains",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 1,
+      "initialBoard": [
+        [0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 0],
+        [0, 1, 1, 1, 0],
+        [0, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 2, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 2, "column": 2, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.0,
+        "minimumInterval": 0.3,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 10,
+        "threeStarMinRemainingSeconds": 36.0,
+        "twoStarMaxMoves": 16,
+        "twoStarMinRemainingSeconds": 22.0
+      },
+      "seed": 6003,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 54,
+      "worldId": 6,
+      "name": "Triple Threat",
+      "gridSize": 5,
+      "colorCount": 5,
+      "targetColor": 3,
+      "initialBoard": [
+        [2, 2, 2, 2, 2],
+        [2, 3, 3, 3, 2],
+        [2, 3, 3, 3, 2],
+        [2, 3, 3, 3, 2],
+        [2, 2, 2, 2, 2]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 2, "column": 2, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 4, "column": 4, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.9,
+        "minimumInterval": 0.3,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 12,
+        "threeStarMinRemainingSeconds": 35.0,
+        "twoStarMaxMoves": 18,
+        "twoStarMinRemainingSeconds": 20.0
+      },
+      "seed": 6004,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 55,
+      "worldId": 6,
+      "name": "Hex Chaos",
+      "gridSize": 6,
+      "colorCount": 5,
+      "targetColor": 4,
+      "initialBoard": [
+        [4, 4, 4, 4, 4, 4],
+        [4, 1, 1, 1, 1, 4],
+        [4, 1, 4, 4, 1, 4],
+        [4, 1, 4, 4, 1, 4],
+        [4, 1, 1, 1, 1, 4],
+        [4, 4, 4, 4, 4, 4]
+      ],
+      "specialTiles": [
+        { "row": 1, "column": 1, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 4, "column": 4, "type": "freeze", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.8,
+        "minimumInterval": 0.3,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 14,
+        "threeStarMinRemainingSeconds": 38.0,
+        "twoStarMaxMoves": 20,
+        "twoStarMinRemainingSeconds": 22.0
+      },
+      "seed": 6005,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 56,
+      "worldId": 6,
+      "name": "Elemental Pulse",
+      "gridSize": 6,
+      "colorCount": 5,
+      "targetColor": 0,
+      "initialBoard": [
+        [2, 2, 2, 2, 2, 2],
+        [2, 0, 0, 0, 0, 2],
+        [2, 0, 2, 2, 0, 2],
+        [2, 0, 2, 2, 0, 2],
+        [2, 0, 0, 0, 0, 2],
+        [2, 2, 2, 2, 2, 2]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 2, "column": 2, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 5, "column": 5, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.7,
+        "minimumInterval": 0.25,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 14,
+        "threeStarMinRemainingSeconds": 34.0,
+        "twoStarMaxMoves": 20,
+        "twoStarMinRemainingSeconds": 18.0
+      },
+      "seed": 6006,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 57,
+      "worldId": 6,
+      "name": "Bomb Shelter",
+      "gridSize": 6,
+      "colorCount": 5,
+      "targetColor": 1,
+      "initialBoard": [
+        [3, 3, 3, 3, 3, 3],
+        [3, 1, 1, 1, 1, 3],
+        [3, 1, 3, 3, 1, 3],
+        [3, 1, 3, 3, 1, 3],
+        [3, 1, 1, 1, 1, 3],
+        [3, 3, 3, 3, 3, 3]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 3, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 5, "column": 2, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.7,
+        "minimumInterval": 0.25,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 14,
+        "threeStarMinRemainingSeconds": 34.0,
+        "twoStarMaxMoves": 20,
+        "twoStarMinRemainingSeconds": 18.0
+      },
+      "seed": 6007,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 58,
+      "worldId": 6,
+      "name": "Frozen Detonation",
+      "gridSize": 6,
+      "colorCount": 5,
+      "targetColor": 2,
+      "initialBoard": [
+        [0, 0, 0, 0, 0, 0],
+        [0, 2, 2, 2, 2, 0],
+        [0, 2, 0, 0, 2, 0],
+        [0, 2, 0, 0, 2, 0],
+        [0, 2, 2, 2, 2, 0],
+        [0, 0, 0, 0, 0, 0]
+      ],
+      "specialTiles": [
+        { "row": 1, "column": 1, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 4, "column": 4, "type": "bomb", "lockDuration": 0.0 }
+      ],
+      "timeLimitSeconds": 48.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.6,
+        "minimumInterval": 0.2,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 14,
+        "threeStarMinRemainingSeconds": 32.0,
+        "twoStarMaxMoves": 20,
+        "twoStarMinRemainingSeconds": 16.0
+      },
+      "seed": 6008,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 59,
+      "worldId": 6,
+      "name": "Master Mix",
+      "gridSize": 6,
+      "colorCount": 5,
+      "targetColor": 3,
+      "initialBoard": [
+        [4, 4, 4, 4, 4, 4],
+        [4, 3, 3, 3, 3, 4],
+        [4, 3, 4, 4, 3, 4],
+        [4, 3, 4, 4, 3, 4],
+        [4, 3, 3, 3, 3, 4],
+        [4, 4, 4, 4, 4, 4]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 0, "column": 5, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 5, "column": 0, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 45.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.6,
+        "minimumInterval": 0.2,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 16,
+        "threeStarMinRemainingSeconds": 30.0,
+        "twoStarMaxMoves": 22,
+        "twoStarMinRemainingSeconds": 15.0
+      },
+      "seed": 6009,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    },
+    {
+      "id": 60,
+      "worldId": 6,
+      "name": "World Six Finale",
+      "gridSize": 6,
+      "colorCount": 5,
+      "targetColor": 4,
+      "initialBoard": [
+        [1, 1, 1, 1, 1, 1],
+        [1, 4, 4, 4, 4, 1],
+        [1, 4, 1, 1, 4, 1],
+        [1, 4, 1, 1, 4, 1],
+        [1, 4, 4, 4, 4, 1],
+        [1, 1, 1, 1, 1, 1]
+      ],
+      "specialTiles": [
+        { "row": 0, "column": 0, "type": "bomb", "lockDuration": 0.0 },
+        { "row": 0, "column": 5, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 5, "column": 0, "type": "freeze", "lockDuration": 0.0 },
+        { "row": 5, "column": 5, "type": "lock", "lockDuration": 5.0 }
+      ],
+      "timeLimitSeconds": 45.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 0.5,
+        "minimumInterval": 0.2,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 16,
+        "threeStarMinRemainingSeconds": 30.0,
+        "twoStarMaxMoves": 22,
+        "twoStarMinRemainingSeconds": 15.0
+      },
+      "seed": 6010,
+      "difficulty": "hard",
+      "rulesVersion": 1
+    }
+  ]
+}

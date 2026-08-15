@@ -1,0 +1,315 @@
+{
+  "worldId": 2,
+  "worldName": "Rising Chaos",
+  "levels": [
+    {
+      "id": 11,
+      "worldId": 2,
+      "name": "Chaos Rising",
+      "gridSize": 3,
+      "colorCount": 3,
+      "targetColor": 1,
+      "initialBoard": [
+        [0, 2, 0],
+        [2, 1, 2],
+        [0, 2, 0]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 2.0,
+        "minimumInterval": 0.8,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 8,
+        "threeStarMinRemainingSeconds": 40.0,
+        "twoStarMaxMoves": 14,
+        "twoStarMinRemainingSeconds": 25.0
+      },
+      "seed": 2001,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 12,
+      "worldId": 2,
+      "name": "Fourth Shade",
+      "gridSize": 3,
+      "colorCount": 4,
+      "targetColor": 3,
+      "initialBoard": [
+        [2, 2, 2],
+        [2, 3, 2],
+        [2, 2, 2]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 2.2,
+        "minimumInterval": 0.9,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 8,
+        "threeStarMinRemainingSeconds": 40.0,
+        "twoStarMaxMoves": 14,
+        "twoStarMinRemainingSeconds": 25.0
+      },
+      "seed": 2002,
+      "difficulty": "medium",
+      "tutorialStep": "Introducing a 4th color: Violet! Cycle through all 4 shades.",
+      "rulesVersion": 1
+    },
+    {
+      "id": 13,
+      "worldId": 2,
+      "name": "Expanded Grid",
+      "gridSize": 4,
+      "colorCount": 3,
+      "targetColor": 0,
+      "initialBoard": [
+        [0, 0, 0, 0],
+        [0, 2, 2, 0],
+        [0, 2, 2, 0],
+        [0, 0, 0, 0]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 60.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 2.5,
+        "minimumInterval": 1.0,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 6,
+        "threeStarMinRemainingSeconds": 45.0,
+        "twoStarMaxMoves": 12,
+        "twoStarMinRemainingSeconds": 30.0
+      },
+      "seed": 2003,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 14,
+      "worldId": 2,
+      "name": "Quad Drift",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 2,
+      "initialBoard": [
+        [1, 1, 1, 1],
+        [1, 2, 2, 1],
+        [1, 2, 2, 1],
+        [1, 1, 1, 1]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 60.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 2.0,
+        "minimumInterval": 0.8,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 12,
+        "threeStarMinRemainingSeconds": 42.0,
+        "twoStarMaxMoves": 18,
+        "twoStarMinRemainingSeconds": 26.0
+      },
+      "seed": 2004,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 15,
+      "worldId": 2,
+      "name": "Fast Pulsar",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 0,
+      "initialBoard": [
+        [3, 3, 3, 3],
+        [3, 0, 0, 3],
+        [3, 0, 0, 3],
+        [3, 3, 3, 3]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.8,
+        "minimumInterval": 0.7,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 12,
+        "threeStarMinRemainingSeconds": 40.0,
+        "twoStarMaxMoves": 18,
+        "twoStarMinRemainingSeconds": 25.0
+      },
+      "seed": 2005,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 16,
+      "worldId": 2,
+      "name": "Staggered Grid",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 1,
+      "initialBoard": [
+        [0, 1, 0, 1],
+        [1, 0, 1, 0],
+        [0, 1, 0, 1],
+        [1, 0, 1, 0]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.8,
+        "minimumInterval": 0.7,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 10,
+        "threeStarMinRemainingSeconds": 40.0,
+        "twoStarMaxMoves": 16,
+        "twoStarMinRemainingSeconds": 25.0
+      },
+      "seed": 2006,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 17,
+      "worldId": 2,
+      "name": "Vortex Shift",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 2,
+      "initialBoard": [
+        [2, 0, 0, 2],
+        [0, 1, 1, 0],
+        [0, 1, 1, 0],
+        [2, 0, 0, 2]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 55.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.6,
+        "minimumInterval": 0.6,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 12,
+        "threeStarMinRemainingSeconds": 38.0,
+        "twoStarMaxMoves": 18,
+        "twoStarMinRemainingSeconds": 24.0
+      },
+      "seed": 2007,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 18,
+      "worldId": 2,
+      "name": "Speed Shift",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 3,
+      "initialBoard": [
+        [2, 2, 2, 2],
+        [2, 1, 1, 2],
+        [2, 1, 1, 2],
+        [2, 2, 2, 2]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.5,
+        "minimumInterval": 0.5,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 12,
+        "threeStarMinRemainingSeconds": 35.0,
+        "twoStarMaxMoves": 18,
+        "twoStarMinRemainingSeconds": 22.0
+      },
+      "seed": 2008,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 19,
+      "worldId": 2,
+      "name": "Chaos Wave",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 0,
+      "initialBoard": [
+        [3, 1, 3, 1],
+        [1, 3, 1, 3],
+        [3, 1, 3, 1],
+        [1, 3, 1, 3]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.4,
+        "minimumInterval": 0.5,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 12,
+        "threeStarMinRemainingSeconds": 35.0,
+        "twoStarMaxMoves": 18,
+        "twoStarMinRemainingSeconds": 22.0
+      },
+      "seed": 2009,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    },
+    {
+      "id": 20,
+      "worldId": 2,
+      "name": "World Two Finale",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 1,
+      "initialBoard": [
+        [0, 2, 0, 2],
+        [2, 0, 2, 0],
+        [0, 2, 0, 2],
+        [2, 0, 2, 0]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "initialInterval": 1.2,
+        "minimumInterval": 0.4,
+        "adaptive": false
+      },
+      "starRules": {
+        "threeStarMaxMoves": 14,
+        "threeStarMinRemainingSeconds": 35.0,
+        "twoStarMaxMoves": 20,
+        "twoStarMinRemainingSeconds": 20.0
+      },
+      "seed": 2010,
+      "difficulty": "medium",
+      "rulesVersion": 1
+    }
+  ]
+}
