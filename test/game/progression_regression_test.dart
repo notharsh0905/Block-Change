@@ -3,7 +3,6 @@ import 'package:block_change/game/level_validator.dart';
 import 'package:block_change/services/progress_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 

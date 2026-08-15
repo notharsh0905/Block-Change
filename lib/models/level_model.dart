@@ -67,7 +67,7 @@ class StarRules {
   }
 }
 
-/// Complete authored level data schema.
+/// Complete authored level data schema with design metadata.
 class LevelModel {
   final int id;
   final int worldId;
@@ -85,6 +85,12 @@ class LevelModel {
   final String? tutorialStep;
   final int rulesVersion;
 
+  // Level Design Metadata (PRD Phase 4.1 Part 7)
+  final String? archetype;
+  final String? designIntent;
+  final String? introducedMechanic;
+  final bool isMiniBoss;
+
   const LevelModel({
     required this.id,
     required this.worldId,
@@ -101,6 +107,10 @@ class LevelModel {
     required this.difficulty,
     this.tutorialStep,
     this.rulesVersion = 1,
+    this.archetype,
+    this.designIntent,
+    this.introducedMechanic,
+    this.isMiniBoss = false,
   });
 
   Map<String, dynamic> toJson() => {
@@ -119,6 +129,10 @@ class LevelModel {
     'difficulty': difficulty.name,
     'tutorialStep': tutorialStep,
     'rulesVersion': rulesVersion,
+    if (archetype != null) 'archetype': archetype,
+    if (designIntent != null) 'designIntent': designIntent,
+    if (introducedMechanic != null) 'introducedMechanic': introducedMechanic,
+    'isMiniBoss': isMiniBoss,
   };
 
   factory LevelModel.fromJson(Map<String, dynamic> json) {
@@ -150,6 +164,10 @@ class LevelModel {
       difficulty: Difficulty.values.byName(json['difficulty'] as String),
       tutorialStep: json['tutorialStep'] as String?,
       rulesVersion: json['rulesVersion'] as int? ?? 1,
+      archetype: json['archetype'] as String?,
+      designIntent: json['designIntent'] as String?,
+      introducedMechanic: json['introducedMechanic'] as String?,
+      isMiniBoss: json['isMiniBoss'] as bool? ?? false,
     );
   }
 }

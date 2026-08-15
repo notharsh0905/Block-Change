@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../models/level_model.dart';
+import '../models/tile_model.dart';
 
 /// Data service for loading authored campaign levels from JSON assets.
 abstract class LevelLoader {
@@ -62,6 +63,19 @@ abstract class LevelLoader {
     'Clean Run',
     'Chaos Rush',
     'First Challenge',
+  ];
+
+  static const List<String> kWorld3Names = [
+    'Boom Introduction',
+    'Corner Blast',
+    'Double Detonation',
+    'Center Impact',
+    'Chain Reaction',
+    'Triple Threat',
+    'Clear Edge',
+    'Cluster Boom',
+    'Volcano',
+    'Mega Blast',
   ];
 
   /// Provides fallback/sample level data definitions for testing and dev.
@@ -164,6 +178,45 @@ abstract class LevelLoader {
           seed: 1000 + id,
           difficulty: Difficulty.easy,
         );
+      }
+
+      if (worldId == 3) {
+        final name = kWorld3Names[index];
+        if (index == 2) {
+          // Level 23 Double Detonation
+          return LevelModel(
+            id: 23,
+            worldId: 3,
+            name: name,
+            gridSize: 4,
+            colorCount: 4,
+            targetColor: 1,
+            initialBoard: const [
+              [0, 0, 0, 1],
+              [0, 1, 0, 0],
+              [0, 0, 1, 0],
+              [1, 0, 0, 0]
+            ],
+            specialTiles: const [
+              TileDefinition(row: 1, column: 1, type: TileType.bomb),
+              TileDefinition(row: 2, column: 2, type: TileType.bomb),
+            ],
+            timeLimitSeconds: 60.0,
+            chaosConfig: const ChaosConfig(enabled: false),
+            starRules: const StarRules(
+              threeStarMaxMoves: 4,
+              threeStarMinRemainingSeconds: 45.0,
+              twoStarMaxMoves: 8,
+              twoStarMinRemainingSeconds: 30.0,
+            ),
+            seed: 3003,
+            difficulty: Difficulty.medium,
+            archetype: 'Double Bomb Strategy',
+            designIntent:
+                'Detonate two Green Bomb tiles in sequence at (1,1) and (2,2) to cover the entire 4x4 grid with target color Mint Green in 2 moves.',
+            introducedMechanic: 'BOMB',
+          );
+        }
       }
 
       final gridSize = 3 + (worldId > 5 ? 1 : 0);
