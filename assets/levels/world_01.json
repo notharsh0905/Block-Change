@@ -10,94 +10,87 @@
       "colorCount": 3,
       "targetColor": 0,
       "initialBoard": [
-        [1, 1, 1],
-        [1, 0, 1],
-        [1, 1, 1]
+        [0, 0, 0],
+        [0, 2, 0],
+        [0, 0, 0]
       ],
       "specialTiles": [],
       "timeLimitSeconds": 60.0,
       "chaosConfig": {
         "enabled": false,
-        "initialInterval": 2.0,
-        "minimumInterval": 0.5,
-        "adaptive": false
+        "tickIntervalSeconds": 5.0,
+        "tilesPerTick": 1
       },
       "starRules": {
-        "threeStarMaxMoves": 5,
+        "threeStarMaxMoves": 2,
         "threeStarMinRemainingSeconds": 45.0,
-        "twoStarMaxMoves": 10,
+        "twoStarMaxMoves": 4,
         "twoStarMinRemainingSeconds": 30.0
       },
       "seed": 1001,
       "difficulty": "easy",
-      "tutorialStep": "Tap blocks to cycle colors until all match the Target Color!",
-      "rulesVersion": 1
+      "tutorialStep": "Tap the center tile once to match the target color!"
     },
     {
       "id": 2,
       "worldId": 1,
-      "name": "Little Shift",
+      "name": "Two Steps",
       "gridSize": 3,
       "colorCount": 3,
-      "targetColor": 1,
+      "targetColor": 0,
       "initialBoard": [
+        [0, 0, 0],
         [0, 1, 0],
-        [1, 2, 1],
-        [0, 1, 0]
+        [0, 0, 0]
       ],
       "specialTiles": [],
       "timeLimitSeconds": 60.0,
       "chaosConfig": {
         "enabled": false,
-        "initialInterval": 2.0,
-        "minimumInterval": 0.5,
-        "adaptive": false
+        "tickIntervalSeconds": 5.0,
+        "tilesPerTick": 1
       },
       "starRules": {
-        "threeStarMaxMoves": 6,
+        "threeStarMaxMoves": 3,
         "threeStarMinRemainingSeconds": 45.0,
-        "twoStarMaxMoves": 12,
+        "twoStarMaxMoves": 5,
         "twoStarMinRemainingSeconds": 30.0
       },
       "seed": 1002,
-      "difficulty": "easy",
-      "tutorialStep": "Match all blocks to Target Color Green!",
-      "rulesVersion": 1
+      "difficulty": "easy"
     },
     {
       "id": 3,
       "worldId": 1,
-      "name": "Green Dream",
+      "name": "Almost There",
       "gridSize": 3,
       "colorCount": 3,
-      "targetColor": 1,
+      "targetColor": 0,
       "initialBoard": [
-        [1, 0, 1],
-        [0, 1, 0],
-        [1, 0, 1]
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 2]
       ],
       "specialTiles": [],
       "timeLimitSeconds": 60.0,
       "chaosConfig": {
         "enabled": false,
-        "initialInterval": 2.0,
-        "minimumInterval": 0.5,
-        "adaptive": false
+        "tickIntervalSeconds": 5.0,
+        "tilesPerTick": 1
       },
       "starRules": {
-        "threeStarMaxMoves": 8,
-        "threeStarMinRemainingSeconds": 40.0,
-        "twoStarMaxMoves": 14,
-        "twoStarMinRemainingSeconds": 25.0
+        "threeStarMaxMoves": 2,
+        "threeStarMinRemainingSeconds": 50.0,
+        "twoStarMaxMoves": 4,
+        "twoStarMinRemainingSeconds": 35.0
       },
       "seed": 1003,
-      "difficulty": "easy",
-      "rulesVersion": 1
+      "difficulty": "easy"
     },
     {
       "id": 4,
       "worldId": 1,
-      "name": "Gentle Chaos",
+      "name": "Chaos Arrives",
       "gridSize": 3,
       "colorCount": 3,
       "targetColor": 0,
@@ -110,115 +103,23 @@
       "timeLimitSeconds": 60.0,
       "chaosConfig": {
         "enabled": true,
-        "initialInterval": 4.0,
-        "minimumInterval": 2.0,
-        "adaptive": false
+        "tickIntervalSeconds": 4.0,
+        "tilesPerTick": 1
       },
       "starRules": {
         "threeStarMaxMoves": 6,
-        "threeStarMinRemainingSeconds": 45.0,
-        "twoStarMaxMoves": 12,
-        "twoStarMinRemainingSeconds": 30.0
+        "threeStarMinRemainingSeconds": 40.0,
+        "twoStarMaxMoves": 10,
+        "twoStarMinRemainingSeconds": 25.0
       },
       "seed": 1004,
       "difficulty": "easy",
-      "tutorialStep": "Watch out! Chaos will automatically change random blocks periodically.",
-      "rulesVersion": 1
+      "tutorialStep": "Watch out! Chaos periodically changes random tiles!"
     },
     {
       "id": 5,
       "worldId": 1,
-      "name": "Color Drift",
-      "gridSize": 3,
-      "colorCount": 3,
-      "targetColor": 2,
-      "initialBoard": [
-        [2, 1, 2],
-        [1, 2, 1],
-        [2, 1, 2]
-      ],
-      "specialTiles": [],
-      "timeLimitSeconds": 60.0,
-      "chaosConfig": {
-        "enabled": true,
-        "initialInterval": 3.5,
-        "minimumInterval": 1.5,
-        "adaptive": false
-      },
-      "starRules": {
-        "threeStarMaxMoves": 6,
-        "threeStarMinRemainingSeconds": 45.0,
-        "twoStarMaxMoves": 12,
-        "twoStarMinRemainingSeconds": 30.0
-      },
-      "seed": 1005,
-      "difficulty": "easy",
-      "rulesVersion": 1
-    },
-    {
-      "id": 6,
-      "worldId": 1,
-      "name": "Tiny Trouble",
-      "gridSize": 3,
-      "colorCount": 3,
-      "targetColor": 0,
-      "initialBoard": [
-        [0, 1, 2],
-        [2, 0, 1],
-        [1, 2, 0]
-      ],
-      "specialTiles": [],
-      "timeLimitSeconds": 60.0,
-      "chaosConfig": {
-        "enabled": true,
-        "initialInterval": 3.0,
-        "minimumInterval": 1.5,
-        "adaptive": false
-      },
-      "starRules": {
-        "threeStarMaxMoves": 9,
-        "threeStarMinRemainingSeconds": 40.0,
-        "twoStarMaxMoves": 15,
-        "twoStarMinRemainingSeconds": 25.0
-      },
-      "seed": 1006,
-      "difficulty": "easy",
-      "rulesVersion": 1
-    },
-    {
-      "id": 7,
-      "worldId": 1,
-      "name": "Sky High",
-      "gridSize": 3,
-      "colorCount": 3,
-      "targetColor": 2,
-      "initialBoard": [
-        [1, 2, 1],
-        [2, 0, 2],
-        [1, 2, 1]
-      ],
-      "specialTiles": [],
-      "timeLimitSeconds": 60.0,
-      "chaosConfig": {
-        "enabled": true,
-        "initialInterval": 3.0,
-        "minimumInterval": 1.2,
-        "adaptive": false
-      },
-      "starRules": {
-        "threeStarMaxMoves": 8,
-        "threeStarMinRemainingSeconds": 40.0,
-        "twoStarMaxMoves": 14,
-        "twoStarMinRemainingSeconds": 25.0
-      },
-      "seed": 1007,
-      "difficulty": "easy",
-      "rulesVersion": 1
-    },
-    {
-      "id": 8,
-      "worldId": 1,
-      "name": "Center Cross",
+      "name": "Beat the Clock",
       "gridSize": 3,
       "colorCount": 3,
       "targetColor": 0,
@@ -228,82 +129,164 @@
         [2, 0, 2]
       ],
       "specialTiles": [],
-      "timeLimitSeconds": 60.0,
+      "timeLimitSeconds": 25.0,
       "chaosConfig": {
-        "enabled": true,
-        "initialInterval": 2.8,
-        "minimumInterval": 1.0,
-        "adaptive": false
+        "enabled": false,
+        "tickIntervalSeconds": 5.0,
+        "tilesPerTick": 1
       },
       "starRules": {
-        "threeStarMaxMoves": 7,
-        "threeStarMinRemainingSeconds": 42.0,
-        "twoStarMaxMoves": 13,
-        "twoStarMinRemainingSeconds": 28.0
+        "threeStarMaxMoves": 6,
+        "threeStarMinRemainingSeconds": 18.0,
+        "twoStarMaxMoves": 10,
+        "twoStarMinRemainingSeconds": 10.0
       },
-      "seed": 1008,
-      "difficulty": "easy",
-      "rulesVersion": 1
+      "seed": 1005,
+      "difficulty": "easy"
     },
     {
-      "id": 9,
+      "id": 6,
       "worldId": 1,
-      "name": "Triple Shift",
-      "gridSize": 3,
-      "colorCount": 3,
-      "targetColor": 1,
-      "initialBoard": [
-        [2, 2, 2],
-        [0, 1, 0],
-        [2, 2, 2]
-      ],
-      "specialTiles": [],
-      "timeLimitSeconds": 60.0,
-      "chaosConfig": {
-        "enabled": true,
-        "initialInterval": 2.5,
-        "minimumInterval": 1.0,
-        "adaptive": false
-      },
-      "starRules": {
-        "threeStarMaxMoves": 8,
-        "threeStarMinRemainingSeconds": 40.0,
-        "twoStarMaxMoves": 14,
-        "twoStarMinRemainingSeconds": 25.0
-      },
-      "seed": 1009,
-      "difficulty": "easy",
-      "rulesVersion": 1
-    },
-    {
-      "id": 10,
-      "worldId": 1,
-      "name": "World One Finale",
+      "name": "Corner Case",
       "gridSize": 3,
       "colorCount": 3,
       "targetColor": 0,
       "initialBoard": [
-        [1, 2, 1],
-        [2, 1, 2],
-        [1, 2, 1]
+        [1, 0, 1],
+        [0, 0, 0],
+        [1, 0, 1]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 60.0,
+      "chaosConfig": {
+        "enabled": false,
+        "tickIntervalSeconds": 5.0,
+        "tilesPerTick": 1
+      },
+      "starRules": {
+        "threeStarMaxMoves": 9,
+        "threeStarMinRemainingSeconds": 45.0,
+        "twoStarMaxMoves": 12,
+        "twoStarMinRemainingSeconds": 30.0
+      },
+      "seed": 1006,
+      "difficulty": "easy"
+    },
+    {
+      "id": 7,
+      "worldId": 1,
+      "name": "Color Trap",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 0,
+      "initialBoard": [
+        [0, 0, 0, 0],
+        [0, 3, 3, 0],
+        [0, 3, 3, 0],
+        [0, 0, 0, 0]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 60.0,
+      "chaosConfig": {
+        "enabled": false,
+        "tickIntervalSeconds": 5.0,
+        "tilesPerTick": 1
+      },
+      "starRules": {
+        "threeStarMaxMoves": 5,
+        "threeStarMinRemainingSeconds": 45.0,
+        "twoStarMaxMoves": 8,
+        "twoStarMinRemainingSeconds": 30.0
+      },
+      "seed": 1007,
+      "difficulty": "easy"
+    },
+    {
+      "id": 8,
+      "worldId": 1,
+      "name": "Clean Run",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 0,
+      "initialBoard": [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 3, 0],
+        [0, 0, 0, 0]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 60.0,
+      "chaosConfig": {
+        "enabled": false,
+        "tickIntervalSeconds": 5.0,
+        "tilesPerTick": 1
+      },
+      "starRules": {
+        "threeStarMaxMoves": 2,
+        "threeStarMinRemainingSeconds": 50.0,
+        "twoStarMaxMoves": 4,
+        "twoStarMinRemainingSeconds": 35.0
+      },
+      "seed": 1008,
+      "difficulty": "easy"
+    },
+    {
+      "id": 9,
+      "worldId": 1,
+      "name": "Chaos Rush",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 0,
+      "initialBoard": [
+        [0, 3, 0, 3],
+        [3, 0, 3, 0],
+        [0, 3, 0, 3],
+        [3, 0, 3, 0]
+      ],
+      "specialTiles": [],
+      "timeLimitSeconds": 50.0,
+      "chaosConfig": {
+        "enabled": true,
+        "tickIntervalSeconds": 2.5,
+        "tilesPerTick": 1
+      },
+      "starRules": {
+        "threeStarMaxMoves": 10,
+        "threeStarMinRemainingSeconds": 35.0,
+        "twoStarMaxMoves": 14,
+        "twoStarMinRemainingSeconds": 20.0
+      },
+      "seed": 1009,
+      "difficulty": "medium"
+    },
+    {
+      "id": 10,
+      "worldId": 1,
+      "name": "First Challenge",
+      "gridSize": 4,
+      "colorCount": 4,
+      "targetColor": 0,
+      "initialBoard": [
+        [3, 3, 3, 3],
+        [3, 0, 0, 3],
+        [3, 0, 0, 3],
+        [3, 3, 3, 3]
       ],
       "specialTiles": [],
       "timeLimitSeconds": 60.0,
       "chaosConfig": {
         "enabled": true,
-        "initialInterval": 2.2,
-        "minimumInterval": 0.8,
-        "adaptive": false
+        "tickIntervalSeconds": 3.0,
+        "tilesPerTick": 1
       },
       "starRules": {
-        "threeStarMaxMoves": 10,
+        "threeStarMaxMoves": 14,
         "threeStarMinRemainingSeconds": 40.0,
-        "twoStarMaxMoves": 16,
+        "twoStarMaxMoves": 18,
         "twoStarMinRemainingSeconds": 25.0
       },
       "seed": 1010,
-      "difficulty": "easy",
-      "rulesVersion": 1
+      "difficulty": "medium"
     }
   ]
 }
