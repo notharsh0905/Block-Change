@@ -56,37 +56,55 @@ class _GameButtonState extends State<GameButton> {
         transform: Matrix4.translationValues(0, _isPressed ? 4 : 0, 0),
         decoration: BoxDecoration(
           color: baseColor,
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(18.0),
           boxShadow: _isPressed
               ? []
               : [
                   BoxShadow(
                     color: shadowColor,
-                    offset: const Offset(0, 4),
+                    offset: const Offset(0, 5),
                     blurRadius: 0,
                   ),
                 ],
         ),
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (widget.icon != null) ...[
-                Icon(widget.icon, color: widget.textColor, size: 22),
-                const SizedBox(width: 8),
-              ],
-              Text(
-                widget.label,
-                style: TextStyle(
-                  color: widget.textColor,
-                  fontSize: widget.fontSize,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.8,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            // Top highlight edge
+            if (!_isPressed)
+              Positioned(
+                top: 4,
+                left: 10,
+                right: 10,
+                child: Container(
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.25),
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
                 ),
               ),
-            ],
-          ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (widget.icon != null) ...[
+                  Icon(widget.icon, color: widget.textColor, size: 22),
+                  const SizedBox(width: 8),
+                ],
+                Text(
+                  widget.label,
+                  style: TextStyle(
+                    color: widget.textColor,
+                    fontSize: widget.fontSize,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.8,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

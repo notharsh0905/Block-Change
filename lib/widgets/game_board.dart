@@ -3,9 +3,10 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../models/tile_model.dart';
+import '../theme/app_colors.dart';
 import 'game_tile.dart';
 
-/// Centered responsive grid container for rendering the active puzzle board.
+/// Centered responsive elevated 2.5D grid container for rendering puzzle board.
 class GameBoardWidget extends StatelessWidget {
   final List<List<TileModel>> board;
   final Function(int row, int col) onTileTap;
@@ -32,12 +33,39 @@ class GameBoardWidget extends StatelessWidget {
           constraints.maxHeight,
         );
 
-        // Calculate individual square tile size
-        final double tileSize = (maxAvailableDimension / gridSize) - 6.0;
+        // Frame padding & border offsets inside elevated board container
+        const double framePadding = 12.0;
+        const double borderWidth = 2.5;
+        const double tileMargin = 3.0;
 
-        return SizedBox(
+        final double innerBoardSize = math.max(
+          0.0,
+          maxAvailableDimension - (framePadding * 2) - (borderWidth * 2) - 4.0,
+        );
+        final double tileSize = math.max(
+          10.0,
+          (innerBoardSize / gridSize) - (tileMargin * 2),
+        );
+
+        return Container(
           width: maxAvailableDimension,
           height: maxAvailableDimension,
+          padding: const EdgeInsets.all(framePadding),
+          decoration: BoxDecoration(
+            color: AppColors.boardBackground,
+            borderRadius: BorderRadius.circular(24.0),
+            border: Border.all(
+              color: AppColors.boardBorder,
+              width: borderWidth,
+            ),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x66000000),
+                offset: Offset(0, 8),
+                blurRadius: 16,
+              ),
+            ],
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(gridSize, (r) {

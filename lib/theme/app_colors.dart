@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 /// Centralized application color palette and 2.5D visual tokens.
 abstract class AppColors {
-  // Logical Game Colors (6 baseline tokens)
-  static const Color coral = Color(0xFFFF7A7A);
-  static const Color mint = Color(0xFF73D99A);
-  static const Color sky = Color(0xFF6FA8FF);
-  static const Color violet = Color(0xFF9B7BFF);
-  static const Color sunshine = Color(0xFFFFD45C);
-  static const Color aqua = Color(0xFF55D6D6);
+  // Vibrant, Brighter Logical Game Colors (6 baseline tokens)
+  static const Color coral = Color(0xFFFF5E62);
+  static const Color mint = Color(0xFF38EF7D);
+  static const Color sky = Color(0xFF4FACFE);
+  static const Color violet = Color(0xFFA855F7);
+  static const Color sunshine = Color(0xFFFFD200);
+  static const Color aqua = Color(0xFF00F2FE);
 
   static const List<Color> gamePalette = [
     coral,
@@ -19,13 +19,13 @@ abstract class AppColors {
     aqua,
   ];
 
-  // Darker shade variants for 2.5D bottom depth edge
-  static const Color coralDark = Color(0xFFD95353);
-  static const Color mintDark = Color(0xFF4EB876);
-  static const Color skyDark = Color(0xFF4A82D9);
-  static const Color violetDark = Color(0xFF7555D9);
-  static const Color sunshineDark = Color(0xFFD9AB36);
-  static const Color aquaDark = Color(0xFF32B0B0);
+  // Rich 2.5D Bottom Depth Edge Shades
+  static const Color coralDark = Color(0xFFD63B40);
+  static const Color mintDark = Color(0xFF11B952);
+  static const Color skyDark = Color(0xFF0072D2);
+  static const Color violetDark = Color(0xFF7E22CE);
+  static const Color sunshineDark = Color(0xFFD49B00);
+  static const Color aquaDark = Color(0xFF00B4BD);
 
   static const List<Color> gamePaletteDark = [
     coralDark,
@@ -36,17 +36,22 @@ abstract class AppColors {
     aquaDark,
   ];
 
-  // App Theme Surfaces (Dark Playful 2.5D Baseline)
-  static const Color background = Color(0xFF181824);
-  static const Color surface = Color(0xFF242436);
-  static const Color surfaceElevated = Color(0xFF32324A);
-  static const Color primary = Color(0xFF9B7BFF);
-  static const Color accent = Color(0xFFFFD45C);
+  // App Theme Surfaces (Brighter, Richer Dark 2.5D Playful Gradient Surfaces)
+  static const Color backgroundTop = Color(0xFF1E1E38);
+  static const Color backgroundBottom = Color(0xFF121222);
+  static const Color background = Color(0xFF181829);
+  static const Color surface = Color(0xFF2B2B48);
+  static const Color surfaceElevated = Color(0xFF38385C);
+  static const Color boardBackground = Color(0xFF19192C);
+  static const Color boardBorder = Color(0xFF38385C);
+
+  static const Color primary = Color(0xFFA855F7);
+  static const Color accent = Color(0xFFFFD200);
   static const Color textPrimary = Color(0xFFFFFFFF);
-  static const Color textSecondary = Color(0xFFA0A0C0);
+  static const Color textSecondary = Color(0xFFB4B4DB);
 
   // Status Colors
-  static const Color success = Color(0xFF73D99A);
-  static const Color warning = Color(0xFFFFD45C);
-  static const Color error = Color(0xFFFF7A7A);
+  static const Color success = Color(0xFF38EF7D);
+  static const Color warning = Color(0xFFFFD200);
+  static const Color error = Color(0xFFFF5E62);
 }

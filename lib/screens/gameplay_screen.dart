@@ -169,200 +169,222 @@ class _GameplayScreenState extends State<GameplayScreen> {
             .gamePalette[state.targetColor % AppColors.gamePalette.length];
 
         return Scaffold(
-          backgroundColor: AppColors.background,
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 12.0,
+          body: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [AppColors.backgroundTop, AppColors.backgroundBottom],
               ),
-              child: Column(
-                children: [
-                  // Top HUD Header
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // Level Details
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'LEVEL ${state.level.id}',
-                            style: const TextStyle(
-                              color: AppColors.textPrimary,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                          Text(
-                            state.level.name,
-                            style: const TextStyle(
-                              color: AppColors.textSecondary,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      // Target Color Indicator
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0,
-                          vertical: 6.0,
-                        ),
-                        decoration: BoxDecoration(
-                          color: AppColors.surface,
-                          borderRadius: BorderRadius.circular(16.0),
-                        ),
-                        child: Row(
+            ),
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 12.0,
+                ),
+                child: Column(
+                  children: [
+                    // Top HUD Header
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Level Details
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'TARGET: ',
-                              style: TextStyle(
+                            Text(
+                              'LEVEL ${state.level.id}',
+                              style: const TextStyle(
+                                color: AppColors.textPrimary,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            Text(
+                              state.level.name,
+                              style: const TextStyle(
                                 color: AppColors.textSecondary,
                                 fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Container(
-                              width: 24,
-                              height: 24,
-                              decoration: BoxDecoration(
-                                color: targetColor,
-                                borderRadius: BorderRadius.circular(6.0),
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ],
                         ),
-                      ),
 
-                      // Pause Button
-                      IconButton(
-                        onPressed: () => _engine?.pause(),
-                        icon: const Icon(
-                          Icons.pause_circle_filled_rounded,
-                          color: AppColors.textPrimary,
-                          size: 36,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  // Metrics Bar (Timer, Moves, Freeze)
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 10.0,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(16.0),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.timer_rounded,
-                              color: AppColors.sky,
-                              size: 20,
-                            ),
-                            const SizedBox(width: 6),
-                            Text(
-                              '${state.timeRemainingSeconds.ceil()}s',
-                              style: const TextStyle(
-                                color: AppColors.textPrimary,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.touch_app_rounded,
-                              color: AppColors.mint,
-                              size: 20,
-                            ),
-                            const SizedBox(width: 6),
-                            Text(
-                              '${state.movesCount}',
-                              style: const TextStyle(
-                                color: AppColors.textPrimary,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        if (state.isFrozen)
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 4,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.sky,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.ac_unit_rounded,
-                                  color: Colors.white,
-                                  size: 14,
-                                ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  '${state.freezeRemainingSeconds.ceil()}s',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
+                        // Target Color Indicator
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14.0,
+                            vertical: 8.0,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.surface,
+                            borderRadius: BorderRadius.circular(18.0),
+                            border: Border.all(
+                              color: AppColors.surfaceElevated,
+                              width: 1.5,
                             ),
                           ),
+                          child: Row(
+                            children: [
+                              const Text(
+                                'TARGET: ',
+                                style: TextStyle(
+                                  color: AppColors.textSecondary,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                              Container(
+                                width: 26,
+                                height: 26,
+                                decoration: BoxDecoration(
+                                  color: targetColor,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color:
+                                          AppColors.gamePaletteDark[state
+                                                  .targetColor %
+                                              AppColors.gamePaletteDark.length],
+                                      offset: const Offset(0, 2),
+                                      blurRadius: 0,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        // Pause Button
+                        IconButton(
+                          onPressed: () => _engine?.pause(),
+                          icon: const Icon(
+                            Icons.pause_circle_filled_rounded,
+                            color: AppColors.textPrimary,
+                            size: 36,
+                          ),
+                        ),
                       ],
                     ),
-                  ),
 
-                  Expanded(
-                    child: Center(
-                      child: GameBoardWidget(
-                        board: state.board,
-                        onTileTap: (r, c) => _engine?.tapTile(r, c),
+                    const SizedBox(height: 12),
+
+                    // Metrics Bar (Timer, Moves, Freeze)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 10.0,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.surface,
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.timer_rounded,
+                                color: AppColors.sky,
+                                size: 20,
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                '${state.timeRemainingSeconds.ceil()}s',
+                                style: const TextStyle(
+                                  color: AppColors.textPrimary,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.touch_app_rounded,
+                                color: AppColors.mint,
+                                size: 20,
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                '${state.movesCount}',
+                                style: const TextStyle(
+                                  color: AppColors.textPrimary,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          if (state.isFrozen)
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppColors.sky,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.ac_unit_rounded,
+                                    color: Colors.white,
+                                    size: 14,
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    '${state.freezeRemainingSeconds.ceil()}s',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                        ],
                       ),
                     ),
-                  ),
 
-                  // Contextual Tutorial Step Banner
-                  if (state.level.tutorialStep != null)
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(12.0),
-                      margin: const EdgeInsets.only(bottom: 8.0),
-                      decoration: BoxDecoration(
-                        color: AppColors.surfaceElevated,
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: Text(
-                        state.level.tutorialStep!,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: AppColors.sunshine,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
+                    Expanded(
+                      child: Center(
+                        child: GameBoardWidget(
+                          board: state.board,
+                          onTileTap: (r, c) => _engine?.tapTile(r, c),
                         ),
                       ),
                     ),
-                ],
+
+                    // Contextual Tutorial Step Banner
+                    if (state.level.tutorialStep != null)
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(12.0),
+                        margin: const EdgeInsets.only(bottom: 8.0),
+                        decoration: BoxDecoration(
+                          color: AppColors.surfaceElevated,
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        child: Text(
+                          state.level.tutorialStep!,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: AppColors.sunshine,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),

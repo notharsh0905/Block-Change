@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../game_button.dart';
 
-/// Level Completion victory overlay dialog.
-class WinOverlay extends StatelessWidget {
+/// Level Completion victory overlay dialog with sequential star pop animation.
+class WinOverlay extends StatefulWidget {
   final int levelNumber;
   final int score;
   final int moves;
@@ -23,10 +23,48 @@ class WinOverlay extends StatelessWidget {
   });
 
   @override
+  State<WinOverlay> createState() => _WinOverlayState();
+}
+
+class _WinOverlayState extends State<WinOverlay> with TickerProviderStateMixin {
+  late AnimationController _animController;
+  final List<Animation<double>> _starScales = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _animController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+
+    for (int i = 0; i < 3; i++) {
+      final start = (i * 0.2).clamp(0.0, 0.6);
+      final end = (start + 0.4).clamp(0.0, 1.0);
+      _starScales.add(
+        Tween<double>(begin: 0.0, end: 1.0).animate(
+          CurvedAnimation(
+            parent: _animController,
+            curve: Interval(start, end, curve: Curves.easeOutBack),
+          ),
+        ),
+      );
+    }
+
+    _animController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: AppColors.surfaceElevated,
-      elevation: 12,
+      elevation: 16,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28.0)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
@@ -40,13 +78,19 @@ class WinOverlay extends StatelessWidget {
                 color: AppColors.sunshine,
                 fontSize: 24,
                 fontWeight: FontWeight.w900,
-
                 letterSpacing: 1.2,
+                shadows: [
+                  Shadow(
+                    color: Colors.black45,
+                    blurRadius: 6,
+                    offset: Offset(0, 2),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 8),
             Text(
-              'Level $levelNumber',
+              'Level ${widget.levelNumber}',
               style: const TextStyle(
                 color: AppColors.textSecondary,
                 fontSize: 16,
@@ -55,19 +99,33 @@ class WinOverlay extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // Star Rating Display
+            // Sequential Animated Star Rating Display
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(3, (index) {
-                final isEarned = index < stars;
+                final isEarned = index < widget.stars;
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                  child: Icon(
-                    isEarned ? Icons.star_rounded : Icons.star_outline_rounded,
-                    color: isEarned
-                        ? AppColors.sunshine
-                        : AppColors.textSecondary,
-                    size: 44,
+                  child: ScaleTransition(
+                    scale: _starScales[index],
+                    child: Icon(
+                      isEarned
+                          ? Icons.star_rounded
+                          : Icons.star_outline_rounded,
+                      color: isEarned
+                          ? AppColors.sunshine
+                          : AppColors.textSecondary.withValues(alpha: 0.5),
+                      size: 48,
+                      shadows: isEarned
+                          ? const [
+                              Shadow(
+                                color: Color(0xFFD49B00),
+                                blurRadius: 8,
+                                offset: Offset(0, 3),
+                              ),
+                            ]
+                          : [],
+                    ),
                   ),
                 );
               }),
@@ -85,8 +143,8 @@ class WinOverlay extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _StatItem(label: 'MOVES', value: '$moves'),
-                  _StatItem(label: 'SCORE', value: '$score'),
+                  _StatItem(label: 'MOVES', value: '${widget.moves}'),
+                  _StatItem(label: 'SCORE', value: '${widget.score}'),
                 ],
               ),
             ),
@@ -99,7 +157,7 @@ class WinOverlay extends StatelessWidget {
               icon: Icons.arrow_forward_rounded,
               color: AppColors.mint,
               darkColor: AppColors.mintDark,
-              onPressed: onNextLevel,
+              onPressed: widget.onNextLevel,
             ),
             const SizedBox(height: 12),
             GameButton(
@@ -107,7 +165,7 @@ class WinOverlay extends StatelessWidget {
               icon: Icons.refresh_rounded,
               color: AppColors.sky,
               darkColor: AppColors.skyDark,
-              onPressed: onReplay,
+              onPressed: widget.onReplay,
             ),
           ],
         ),
