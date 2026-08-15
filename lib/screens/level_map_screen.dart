@@ -108,7 +108,7 @@ const List<WorldInfo> kWorldCatalog = [
   ),
 ];
 
-/// Playful 2.5D Campaign Level Map Screen displaying 10 Worlds & 100 Level Nodes.
+/// Responsive 2.5D Campaign Level Map Screen displaying 10 Worlds & 100 Level Nodes.
 class LevelMapScreen extends StatefulWidget {
   const LevelMapScreen({super.key});
 
@@ -198,11 +198,11 @@ class _LevelMapScreenState extends State<LevelMapScreen>
 
               return Column(
                 children: [
-                  // Top Campaign HUD Header
+                  // Top Campaign HUD Header (Responsive Layout Guard against 11px overflow)
                   Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 14.0,
+                      horizontal: 12.0,
+                      vertical: 10.0,
                     ),
                     decoration: const BoxDecoration(
                       color: AppColors.surface,
@@ -216,49 +216,54 @@ class _LevelMapScreenState extends State<LevelMapScreen>
                     child: Row(
                       children: [
                         IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
                           onPressed: () => Navigator.pop(context),
                           icon: const Icon(
                             Icons.arrow_back_rounded,
                             color: AppColors.textPrimary,
-                            size: 28,
+                            size: 26,
                           ),
                         ),
                         const SizedBox(width: 8),
                         const Expanded(
                           child: Text(
                             'CAMPAIGN MAP',
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: AppColors.textPrimary,
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.w900,
-                              letterSpacing: 1.2,
+                              letterSpacing: 1.0,
                             ),
                           ),
                         ),
+                        const SizedBox(width: 6),
 
-                        // Total Stars Badge
+                        // Total Stars Compact Badge
                         Container(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 12.0,
-                            vertical: 6.0,
+                            horizontal: 8.0,
+                            vertical: 5.0,
                           ),
                           decoration: BoxDecoration(
                             color: AppColors.surfaceElevated,
-                            borderRadius: BorderRadius.circular(16.0),
+                            borderRadius: BorderRadius.circular(12.0),
                           ),
                           child: Row(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               const Icon(
                                 Icons.star_rounded,
                                 color: AppColors.sunshine,
-                                size: 20,
+                                size: 16,
                               ),
-                              const SizedBox(width: 4),
+                              const SizedBox(width: 3),
                               Text(
-                                '$totalEarnedStars / 300',
+                                '$totalEarnedStars/300',
                                 style: const TextStyle(
                                   color: AppColors.textPrimary,
-                                  fontSize: 14,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w800,
                                 ),
                               ),
@@ -266,31 +271,32 @@ class _LevelMapScreenState extends State<LevelMapScreen>
                           ),
                         ),
 
-                        const SizedBox(width: 8),
+                        const SizedBox(width: 6),
 
-                        // Completed Levels Badge
+                        // Completed Levels Compact Badge
                         Container(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0,
-                            vertical: 6.0,
+                            horizontal: 8.0,
+                            vertical: 5.0,
                           ),
                           decoration: BoxDecoration(
                             color: AppColors.surfaceElevated,
-                            borderRadius: BorderRadius.circular(16.0),
+                            borderRadius: BorderRadius.circular(12.0),
                           ),
                           child: Row(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               const Icon(
                                 Icons.emoji_events_rounded,
                                 color: AppColors.mint,
-                                size: 18,
+                                size: 15,
                               ),
-                              const SizedBox(width: 4),
+                              const SizedBox(width: 3),
                               Text(
                                 '${progress.completedLevels.length}/100',
                                 style: const TextStyle(
                                   color: AppColors.textPrimary,
-                                  fontSize: 13,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w800,
                                 ),
                               ),
@@ -305,7 +311,7 @@ class _LevelMapScreenState extends State<LevelMapScreen>
                   Expanded(
                     child: ListView.builder(
                       controller: _scrollController,
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(14.0),
                       itemCount: kWorldCatalog.length,
                       itemBuilder: (context, index) {
                         final world = kWorldCatalog[index];
@@ -366,10 +372,10 @@ class _WorldCardWidget extends StatelessWidget {
     final percent = (completedCount / 10.0 * 100).toInt();
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 20.0),
+      margin: const EdgeInsets.only(bottom: 18.0),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: BorderRadius.circular(18.0),
         border: Border.all(
           color: isUnlocked
               ? world.themeColor.withValues(alpha: 0.5)
@@ -379,33 +385,36 @@ class _WorldCardWidget extends StatelessWidget {
         boxShadow: const [
           BoxShadow(
             color: Color(0x40000000),
-            offset: Offset(0, 6),
-            blurRadius: 12,
+            offset: Offset(0, 5),
+            blurRadius: 10,
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // World Banner Header
+          // World Banner Header (Overflow Guarded)
           Container(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 14.0,
+              vertical: 12.0,
+            ),
             decoration: BoxDecoration(
               color: isUnlocked
                   ? world.themeColor.withValues(alpha: 0.15)
                   : AppColors.surfaceElevated.withValues(alpha: 0.4),
               borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(18.0),
+                top: Radius.circular(16.0),
               ),
             ),
             child: Row(
               children: [
                 Container(
-                  width: 44,
-                  height: 44,
+                  width: 40,
+                  height: 40,
                   decoration: BoxDecoration(
                     color: isUnlocked ? world.themeColor : Colors.grey.shade800,
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(10.0),
                     boxShadow: [
                       BoxShadow(
                         color: isUnlocked ? world.darkColor : Colors.black45,
@@ -417,10 +426,10 @@ class _WorldCardWidget extends StatelessWidget {
                   child: Icon(
                     isUnlocked ? world.icon : Icons.lock_rounded,
                     color: isUnlocked ? Colors.black87 : Colors.white60,
-                    size: 24,
+                    size: 22,
                   ),
                 ),
-                const SizedBox(width: 14),
+                const SizedBox(width: 12),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -433,78 +442,83 @@ class _WorldCardWidget extends StatelessWidget {
                               color: isUnlocked
                                   ? world.themeColor
                                   : AppColors.textSecondary,
-                              fontSize: 12,
+                              fontSize: 11,
                               fontWeight: FontWeight.w900,
                               letterSpacing: 1.0,
                             ),
                           ),
-                          const SizedBox(width: 8),
+                          const SizedBox(width: 6),
                           if (completedCount == 10)
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 6,
-                                vertical: 2,
+                                horizontal: 5,
+                                vertical: 1,
                               ),
                               decoration: BoxDecoration(
                                 color: AppColors.mint,
-                                borderRadius: BorderRadius.circular(6),
+                                borderRadius: BorderRadius.circular(4),
                               ),
                               child: const Text(
                                 'CLEARED',
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 10,
+                                  fontSize: 9,
                                   fontWeight: FontWeight.w900,
                                 ),
                               ),
                             ),
                         ],
                       ),
-                      const SizedBox(height: 2),
+                      const SizedBox(height: 1),
                       Text(
                         world.title,
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                           color: AppColors.textPrimary,
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
                         world.description,
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                           color: AppColors.textSecondary,
-                          fontSize: 12,
+                          fontSize: 11,
                         ),
                       ),
                     ],
                   ),
                 ),
 
-                // World Progress Stats Badge
+                const SizedBox(width: 8),
+
+                // World Progress Stats Column
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      '$completedCount / 10',
+                      '$completedCount/10',
                       style: const TextStyle(
                         color: AppColors.textPrimary,
-                        fontSize: 14,
+                        fontSize: 13,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
                     Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         const Icon(
                           Icons.star_rounded,
                           color: AppColors.sunshine,
-                          size: 14,
+                          size: 13,
                         ),
                         const SizedBox(width: 2),
                         Text(
-                          '$earnedStars / 30',
+                          '$earnedStars/30',
                           style: const TextStyle(
                             color: AppColors.textSecondary,
-                            fontSize: 12,
+                            fontSize: 11,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -516,7 +530,7 @@ class _WorldCardWidget extends StatelessWidget {
                         color: isUnlocked
                             ? world.themeColor
                             : AppColors.textSecondary,
-                        fontSize: 11,
+                        fontSize: 10,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
@@ -530,15 +544,15 @@ class _WorldCardWidget extends StatelessWidget {
 
           // 10 Level Nodes Grid (2 rows x 5 cols)
           Padding(
-            padding: const EdgeInsets.all(14.0),
+            padding: const EdgeInsets.all(12.0),
             child: GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: 10,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 5,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
                 childAspectRatio: 0.85,
               ),
               itemBuilder: (context, index) {
@@ -585,7 +599,6 @@ class _LevelNodeWidget extends StatelessWidget {
     final isCurrent = levelId == progress.highestUnlockedLevel;
     final stars = progress.getStars(levelId);
 
-    // Accessibility visual attributes (PRD 16: non-color alone cues)
     Color bgColor = AppColors.surfaceElevated;
     Color shadowColor = const Color(0xFF1E1E2E);
     Color textColor = AppColors.textSecondary;
@@ -607,7 +620,6 @@ class _LevelNodeWidget extends StatelessWidget {
       textColor = AppColors.textPrimary;
       stateIcon = Icons.check_circle_rounded;
     } else {
-      // Unlocked but not played
       bgColor = worldColor.withValues(alpha: 0.85);
       shadowColor = worldDarkColor;
       textColor = Colors.black;
@@ -617,7 +629,6 @@ class _LevelNodeWidget extends StatelessWidget {
     Widget nodeContent = Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Level Number + Accessibility Icon Header
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -625,7 +636,7 @@ class _LevelNodeWidget extends StatelessWidget {
               '$levelId',
               style: TextStyle(
                 color: textColor,
-                fontSize: 15,
+                fontSize: 14,
                 fontWeight: FontWeight.w900,
               ),
             ),
@@ -633,16 +644,15 @@ class _LevelNodeWidget extends StatelessWidget {
               const SizedBox(width: 2),
               Icon(
                 stateIcon,
-                size: 12,
+                size: 11,
                 color: textColor.withValues(alpha: 0.7),
               ),
             ],
           ],
         ),
 
-        const SizedBox(height: 4),
+        const SizedBox(height: 3),
 
-        // Stars row for completed / playable levels
         if (isUnlocked)
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -650,7 +660,7 @@ class _LevelNodeWidget extends StatelessWidget {
               final isEarned = (i + 1) <= stars;
               return Icon(
                 isEarned ? Icons.star_rounded : Icons.star_border_rounded,
-                size: 13,
+                size: 12,
                 color: isEarned
                     ? (isCurrent ? Colors.black : AppColors.sunshine)
                     : (isCurrent ? Colors.black38 : AppColors.textSecondary),
@@ -658,11 +668,10 @@ class _LevelNodeWidget extends StatelessWidget {
             }),
           )
         else
-          const Icon(Icons.lock_rounded, size: 14, color: Colors.white24),
+          const Icon(Icons.lock_rounded, size: 13, color: Colors.white24),
       ],
     );
 
-    // Apply scale pulse animation for CURRENT level node
     if (isCurrent) {
       nodeContent = ScaleTransition(
         scale: Tween<double>(begin: 0.95, end: 1.05).animate(
@@ -678,7 +687,7 @@ class _LevelNodeWidget extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
           color: bgColor,
-          borderRadius: BorderRadius.circular(14.0),
+          borderRadius: BorderRadius.circular(12.0),
           border: Border.all(
             color: isCurrent
                 ? Colors.white
@@ -691,7 +700,7 @@ class _LevelNodeWidget extends StatelessWidget {
             if (isUnlocked && shadowColor != Colors.transparent)
               BoxShadow(
                 color: shadowColor,
-                offset: const Offset(0, 4),
+                offset: const Offset(0, 3),
                 blurRadius: 0,
               ),
           ],
