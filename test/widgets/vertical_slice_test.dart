@@ -44,6 +44,31 @@ void main() {
     difficulty: Difficulty.easy,
   );
 
+  final testLevel2 = const LevelModel(
+    id: 2,
+    worldId: 1,
+    name: 'Test Level 2',
+    gridSize: 3,
+    colorCount: 3,
+    targetColor: 0,
+    initialBoard: [
+      [0, 0, 0],
+      [0, 2, 0],
+      [0, 0, 0],
+    ],
+    specialTiles: [],
+    timeLimitSeconds: 60.0,
+    chaosConfig: ChaosConfig(enabled: false),
+    starRules: StarRules(
+      threeStarMaxMoves: 5,
+      threeStarMinRemainingSeconds: 40.0,
+      twoStarMaxMoves: 10,
+      twoStarMinRemainingSeconds: 25.0,
+    ),
+    seed: 102,
+    difficulty: Difficulty.easy,
+  );
+
   group('Phase 3A Vertical Slice Widget Tests', () {
     testWidgets('1. Home screen renders', (WidgetTester tester) async {
       await tester.pumpWidget(const BlockChangeApp());
@@ -148,7 +173,12 @@ void main() {
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        MaterialApp(home: GameplayScreen(initialLevel: testLevel1)),
+        MaterialApp(
+          home: GameplayScreen(
+            initialLevel: testLevel1,
+            availableLevels: [testLevel1, testLevel2],
+          ),
+        ),
       );
       await tester.pumpAndSettle();
 
@@ -161,6 +191,7 @@ void main() {
 
       // Tap NEXT LEVEL
       await tester.tap(find.text('NEXT LEVEL'));
+      await tester.pump(const Duration(milliseconds: 100));
       await tester.pumpAndSettle();
 
       expect(find.text('LEVEL 2'), findsOneWidget);
