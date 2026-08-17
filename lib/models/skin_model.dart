@@ -1,49 +1,64 @@
-/// Cosmetic skin unlock requirement categories.
-enum SkinUnlockMethod { free, rewardedAd, premiumPurchase, starMilestone }
+import 'package:flutter/material.dart';
 
-/// Cosmetic theme definition for block artwork rendering.
+enum SkinUnlockMethod {
+  free,
+  levelProgress,
+  rewardedAd,
+  purchase,
+}
+
+/// Catalog model defining a cosmetic skin appearance and unlock conditions.
 class SkinModel {
   final String id;
-  final String displayName;
+  final String name;
+  final String description;
   final SkinUnlockMethod unlockMethod;
-  final String? productId;
-  final int requiredStars;
-  final bool isUnlockedByDefault;
-  final List<String> colorAssetPaths;
+  final int requiredLevel; // Applicable when unlockMethod == levelProgress
+  final IconData previewIcon;
+  final Color accentColor;
 
   const SkinModel({
     required this.id,
-    required this.displayName,
+    required this.name,
+    required this.description,
     required this.unlockMethod,
-    this.productId,
-    this.requiredStars = 0,
-    this.isUnlockedByDefault = false,
-    required this.colorAssetPaths,
+    this.requiredLevel = 1,
+    required this.previewIcon,
+    required this.accentColor,
   });
 
-  Map<String, dynamic> toJson() => {
-    'id': id,
-    'displayName': displayName,
-    'unlockMethod': unlockMethod.name,
-    'productId': productId,
-    'requiredStars': requiredStars,
-    'isUnlockedByDefault': isUnlockedByDefault,
-    'colorAssetPaths': colorAssetPaths,
-  };
+  /// Evaluates whether this skin is unlocked given the player's highest unlocked campaign level.
+  bool isUnlocked({required int highestUnlockedLevel, required bool isCampaignCompleted}) {
+    switch (unlockMethod) {
+      case SkinUnlockMethod.free:
+        return true;
+      case SkinUnlockMethod.levelProgress:
+        if (requiredLevel > 100) {
+          return isCampaignCompleted;
+        }
+        return highestUnlockedLevel >= requiredLevel;
+      case SkinUnlockMethod.rewardedAd:
+      case SkinUnlockMethod.purchase:
+        // Reserved for future monetization phases
+        return false;
+    }
+  }
 
-  factory SkinModel.fromJson(Map<String, dynamic> json) {
-    return SkinModel(
-      id: json['id'] as String,
-      displayName: json['displayName'] as String,
-      unlockMethod: SkinUnlockMethod.values.byName(
-        json['unlockMethod'] as String,
-      ),
-      productId: json['productId'] as String?,
-      requiredStars: json['requiredStars'] as int? ?? 0,
-      isUnlockedByDefault: json['isUnlockedByDefault'] as bool? ?? false,
-      colorAssetPaths: (json['colorAssetPaths'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-    );
+  /// Display text explaining unlock criteria.
+  String get unlockRequirementText {
+    switch (unlockMethod) {
+      case SkinUnlockMethod.free:
+        return 'UNLOCKED';
+      case SkinUnlockMethod.levelProgress:
+        if (requiredLevel > 100) {
+          return 'COMPLETE CAMPAIGN';
+        }
+        final worldNum = ((requiredLevel - 1) ~/ 10) + 1;
+        return 'REACH WORLD $worldNum';
+      case SkinUnlockMethod.rewardedAd:
+        return 'WATCH AD (FUTURE)';
+      case SkinUnlockMethod.purchase:
+        return 'PREMIUM (FUTURE)';
+    }
   }
 }
