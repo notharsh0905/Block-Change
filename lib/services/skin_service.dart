@@ -15,8 +15,8 @@ class SkinService {
   SkinService._({
     SettingsService? settingsService,
     ProgressService? progressService,
-  })  : _overrideSettingsService = settingsService,
-        _overrideProgressService = progressService;
+  }) : _overrideSettingsService = settingsService,
+       _overrideProgressService = progressService;
 
   SettingsService get _settingsService =>
       _overrideSettingsService ?? SettingsService.instance;
@@ -58,7 +58,8 @@ class SkinService {
     SkinModel(
       id: 'fruits',
       name: 'Fruits',
-      description: 'Fresh citrus slices, juicy berries and sweet tropical vibes.',
+      description:
+          'Fresh citrus slices, juicy berries and sweet tropical vibes.',
       unlockMethod: SkinUnlockMethod.rewardedAd,
       previewIcon: Icons.apple_rounded,
       accentColor: Color(0xFFFB5607),
@@ -92,7 +93,8 @@ class SkinService {
     SkinModel(
       id: 'kawaii',
       name: 'Kawaii',
-      description: 'Charming smileys, sparkles and Japanese pop cute aesthetic.',
+      description:
+          'Charming smileys, sparkles and Japanese pop cute aesthetic.',
       unlockMethod: SkinUnlockMethod.levelProgress,
       requiredLevel: 61, // Unlock World 6 complete
       previewIcon: Icons.mood_rounded,
@@ -101,7 +103,8 @@ class SkinService {
     SkinModel(
       id: 'ice',
       name: 'Ice',
-      description: 'Crystalline frost patterns and glacial diamond reflections.',
+      description:
+          'Crystalline frost patterns and glacial diamond reflections.',
       unlockMethod: SkinUnlockMethod.levelProgress,
       requiredLevel: 81, // Unlock World 8 complete
       previewIcon: Icons.ac_unit_rounded,
@@ -120,10 +123,7 @@ class SkinService {
 
   /// Gets a skin definition by ID. Defaults to Classic if not found.
   SkinModel getSkinById(String id) {
-    return allSkins.firstWhere(
-      (s) => s.id == id,
-      orElse: () => allSkins.first,
-    );
+    return allSkins.firstWhere((s) => s.id == id, orElse: () => allSkins.first);
   }
 
   /// Currently equipped skin.

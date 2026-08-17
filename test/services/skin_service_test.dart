@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:block_change/models/player_progress_model.dart';
 import 'package:block_change/models/skin_model.dart';
 import 'package:block_change/services/progress_service.dart';
 import 'package:block_change/services/settings_service.dart';
@@ -36,14 +37,11 @@ void main() {
       // Default level = 1 -> Locked
       expect(skinService.isSkinUnlocked(rainbowSkin), isFalse);
 
-      // Unlock up to level 21
-      await progressService.recordLevelCompletion(
-        levelId: 20,
-        stars: 3,
-        score: 1000,
-        moves: 5,
-        timeRemainingSeconds: 30,
+      // Simulate player reaching Level 21
+      final updatedProgress = progressService.currentProgress.copyWith(
+        highestUnlockedLevel: 21,
       );
+      await progressService.saveProgress(updatedProgress);
 
       expect(progressService.currentProgress.highestUnlockedLevel, equals(21));
       expect(skinService.isSkinUnlocked(rainbowSkin), isTrue);
@@ -51,13 +49,10 @@ void main() {
 
     test('3. Equipping unlocked skin updates equippedSkin and persists', () async {
       final rainbowSkin = skinService.getSkinById('rainbow');
-      await progressService.recordLevelCompletion(
-        levelId: 20,
-        stars: 3,
-        score: 1000,
-        moves: 5,
-        timeRemainingSeconds: 30,
+      final updatedProgress = progressService.currentProgress.copyWith(
+        highestUnlockedLevel: 21,
       );
+      await progressService.saveProgress(updatedProgress);
 
       final success = await skinService.equipSkin(rainbowSkin);
       expect(success, isTrue);

@@ -247,7 +247,11 @@ class _LevelMapScreenState extends State<LevelMapScreen>
                         IconButton(
                           padding: EdgeInsets.zero,
                           constraints: const BoxConstraints(),
-                          icon: const Icon(Icons.palette_rounded, color: AppColors.textPrimary, size: 20),
+                          icon: const Icon(
+                            Icons.palette_rounded,
+                            color: AppColors.textPrimary,
+                            size: 20,
+                          ),
                           onPressed: () {
                             AudioService.instance.playButtonTap();
                             HapticService.instance.buttonPress();
@@ -257,7 +261,11 @@ class _LevelMapScreenState extends State<LevelMapScreen>
                         IconButton(
                           padding: EdgeInsets.zero,
                           constraints: const BoxConstraints(),
-                          icon: const Icon(Icons.settings_rounded, color: AppColors.textPrimary, size: 20),
+                          icon: const Icon(
+                            Icons.settings_rounded,
+                            color: AppColors.textPrimary,
+                            size: 20,
+                          ),
                           onPressed: () {
                             AudioService.instance.playButtonTap();
                             HapticService.instance.buttonPress();

@@ -30,7 +30,10 @@ class SettingsScreen extends StatelessWidget {
                   // Main Settings Scrollable Body
                   Expanded(
                     child: ListView(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0,
+                        vertical: 12.0,
+                      ),
                       children: [
                         _buildAudioSection(context, settings, theme),
                         const SizedBox(height: 20.0),
@@ -93,10 +96,10 @@ class SettingsScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.surfaceColor,
         borderRadius: BorderRadius.circular(20.0),
-        border: Border.all(color: theme.boardFrameColor.withOpacity(0.3)),
+        border: Border.all(color: theme.boardFrameColor.withValues(alpha: 0.3)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.15),
+            color: Colors.black.withValues(alpha: 0.15),
             blurRadius: 10.0,
             offset: const Offset(0, 4),
           ),
@@ -141,7 +144,10 @@ class SettingsScreen extends StatelessWidget {
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           activeThumbColor: theme.primaryAccent,
-          title: Text('Background Music', style: TextStyle(color: theme.textPrimary)),
+          title: Text(
+            'Background Music',
+            style: TextStyle(color: theme.textPrimary),
+          ),
           value: settings.musicEnabled,
           onChanged: (val) {
             AudioService.instance.playButtonTap();
@@ -154,7 +160,11 @@ class SettingsScreen extends StatelessWidget {
         if (settings.musicEnabled) ...[
           Row(
             children: [
-              Icon(Icons.music_note_rounded, color: theme.textSecondary, size: 18.0),
+              Icon(
+                Icons.music_note_rounded,
+                color: theme.textSecondary,
+                size: 18.0,
+              ),
               Expanded(
                 child: Slider(
                   value: settings.musicVolume,
@@ -178,7 +188,10 @@ class SettingsScreen extends StatelessWidget {
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           activeThumbColor: theme.primaryAccent,
-          title: Text('Sound Effects', style: TextStyle(color: theme.textPrimary)),
+          title: Text(
+            'Sound Effects',
+            style: TextStyle(color: theme.textPrimary),
+          ),
           value: settings.sfxEnabled,
           onChanged: (val) {
             AudioService.instance.playButtonTap();
@@ -191,7 +204,11 @@ class SettingsScreen extends StatelessWidget {
         if (settings.sfxEnabled) ...[
           Row(
             children: [
-              Icon(Icons.graphic_eq_rounded, color: theme.textSecondary, size: 18.0),
+              Icon(
+                Icons.graphic_eq_rounded,
+                color: theme.textSecondary,
+                size: 18.0,
+              ),
               Expanded(
                 child: Slider(
                   value: settings.sfxVolume,
@@ -229,7 +246,10 @@ class SettingsScreen extends StatelessWidget {
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           activeThumbColor: theme.primaryAccent,
-          title: Text('Haptics Enabled', style: TextStyle(color: theme.textPrimary)),
+          title: Text(
+            'Haptics Enabled',
+            style: TextStyle(color: theme.textPrimary),
+          ),
           value: settings.hapticsEnabled,
           onChanged: (val) {
             AudioService.instance.playButtonTap();
@@ -252,8 +272,12 @@ class SettingsScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: isSelected ? theme.primaryAccent : theme.cardColor,
-                      foregroundColor: isSelected ? Colors.white : theme.textPrimary,
+                      backgroundColor: isSelected
+                          ? theme.primaryAccent
+                          : theme.cardColor,
+                      foregroundColor: isSelected
+                          ? Colors.white
+                          : theme.textPrimary,
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
@@ -262,12 +286,17 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     onPressed: () {
                       AudioService.instance.playButtonTap();
-                      SettingsService.instance.update(hapticIntensity: intensity);
+                      SettingsService.instance.update(
+                        hapticIntensity: intensity,
+                      );
                       HapticService.instance.tileTap();
                     },
                     child: Text(
                       intensity.name.toUpperCase(),
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12.0,
+                      ),
                     ),
                   ),
                 ),
@@ -292,7 +321,10 @@ class SettingsScreen extends StatelessWidget {
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           activeThumbColor: theme.primaryAccent,
-          title: Text('Show Interactive Tutorial', style: TextStyle(color: theme.textPrimary)),
+          title: Text(
+            'Show Interactive Tutorial',
+            style: TextStyle(color: theme.textPrimary),
+          ),
           value: settings.showTutorial,
           onChanged: (val) {
             AudioService.instance.playButtonTap();
@@ -303,7 +335,10 @@ class SettingsScreen extends StatelessWidget {
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           activeThumbColor: theme.primaryAccent,
-          title: Text('Reduced Motion', style: TextStyle(color: theme.textPrimary)),
+          title: Text(
+            'Reduced Motion',
+            style: TextStyle(color: theme.textPrimary),
+          ),
           subtitle: Text(
             'Damps scale animations & heavy haptic pulses',
             style: TextStyle(color: theme.textSecondary, fontSize: 12.0),
@@ -336,7 +371,7 @@ class SettingsScreen extends StatelessWidget {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: allThemes.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 12.0),
+            separatorBuilder: (context, index) => const SizedBox(width: 12.0),
             itemBuilder: (context, index) {
               final itemTheme = allThemes[index];
               final isEquipped = settings.selectedThemeId == itemTheme.id;
@@ -354,12 +389,14 @@ class SettingsScreen extends StatelessWidget {
                     gradient: itemTheme.backgroundGradient,
                     borderRadius: BorderRadius.circular(16.0),
                     border: Border.all(
-                      color: isEquipped ? theme.primaryAccent : Colors.transparent,
+                      color: isEquipped
+                          ? theme.primaryAccent
+                          : Colors.transparent,
                       width: isEquipped ? 3.0 : 1.0,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
+                        color: Colors.black.withValues(alpha: 0.2),
                         blurRadius: 6.0,
                         offset: const Offset(0, 3),
                       ),
@@ -383,14 +420,21 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           if (isEquipped)
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6.0,
+                                vertical: 2.0,
+                              ),
                               decoration: BoxDecoration(
                                 color: theme.primaryAccent,
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                               child: const Text(
                                 'ACTIVE',
-                                style: TextStyle(color: Colors.white, fontSize: 9.0, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 9.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                         ],
@@ -424,7 +468,13 @@ class SettingsScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Game Version', style: TextStyle(color: theme.textSecondary)),
-            Text('1.0.0+1', style: TextStyle(color: theme.textPrimary, fontWeight: FontWeight.bold)),
+            Text(
+              '1.0.0+1',
+              style: TextStyle(
+                color: theme.textPrimary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 8.0),
@@ -432,21 +482,40 @@ class SettingsScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Architecture', style: TextStyle(color: theme.textSecondary)),
-            Text('Clean Engine v5.0', style: TextStyle(color: theme.textPrimary, fontWeight: FontWeight.bold)),
+            Text(
+              'Clean Engine v5.0',
+              style: TextStyle(
+                color: theme.textPrimary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 8.0),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Campaign Levels', style: TextStyle(color: theme.textSecondary)),
-            Text('100 / 100 Solvable', style: TextStyle(color: theme.primaryAccent, fontWeight: FontWeight.bold)),
+            Text(
+              'Campaign Levels',
+              style: TextStyle(color: theme.textSecondary),
+            ),
+            Text(
+              '100 / 100 Solvable',
+              style: TextStyle(
+                color: theme.primaryAccent,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 12.0),
         Text(
           'Developed by Google DeepMind Advanced Agentic Coding.\nAudio SFX & Music: Synthesized PCM 44.1kHz WAV Royalty-Free Assets.',
-          style: TextStyle(color: theme.textSecondary, fontSize: 11.0, height: 1.4),
+          style: TextStyle(
+            color: theme.textSecondary,
+            fontSize: 11.0,
+            height: 1.4,
+          ),
         ),
       ],
     );

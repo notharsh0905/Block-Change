@@ -36,13 +36,18 @@ class _SkinSelectionScreenState extends State<SkinSelectionScreen> {
               // Skin Gallery Grid
               Expanded(
                 child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0,
+                    vertical: 12.0,
+                  ),
                   itemCount: allSkins.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 16.0),
+                  separatorBuilder: (context, index) => const SizedBox(height: 16.0),
                   itemBuilder: (context, index) {
                     final skin = allSkins[index];
                     final isEquipped = skin.id == equippedSkin.id;
-                    final isUnlocked = SkinService.instance.isSkinUnlocked(skin);
+                    final isUnlocked = SkinService.instance.isSkinUnlocked(
+                      skin,
+                    );
 
                     return _buildSkinCard(
                       context: context,
@@ -102,12 +107,14 @@ class _SkinSelectionScreenState extends State<SkinSelectionScreen> {
         color: theme.surfaceColor,
         borderRadius: BorderRadius.circular(20.0),
         border: Border.all(
-          color: isEquipped ? theme.primaryAccent : theme.boardFrameColor.withOpacity(0.3),
+          color: isEquipped
+              ? theme.primaryAccent
+              : theme.boardFrameColor.withValues(alpha: 0.3),
           width: isEquipped ? 2.5 : 1.0,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.15),
+            color: Colors.black.withValues(alpha: 0.15),
             blurRadius: 10.0,
             offset: const Offset(0, 4),
           ),
@@ -160,14 +167,17 @@ class _SkinSelectionScreenState extends State<SkinSelectionScreen> {
                       backgroundColor: isEquipped
                           ? theme.cardColor
                           : isUnlocked
-                              ? theme.primaryAccent
-                              : theme.cardColor.withOpacity(0.5),
+                          ? theme.primaryAccent
+                          : theme.cardColor.withValues(alpha: 0.5),
                       foregroundColor: isEquipped
                           ? theme.textSecondary
                           : isUnlocked
-                              ? Colors.white
-                              : theme.textSecondary,
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                          ? Colors.white
+                          : theme.textSecondary,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0,
+                        vertical: 10.0,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
                       ),
@@ -184,9 +194,12 @@ class _SkinSelectionScreenState extends State<SkinSelectionScreen> {
                       isEquipped
                           ? 'EQUIPPED'
                           : isUnlocked
-                              ? 'EQUIP'
-                              : skin.unlockRequirementText,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0),
+                          ? 'EQUIP'
+                          : skin.unlockRequirementText,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12.0,
+                      ),
                     ),
                   ),
                 ),
@@ -258,7 +271,11 @@ class _SkinSelectionScreenState extends State<SkinSelectionScreen> {
         ),
         child: const Text(
           'EQUIPPED',
-          style: TextStyle(color: Colors.white, fontSize: 10.0, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 10.0,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       );
     }
@@ -267,13 +284,17 @@ class _SkinSelectionScreenState extends State<SkinSelectionScreen> {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
         decoration: BoxDecoration(
-          color: Colors.green.withOpacity(0.2),
+          color: Colors.green.withValues(alpha: 0.2),
           borderRadius: BorderRadius.circular(8.0),
           border: Border.all(color: Colors.green, width: 1.0),
         ),
         child: const Text(
           'UNLOCKED',
-          style: TextStyle(color: Colors.greenAccent, fontSize: 10.0, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: Colors.greenAccent,
+            fontSize: 10.0,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       );
     }
@@ -281,18 +302,26 @@ class _SkinSelectionScreenState extends State<SkinSelectionScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       decoration: BoxDecoration(
-        color: Colors.orange.withOpacity(0.2),
+        color: Colors.orange.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(8.0),
-        border: Border.all(color: Colors.orange.withOpacity(0.5), width: 1.0),
+        border: Border.all(color: Colors.orange.withValues(alpha: 0.5), width: 1.0),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.lock_rounded, size: 10.0, color: Colors.orangeAccent),
+          const Icon(
+            Icons.lock_rounded,
+            size: 10.0,
+            color: Colors.orangeAccent,
+          ),
           const SizedBox(width: 4.0),
           Text(
             skin.unlockRequirementText,
-            style: const TextStyle(color: Colors.orangeAccent, fontSize: 9.0, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              color: Colors.orangeAccent,
+              fontSize: 9.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),

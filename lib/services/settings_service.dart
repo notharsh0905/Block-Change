@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 import '../models/game_settings_model.dart';
@@ -17,10 +18,10 @@ class SettingsService {
   bool _initialized = false;
 
   SettingsService._({IProgressStorage? storage})
-      : _storage = storage ?? SharedPreferencesStorage(),
-        settingsNotifier = ValueNotifier<GameSettingsModel>(
-          GameSettingsModel.defaultSettings,
-        );
+    : _storage = storage ?? SharedPreferencesStorage(),
+      settingsNotifier = ValueNotifier<GameSettingsModel>(
+        GameSettingsModel.defaultSettings,
+      );
 
   /// Testing factory allowing mock/in-memory storage overrides.
   factory SettingsService.withStorage(IProgressStorage storage) {

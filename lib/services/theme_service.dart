@@ -11,7 +11,7 @@ class ThemeService {
   final SettingsService? _overrideSettingsService;
 
   ThemeService._({SettingsService? settingsService})
-      : _overrideSettingsService = settingsService;
+    : _overrideSettingsService = settingsService;
 
   SettingsService get _settingsService =>
       _overrideSettingsService ?? SettingsService.instance;
@@ -60,7 +60,8 @@ class ThemeService {
     AppThemeModel(
       id: 'ocean',
       name: 'Deep Ocean',
-      description: 'Cool aquatic cyan abyss with refreshing seafoam highlights.',
+      description:
+          'Cool aquatic cyan abyss with refreshing seafoam highlights.',
       backgroundGradient: LinearGradient(
         colors: [Color(0xFF0B192C), Color(0xFF1E3E62)],
         begin: Alignment.topCenter,
@@ -77,7 +78,8 @@ class ThemeService {
     AppThemeModel(
       id: 'sunset',
       name: 'Dusk Sunset',
-      description: 'Warm twilight gradient with glowing orange and magenta accents.',
+      description:
+          'Warm twilight gradient with glowing orange and magenta accents.',
       backgroundGradient: LinearGradient(
         colors: [Color(0xFF2D0B32), Color(0xFF4D194D)],
         begin: Alignment.topCenter,

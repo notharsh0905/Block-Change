@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum SkinUnlockMethod {
-  free,
-  levelProgress,
-  rewardedAd,
-  purchase,
-}
+enum SkinUnlockMethod { free, levelProgress, rewardedAd, purchase }
 
 /// Catalog model defining a cosmetic skin appearance and unlock conditions.
 class SkinModel {
@@ -28,7 +23,10 @@ class SkinModel {
   });
 
   /// Evaluates whether this skin is unlocked given the player's highest unlocked campaign level.
-  bool isUnlocked({required int highestUnlockedLevel, required bool isCampaignCompleted}) {
+  bool isUnlocked({
+    required int highestUnlockedLevel,
+    required bool isCampaignCompleted,
+  }) {
     switch (unlockMethod) {
       case SkinUnlockMethod.free:
         return true;

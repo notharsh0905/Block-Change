@@ -171,10 +171,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         vertical: 6.0,
                       ),
                       decoration: BoxDecoration(
-                        color: AppColors.sunshine.withOpacity(0.15),
+                        color: AppColors.sunshine.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(16.0),
                         border: Border.all(
-                          color: AppColors.sunshine.withOpacity(0.4),
+                          color: AppColors.sunshine.withValues(alpha: 0.4),
                           width: 1.5,
                         ),
                       ),
@@ -219,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Expanded(
                           child: GameButton(
-                            label: 'MAP',
+                            label: 'CAMPAIGN MAP',
                             icon: Icons.map_rounded,
                             color: AppColors.sky,
                             darkColor: AppColors.skyDark,

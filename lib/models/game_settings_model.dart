@@ -1,8 +1,4 @@
-enum HapticIntensity {
-  low,
-  medium,
-  high,
-}
+enum HapticIntensity { low, medium, high }
 
 /// Model storing player preferences and game settings.
 class GameSettingsModel {
@@ -87,9 +83,11 @@ class GameSettingsModel {
 
     return GameSettingsModel(
       musicEnabled: json['musicEnabled'] as bool? ?? true,
-      musicVolume: (json['musicVolume'] as num?)?.toDouble().clamp(0.0, 1.0) ?? 0.7,
+      musicVolume:
+          (json['musicVolume'] as num?)?.toDouble().clamp(0.0, 1.0) ?? 0.7,
       sfxEnabled: json['sfxEnabled'] as bool? ?? true,
-      sfxVolume: (json['sfxVolume'] as num?)?.toDouble().clamp(0.0, 1.0) ?? 0.85,
+      sfxVolume:
+          (json['sfxVolume'] as num?)?.toDouble().clamp(0.0, 1.0) ?? 0.85,
       hapticsEnabled: json['hapticsEnabled'] as bool? ?? true,
       hapticIntensity: parseHaptics(json['hapticIntensity']),
       showTutorial: json['showTutorial'] as bool? ?? true,

@@ -5,7 +5,11 @@ import '../models/game_settings_model.dart';
 import 'settings_service.dart';
 
 /// Callback signature for audio playback interception in unit tests.
-typedef AudioPlaybackCallback = void Function(String assetPath, double volume, bool isMusic);
+typedef AudioPlaybackCallback = void Function(
+  String assetPath,
+  double volume,
+  bool isMusic,
+);
 
 /// Centralized audio management service backing all game SFX and ambient music.
 class AudioService {
@@ -21,10 +25,8 @@ class AudioService {
   String? _currentMusicAsset;
   bool _isMusicPlaying = false;
 
-  AudioService._({
-    SettingsService? settingsService,
-    this._testCallback,
-  })  : _settingsService = settingsService ?? SettingsService.instance {
+  AudioService._({SettingsService? settingsService, this._testCallback})
+    : _settingsService = settingsService ?? SettingsService.instance {
     _initPlayers();
     _settingsService.settingsNotifier.addListener(_onSettingsChanged);
   }
@@ -47,11 +49,14 @@ class AudioService {
   }
 
   void _initPlayers() {
+    if (_testCallback != null) return;
     try {
       _sfxPlayer = AudioPlayer()..setReleaseMode(ReleaseMode.stop);
       _musicPlayer = AudioPlayer()..setReleaseMode(ReleaseMode.loop);
     } catch (e) {
-      debugPrint('AudioPlayer initialization notice (ignored in test mode): $e');
+      debugPrint(
+        'AudioPlayer initialization notice (ignored in test mode): $e',
+      );
     }
   }
 
@@ -177,12 +182,16 @@ class AudioService {
   Future<void> playStarReveal() => _playSfx('audio/sfx/star_reveal.wav');
   Future<void> playButtonTap() => _playSfx('audio/sfx/button_click.wav');
   Future<void> playLevelStart() => _playSfx('audio/sfx/level_start.wav');
-  Future<void> playCountdownWarning() => _playSfx('audio/sfx/timer_warning.wav');
+  Future<void> playCountdownWarning() =>
+      _playSfx('audio/sfx/timer_warning.wav');
   Future<void> playGameOver() => _playSfx('audio/sfx/game_over.wav');
 
   // --- Semantic Background Music Methods ---
 
-  Future<void> playMenuMusic() => _playMusic('audio/music/menu_theme.wav', loop: true);
-  Future<void> playGameplayMusic() => _playMusic('audio/music/gameplay_theme.wav', loop: true);
-  Future<void> playVictoryMusic() => _playMusic('audio/music/victory_stinger.wav', loop: false);
+  Future<void> playMenuMusic() =>
+      _playMusic('audio/music/menu_theme.wav', loop: true);
+  Future<void> playGameplayMusic() =>
+      _playMusic('audio/music/gameplay_theme.wav', loop: true);
+  Future<void> playVictoryMusic() =>
+      _playMusic('audio/music/victory_stinger.wav', loop: false);
 }

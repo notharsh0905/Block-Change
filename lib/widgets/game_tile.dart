@@ -59,14 +59,15 @@ class _GameTileWidgetState extends State<GameTileWidget>
       duration: const Duration(milliseconds: 250),
     );
 
-    _shakeAnimation = TweenSequence<double>([
-      TweenSequenceItem(tween: Tween(begin: 0.0, end: -6.0), weight: 20),
-      TweenSequenceItem(tween: Tween(begin: -6.0, end: 6.0), weight: 30),
-      TweenSequenceItem(tween: Tween(begin: 6.0, end: -4.0), weight: 25),
-      TweenSequenceItem(tween: Tween(begin: -4.0, end: 0.0), weight: 25),
-    ]).animate(
-      CurvedAnimation(parent: _shakeController, curve: Curves.easeInOut),
-    );
+    _shakeAnimation =
+        TweenSequence<double>([
+          TweenSequenceItem(tween: Tween(begin: 0.0, end: -6.0), weight: 20),
+          TweenSequenceItem(tween: Tween(begin: -6.0, end: 6.0), weight: 30),
+          TweenSequenceItem(tween: Tween(begin: 6.0, end: -4.0), weight: 25),
+          TweenSequenceItem(tween: Tween(begin: -4.0, end: 0.0), weight: 25),
+        ]).animate(
+          CurvedAnimation(parent: _shakeController, curve: Curves.easeInOut),
+        );
   }
 
   @override
@@ -127,7 +128,8 @@ class _GameTileWidgetState extends State<GameTileWidget>
       child: AnimatedBuilder(
         animation: Listenable.merge([_scaleAnimation, _shakeAnimation]),
         builder: (context, child) {
-          final isReduced = SettingsService.instance.currentSettings.reducedMotion;
+          final isReduced =
+              SettingsService.instance.currentSettings.reducedMotion;
           final scaleVal = isReduced ? 1.0 : _scaleAnimation.value;
           final shakeVal = isReduced ? 0.0 : _shakeAnimation.value;
 
@@ -166,7 +168,7 @@ class _GameTileWidgetState extends State<GameTileWidget>
                   child: Container(
                     height: math.max(3.0, widget.tileSize * 0.08),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.30),
+                      color: Colors.white.withValues(alpha: 0.30),
                       borderRadius: BorderRadius.circular(borderRadius * 0.5),
                     ),
                   ),
@@ -207,7 +209,9 @@ class _GameTileWidgetState extends State<GameTileWidget>
                     children: [
                       Icon(
                         isLocked ? Icons.lock_rounded : Icons.lock_open_rounded,
-                        color: isLocked ? const Color(0xFFFFD200) : Colors.white,
+                        color: isLocked
+                            ? const Color(0xFFFFD200)
+                            : Colors.white,
                         size: iconSize * 0.85,
                         shadows: const [
                           Shadow(

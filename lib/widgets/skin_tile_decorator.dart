@@ -47,16 +47,13 @@ class SkinTileDecorator extends StatelessWidget {
       case 'rainbow':
         return BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
-          border: Border.all(
-            color: Colors.white.withOpacity(0.4),
-            width: 2.0,
-          ),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.4), width: 2.0),
         );
       case 'ice':
         return BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
           border: Border.all(
-            color: const Color(0xFFE0F7FA).withOpacity(0.6),
+            color: const Color(0xFFE0F7FA).withValues(alpha: 0.6),
             width: 2.0,
           ),
         );
@@ -64,7 +61,7 @@ class SkinTileDecorator extends StatelessWidget {
         return BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
           border: Border.all(
-            color: const Color(0xFFFF6F00).withOpacity(0.6),
+            color: const Color(0xFFFF6F00).withValues(alpha: 0.6),
             width: 2.0,
           ),
         );
@@ -83,9 +80,7 @@ class SkinTileDecorator extends StatelessWidget {
         child,
         if (border != null)
           Positioned.fill(
-            child: IgnorePointer(
-              child: Container(decoration: border),
-            ),
+            child: IgnorePointer(child: Container(decoration: border)),
           ),
         if (icon != null && tile.type == TileType.normal)
           Positioned(
@@ -95,7 +90,7 @@ class SkinTileDecorator extends StatelessWidget {
               child: Icon(
                 icon,
                 size: 14.0,
-                color: Colors.white.withOpacity(0.35),
+                color: Colors.white.withValues(alpha: 0.35),
               ),
             ),
           ),

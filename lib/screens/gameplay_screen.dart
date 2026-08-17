@@ -362,7 +362,7 @@ class _GameplayScreenState extends State<GameplayScreen> {
                             color: theme.surfaceColor,
                             borderRadius: BorderRadius.circular(18.0),
                             border: Border.all(
-                              color: theme.boardFrameColor.withOpacity(0.4),
+                              color: theme.boardFrameColor.withValues(alpha: 0.4),
                               width: 1.5,
                             ),
                           ),
@@ -384,9 +384,10 @@ class _GameplayScreenState extends State<GameplayScreen> {
                                   borderRadius: BorderRadius.circular(8.0),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: AppColors.gamePaletteDark[state
-                                              .targetColor %
-                                          AppColors.gamePaletteDark.length],
+                                      color:
+                                          AppColors.gamePaletteDark[state
+                                                  .targetColor %
+                                              AppColors.gamePaletteDark.length],
                                       offset: const Offset(0, 2),
                                       blurRadius: 0,
                                     ),

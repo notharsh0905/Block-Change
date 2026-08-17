@@ -36,7 +36,16 @@ void main() {
       final catalog = ThemeService.allThemes;
       expect(catalog.length, equals(5));
       final ids = catalog.map((t) => t.id).toList();
-      expect(ids, containsAll(['classic_dark', 'bright_candy', 'ocean', 'sunset', 'lavender']));
+      expect(
+        ids,
+        containsAll([
+          'classic_dark',
+          'bright_candy',
+          'ocean',
+          'sunset',
+          'lavender',
+        ]),
+      );
     });
   });
 }

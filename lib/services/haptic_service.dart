@@ -7,13 +7,7 @@ import 'settings_service.dart';
 /// Function signature for haptic execution override in tests.
 typedef HapticFeedbackCallback = Future<void> Function(HapticFeedbackType type);
 
-enum HapticFeedbackType {
-  selection,
-  light,
-  medium,
-  heavy,
-  vibrate,
-}
+enum HapticFeedbackType { selection, light, medium, heavy, vibrate }
 
 /// Centralized service providing semantic haptic feedback based on player preferences.
 class HapticService {
@@ -26,7 +20,7 @@ class HapticService {
   HapticService._({
     SettingsService? settingsService,
     this._testFeedbackCallback,
-  })  : _settingsService = settingsService ?? SettingsService.instance;
+  }) : _settingsService = settingsService ?? SettingsService.instance;
 
   /// Factory for testing with explicit SettingsService or feedback callback.
   factory HapticService.withSettings(
@@ -74,7 +68,8 @@ class HapticService {
     // Adjust for intensity setting
     switch (_settings.hapticIntensity) {
       case HapticIntensity.low:
-        if (targetType == HapticFeedbackType.heavy || targetType == HapticFeedbackType.vibrate) {
+        if (targetType == HapticFeedbackType.heavy ||
+            targetType == HapticFeedbackType.vibrate) {
           targetType = HapticFeedbackType.medium;
         } else if (targetType == HapticFeedbackType.medium) {
           targetType = HapticFeedbackType.light;
