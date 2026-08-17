@@ -21,7 +21,7 @@ class SkinTileDecorator extends StatelessWidget {
       case 'cute_cats':
         return Icons.pets_rounded;
       case 'puppies':
-        return Icons.paws_rounded;
+        return Icons.pets_rounded;
       case 'fruits':
         return Icons.eco_rounded;
       case 'desserts':

@@ -5,7 +5,6 @@ import '../models/player_progress_model.dart';
 import '../services/audio_service.dart';
 import '../services/haptic_service.dart';
 import '../services/progress_service.dart';
-import '../services/theme_service.dart';
 import '../theme/app_colors.dart';
 import 'gameplay_screen.dart';
 

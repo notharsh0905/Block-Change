@@ -23,9 +23,8 @@ class AudioService {
 
   AudioService._({
     SettingsService? settingsService,
-    AudioPlaybackCallback? testCallback,
-  })  : _settingsService = settingsService ?? SettingsService.instance,
-        _testCallback = testCallback {
+    this._testCallback,
+  })  : _settingsService = settingsService ?? SettingsService.instance {
     _initPlayers();
     _settingsService.settingsNotifier.addListener(_onSettingsChanged);
   }
@@ -48,9 +47,6 @@ class AudioService {
   }
 
   void _initPlayers() {
-    if (kIsWeb || !kDebugMode && defaultTargetPlatform == TargetPlatform.android) {
-      // Standard runtime initialization
-    }
     try {
       _sfxPlayer = AudioPlayer()..setReleaseMode(ReleaseMode.stop);
       _musicPlayer = AudioPlayer()..setReleaseMode(ReleaseMode.loop);
@@ -85,16 +81,18 @@ class AudioService {
     final settings = _settings;
     if (!settings.sfxEnabled || settings.sfxVolume <= 0) return;
 
-    if (_testCallback != null) {
-      _testCallback!(assetPath, settings.sfxVolume, false);
+    final callback = _testCallback;
+    if (callback != null) {
+      callback(assetPath, settings.sfxVolume, false);
       return;
     }
 
     try {
-      if (_sfxPlayer != null) {
-        await _sfxPlayer!.stop();
-        await _sfxPlayer!.setVolume(settings.sfxVolume);
-        await _sfxPlayer!.play(AssetSource(assetPath));
+      final player = _sfxPlayer;
+      if (player != null) {
+        await player.stop();
+        await player.setVolume(settings.sfxVolume);
+        await player.play(AssetSource(assetPath));
       }
     } catch (e) {
       debugPrint('AudioService SFX playback notice: $e');
@@ -108,19 +106,21 @@ class AudioService {
 
     if (_currentMusicAsset == assetPath && _isMusicPlaying) return;
 
-    if (_testCallback != null) {
-      _testCallback!(assetPath, settings.musicVolume, true);
+    final callback = _testCallback;
+    if (callback != null) {
+      callback(assetPath, settings.musicVolume, true);
       _currentMusicAsset = assetPath;
       _isMusicPlaying = true;
       return;
     }
 
     try {
-      if (_musicPlayer != null) {
-        await _musicPlayer!.stop();
-        await _musicPlayer!.setReleaseMode(loop ? ReleaseMode.loop : ReleaseMode.stop);
-        await _musicPlayer!.setVolume(settings.musicVolume);
-        await _musicPlayer!.play(AssetSource(assetPath));
+      final player = _musicPlayer;
+      if (player != null) {
+        await player.stop();
+        await player.setReleaseMode(loop ? ReleaseMode.loop : ReleaseMode.stop);
+        await player.setVolume(settings.musicVolume);
+        await player.play(AssetSource(assetPath));
         _currentMusicAsset = assetPath;
         _isMusicPlaying = true;
       }

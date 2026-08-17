@@ -56,6 +56,7 @@ class PlayerProgressModel {
   int getBestScore(int levelId) => bestScoreByLevel[levelId] ?? 0;
   int getBestMoves(int levelId) => bestMovesByLevel[levelId] ?? 0;
   double getBestTime(int levelId) => bestTimeByLevel[levelId] ?? 0.0;
+  bool get isCampaignCompleted => completedLevels.length >= 100 || completedLevels.contains(100);
 
   /// Calculates total stars earned across all completed levels in a given world (1..10).
   int getWorldEarnedStars(int worldId) {

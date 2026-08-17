@@ -8,10 +8,13 @@ class ThemeService {
   static ThemeService? _instance;
   static ThemeService get instance => _instance ??= ThemeService._();
 
-  final SettingsService _settingsService;
+  final SettingsService? _overrideSettingsService;
 
   ThemeService._({SettingsService? settingsService})
-      : _settingsService = settingsService ?? SettingsService.instance;
+      : _overrideSettingsService = settingsService;
+
+  SettingsService get _settingsService =>
+      _overrideSettingsService ?? SettingsService.instance;
 
   @visibleForTesting
   static void resetInstanceForTesting({ThemeService? testInstance}) {

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import '../models/game_settings_model.dart';
@@ -24,9 +25,8 @@ class HapticService {
 
   HapticService._({
     SettingsService? settingsService,
-    HapticFeedbackCallback? testFeedbackCallback,
-  })  : _settingsService = settingsService ?? SettingsService.instance,
-        _testFeedbackCallback = testFeedbackCallback;
+    this._testFeedbackCallback,
+  })  : _settingsService = settingsService ?? SettingsService.instance;
 
   /// Factory for testing with explicit SettingsService or feedback callback.
   factory HapticService.withSettings(
@@ -94,8 +94,9 @@ class HapticService {
         break;
     }
 
-    if (_testFeedbackCallback != null) {
-      await _testFeedbackCallback!(targetType);
+    final callback = _testFeedbackCallback;
+    if (callback != null) {
+      await callback(targetType);
       return;
     }
 

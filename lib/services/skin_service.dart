@@ -9,14 +9,20 @@ class SkinService {
   static SkinService? _instance;
   static SkinService get instance => _instance ??= SkinService._();
 
-  final SettingsService _settingsService;
-  final ProgressService _progressService;
+  final SettingsService? _overrideSettingsService;
+  final ProgressService? _overrideProgressService;
 
   SkinService._({
     SettingsService? settingsService,
     ProgressService? progressService,
-  })  : _settingsService = settingsService ?? SettingsService.instance,
-        _progressService = progressService ?? ProgressService.instance;
+  })  : _overrideSettingsService = settingsService,
+        _overrideProgressService = progressService;
+
+  SettingsService get _settingsService =>
+      _overrideSettingsService ?? SettingsService.instance;
+
+  ProgressService get _progressService =>
+      _overrideProgressService ?? ProgressService.instance;
 
   @visibleForTesting
   static void resetInstanceForTesting({SkinService? testInstance}) {
@@ -46,7 +52,7 @@ class SkinService {
       name: 'Puppies',
       description: 'Cheerful puppy dog paws and happy wagging energy.',
       unlockMethod: SkinUnlockMethod.rewardedAd,
-      previewIcon: Icons.paws_rounded,
+      previewIcon: Icons.pets_rounded,
       accentColor: Color(0xFFFFBE0B),
     ),
     SkinModel(

@@ -140,7 +140,7 @@ class SettingsScreen extends StatelessWidget {
         // Music Switch
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
-          activeColor: theme.primaryAccent,
+          activeThumbColor: theme.primaryAccent,
           title: Text('Background Music', style: TextStyle(color: theme.textPrimary)),
           value: settings.musicEnabled,
           onChanged: (val) {
@@ -177,7 +177,7 @@ class SettingsScreen extends StatelessWidget {
         // SFX Switch
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
-          activeColor: theme.primaryAccent,
+          activeThumbColor: theme.primaryAccent,
           title: Text('Sound Effects', style: TextStyle(color: theme.textPrimary)),
           value: settings.sfxEnabled,
           onChanged: (val) {
@@ -228,7 +228,7 @@ class SettingsScreen extends StatelessWidget {
       children: [
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
-          activeColor: theme.primaryAccent,
+          activeThumbColor: theme.primaryAccent,
           title: Text('Haptics Enabled', style: TextStyle(color: theme.textPrimary)),
           value: settings.hapticsEnabled,
           onChanged: (val) {
@@ -291,7 +291,7 @@ class SettingsScreen extends StatelessWidget {
       children: [
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
-          activeColor: theme.primaryAccent,
+          activeThumbColor: theme.primaryAccent,
           title: Text('Show Interactive Tutorial', style: TextStyle(color: theme.textPrimary)),
           value: settings.showTutorial,
           onChanged: (val) {
@@ -302,7 +302,7 @@ class SettingsScreen extends StatelessWidget {
         ),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
-          activeColor: theme.primaryAccent,
+          activeThumbColor: theme.primaryAccent,
           title: Text('Reduced Motion', style: TextStyle(color: theme.textPrimary)),
           subtitle: Text(
             'Damps scale animations & heavy haptic pulses',

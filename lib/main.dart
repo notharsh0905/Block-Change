@@ -8,7 +8,7 @@ import 'services/settings_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   AppConfig.validateConfiguration();
-  await ProgressService.instance.initialize();
+  await ProgressService.instance.loadProgress();
   await SettingsService.instance.initialize();
   runApp(const BlockChangeApp());
 }

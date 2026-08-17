@@ -267,9 +267,10 @@ class _GameplayScreenState extends State<GameplayScreen> {
   void _onTileTapped(int row, int col) {
     if (_engine == null) return;
     final board = _engine!.value.board;
-    if (row < 0 || row >= board.gridSize || col < 0 || col >= board.gridSize) return;
+    final gridSize = board.length;
+    if (row < 0 || row >= gridSize || col < 0 || col >= gridSize) return;
 
-    final tile = board.grid[row][col];
+    final tile = board[row][col];
     if (tile.isLocked) {
       AudioService.instance.playLockedTap();
       HapticService.instance.lockTap();
