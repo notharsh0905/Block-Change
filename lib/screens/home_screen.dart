@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../data/level_loader.dart';
 import '../models/player_progress_model.dart';
+import '../services/audio_service.dart';
+import '../services/haptic_service.dart';
 import '../services/progress_service.dart';
+import '../services/theme_service.dart';
 import '../theme/app_colors.dart';
 import '../widgets/game_button.dart';
 import 'gameplay_screen.dart';
 
-/// Intentional 2.5D Home Screen dashboard with campaign progression integration.
+/// Intentional 2.5D Home Screen dashboard with campaign progression, settings & skin integration.
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -20,9 +23,13 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     ProgressService.instance.loadProgress();
+    AudioService.instance.playMenuMusic();
   }
 
   void _startGame(BuildContext context, PlayerProgressModel progress) async {
+    AudioService.instance.playButtonTap();
+    HapticService.instance.buttonPress();
+
     final navigator = Navigator.of(context);
     final targetLevelId = progress.highestUnlockedLevel;
     final levelModel = await LevelLoader.loadLevelById(targetLevelId);
@@ -45,15 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = ThemeService.instance.equippedTheme;
+
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [AppColors.backgroundTop, AppColors.backgroundBottom],
-          ),
-        ),
+        decoration: BoxDecoration(gradient: theme.backgroundGradient),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(
@@ -65,6 +68,33 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (context, progress, child) {
                 return Column(
                   children: [
+                    // Top Right Quick Action Bar
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.palette_rounded),
+                          color: theme.textPrimary,
+                          tooltip: 'Skin Gallery',
+                          onPressed: () {
+                            AudioService.instance.playButtonTap();
+                            HapticService.instance.buttonPress();
+                            Navigator.pushNamed(context, '/skins');
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.settings_rounded),
+                          color: theme.textPrimary,
+                          tooltip: 'Settings',
+                          onPressed: () {
+                            AudioService.instance.playButtonTap();
+                            HapticService.instance.buttonPress();
+                            Navigator.pushNamed(context, '/settings');
+                          },
+                        ),
+                      ],
+                    ),
+
                     const Spacer(flex: 2),
 
                     // Authentic 2.5D Logo Block Emblem Motif
@@ -73,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 96,
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: AppColors.surfaceElevated,
+                        color: theme.surfaceColor,
                         borderRadius: BorderRadius.circular(24.0),
                         boxShadow: const [
                           BoxShadow(
@@ -111,17 +141,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     const SizedBox(height: 20),
 
-                    const FittedBox(
+                    FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
                         'BLOCK CHANGE',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: AppColors.textPrimary,
+                          color: theme.textPrimary,
                           fontSize: 32,
                           fontWeight: FontWeight.w900,
                           letterSpacing: 1.4,
-                          shadows: [
+                          shadows: const [
                             Shadow(
                               color: Colors.black45,
                               offset: Offset(0, 3),
@@ -141,10 +171,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         vertical: 6.0,
                       ),
                       decoration: BoxDecoration(
-                        color: AppColors.sunshine.withValues(alpha: 0.15),
+                        color: AppColors.sunshine.withOpacity(0.15),
                         borderRadius: BorderRadius.circular(16.0),
                         border: Border.all(
-                          color: AppColors.sunshine.withValues(alpha: 0.4),
+                          color: AppColors.sunshine.withOpacity(0.4),
                           width: 1.5,
                         ),
                       ),
@@ -189,35 +219,48 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Expanded(
                           child: GameButton(
-                            label: 'CAMPAIGN MAP',
+                            label: 'MAP',
                             icon: Icons.map_rounded,
                             color: AppColors.sky,
                             darkColor: AppColors.skyDark,
                             height: 48,
                             fontSize: 14,
                             onPressed: () {
+                              AudioService.instance.playButtonTap();
+                              HapticService.instance.buttonPress();
                               Navigator.pushNamed(context, '/map');
                             },
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: GameButton(
+                            label: 'SKINS',
+                            icon: Icons.palette_rounded,
+                            color: theme.primaryAccent,
+                            darkColor: theme.cardColor,
+                            height: 48,
+                            fontSize: 14,
+                            onPressed: () {
+                              AudioService.instance.playButtonTap();
+                              HapticService.instance.buttonPress();
+                              Navigator.pushNamed(context, '/skins');
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 10),
                         Expanded(
                           child: GameButton(
                             label: 'SETTINGS',
                             icon: Icons.settings_rounded,
-                            color: AppColors.surfaceElevated,
-                            darkColor: const Color(0xFF222238),
+                            color: theme.surfaceColor,
+                            darkColor: theme.boardFrameColor,
                             height: 48,
                             fontSize: 14,
                             onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'Settings unlocked in future phase!',
-                                  ),
-                                  duration: Duration(seconds: 1),
-                                ),
-                              );
+                              AudioService.instance.playButtonTap();
+                              HapticService.instance.buttonPress();
+                              Navigator.pushNamed(context, '/settings');
                             },
                           ),
                         ),

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../data/level_loader.dart';
 import '../models/player_progress_model.dart';
+import '../services/audio_service.dart';
+import '../services/haptic_service.dart';
 import '../services/progress_service.dart';
+import '../services/theme_service.dart';
 import '../theme/app_colors.dart';
 import 'gameplay_screen.dart';
 
@@ -218,7 +221,11 @@ class _LevelMapScreenState extends State<LevelMapScreen>
                         IconButton(
                           padding: EdgeInsets.zero,
                           constraints: const BoxConstraints(),
-                          onPressed: () => Navigator.pop(context),
+                          onPressed: () {
+                            AudioService.instance.playButtonTap();
+                            HapticService.instance.buttonPress();
+                            Navigator.pop(context);
+                          },
                           icon: const Icon(
                             Icons.arrow_back_rounded,
                             color: AppColors.textPrimary,
@@ -232,23 +239,43 @@ class _LevelMapScreenState extends State<LevelMapScreen>
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: AppColors.textPrimary,
-                              fontSize: 18,
+                              fontSize: 16,
                               fontWeight: FontWeight.w900,
-                              letterSpacing: 1.0,
+                              letterSpacing: 0.5,
                             ),
                           ),
                         ),
-                        const SizedBox(width: 6),
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                          icon: const Icon(Icons.palette_rounded, color: AppColors.textPrimary, size: 20),
+                          onPressed: () {
+                            AudioService.instance.playButtonTap();
+                            HapticService.instance.buttonPress();
+                            Navigator.pushNamed(context, '/skins');
+                          },
+                        ),
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                          icon: const Icon(Icons.settings_rounded, color: AppColors.textPrimary, size: 20),
+                          onPressed: () {
+                            AudioService.instance.playButtonTap();
+                            HapticService.instance.buttonPress();
+                            Navigator.pushNamed(context, '/settings');
+                          },
+                        ),
+                        const SizedBox(width: 4),
 
                         // Total Stars Compact Badge
                         Container(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0,
-                            vertical: 5.0,
+                            horizontal: 6.0,
+                            vertical: 4.0,
                           ),
                           decoration: BoxDecoration(
                             color: AppColors.surfaceElevated,
-                            borderRadius: BorderRadius.circular(12.0),
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -256,14 +283,14 @@ class _LevelMapScreenState extends State<LevelMapScreen>
                               const Icon(
                                 Icons.star_rounded,
                                 color: AppColors.sunshine,
-                                size: 16,
+                                size: 14,
                               ),
-                              const SizedBox(width: 3),
+                              const SizedBox(width: 2),
                               Text(
                                 '$totalEarnedStars/300',
                                 style: const TextStyle(
                                   color: AppColors.textPrimary,
-                                  fontSize: 12,
+                                  fontSize: 11,
                                   fontWeight: FontWeight.w800,
                                 ),
                               ),

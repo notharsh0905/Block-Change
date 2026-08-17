@@ -7,14 +7,18 @@ import '../game/game_engine.dart';
 import '../game/star_calculator.dart';
 import '../models/game_state_model.dart';
 import '../models/level_model.dart';
+import '../models/tile_model.dart';
+import '../services/audio_service.dart';
+import '../services/haptic_service.dart';
 import '../services/progress_service.dart';
+import '../services/theme_service.dart';
 import '../theme/app_colors.dart';
 import '../widgets/dialogs/pause_overlay.dart';
 import '../widgets/dialogs/win_overlay.dart';
 import '../widgets/game_board.dart';
 import '../widgets/game_button.dart';
 
-/// Main Playable Puzzle Screen — Refactored Single Source of Truth for Campaign Progression.
+/// Main Playable Puzzle Screen with audio, haptics, themes, and skin integration.
 class GameplayScreen extends StatefulWidget {
   final LevelModel? initialLevel;
   final List<LevelModel>? availableLevels;
@@ -42,14 +46,12 @@ class _GameplayScreenState extends State<GameplayScreen> {
 
   Future<void> _initLevelsAndStart() async {
     if (widget.availableLevels != null && widget.availableLevels!.isNotEmpty) {
-      // Direct widget test injection
       _testAvailableLevels = widget.availableLevels;
       _testLevelIndex = 0;
       _currentLevel = _testAvailableLevels!.first;
     } else if (widget.initialLevel != null) {
       _currentLevel = widget.initialLevel;
     } else {
-      // Single Source of Truth: load current highest unlocked level
       final progress = await ProgressService.instance.loadProgress();
       _currentLevel = await LevelLoader.loadLevelById(
         progress.highestUnlockedLevel,
@@ -69,6 +71,9 @@ class _GameplayScreenState extends State<GameplayScreen> {
     _engine!.addListener(_onEngineStateChanged);
     _engine!.start();
 
+    AudioService.instance.playGameplayMusic();
+    AudioService.instance.playLevelStart();
+
     // Start 50ms engine tick loop (20 ticks/sec)
     _tickerTimer = Timer.periodic(const Duration(milliseconds: 50), (_) {
       if (_engine != null && _engine!.value.status == GameStatus.playing) {
@@ -85,6 +90,9 @@ class _GameplayScreenState extends State<GameplayScreen> {
     final status = _engine!.value.status;
     if (status == GameStatus.won) {
       _isOverlayShowing = true;
+      AudioService.instance.playVictoryMusic();
+      AudioService.instance.playLevelComplete();
+      HapticService.instance.levelComplete();
       _showWinOverlay();
     } else if (status == GameStatus.paused) {
       _isOverlayShowing = true;
@@ -100,7 +108,6 @@ class _GameplayScreenState extends State<GameplayScreen> {
       timeRemainingSeconds: state.timeRemainingSeconds,
     );
 
-    // Save player progress & high scores locally via Single Source of Truth ProgressService
     ProgressService.instance.recordLevelCompletion(
       levelId: state.level.id,
       stars: stars,
@@ -156,7 +163,6 @@ class _GameplayScreenState extends State<GameplayScreen> {
   }
 
   void _nextLevel() async {
-    // 1. Handle widget test injection override if explicitly provided
     if (_testAvailableLevels != null && _testAvailableLevels!.length > 1) {
       if (_testLevelIndex < _testAvailableLevels!.length - 1) {
         _testLevelIndex++;
@@ -171,18 +177,14 @@ class _GameplayScreenState extends State<GameplayScreen> {
     if (_currentLevel == null) return;
     final currentId = _currentLevel!.id;
 
-    // 2. Handle Level 100 Endgame (PRD Part A2: Never wrap Level 100 -> Level 1!)
     if (currentId >= 100) {
       _showCampaignClearedDialog();
       return;
     }
 
-    // 3. Single Source of Truth Campaign Progression (Next Level = currentId + 1)
     final nextId = ProgressService.instance.getNextLevelId(currentId);
-
     LevelModel? nextLevel = await LevelLoader.loadLevelById(nextId);
 
-    // 4. Safe fallback for unit test environments
     nextLevel ??= LevelLoader.getFallbackWorldLevels((nextId - 1) ~/ 10 + 1)
         .firstWhere(
           (l) => l.id == nextId,
@@ -190,7 +192,6 @@ class _GameplayScreenState extends State<GameplayScreen> {
         );
 
     if (nextLevel.id == 1 && currentId >= 1) {
-      // Diagnostic Guard: Prevent invalid fallback wraparound to Level 1
       debugPrint(
         'CRITICAL PROGRESSION GUARD: Prevented wraparound from Level $currentId to Level 1',
       );
@@ -249,6 +250,8 @@ class _GameplayScreenState extends State<GameplayScreen> {
                   color: AppColors.mint,
                   darkColor: AppColors.mintDark,
                   onPressed: () {
+                    AudioService.instance.playButtonTap();
+                    HapticService.instance.buttonPress();
                     Navigator.of(context).pop();
                     Navigator.of(context).pop();
                   },
@@ -261,8 +264,32 @@ class _GameplayScreenState extends State<GameplayScreen> {
     );
   }
 
+  void _onTileTapped(int row, int col) {
+    if (_engine == null) return;
+    final board = _engine!.value.board;
+    if (row < 0 || row >= board.gridSize || col < 0 || col >= board.gridSize) return;
+
+    final tile = board.grid[row][col];
+    if (tile.isLocked) {
+      AudioService.instance.playLockedTap();
+      HapticService.instance.lockTap();
+    } else if (tile.type == TileType.bomb) {
+      AudioService.instance.playBomb();
+      HapticService.instance.bombExplosion();
+    } else if (tile.type == TileType.freeze) {
+      AudioService.instance.playFreeze();
+      HapticService.instance.freeze();
+    } else {
+      AudioService.instance.playColorChange();
+      HapticService.instance.tileTap();
+    }
+
+    _engine!.tapTile(row, col);
+  }
+
   @override
   void dispose() {
+    AudioService.instance.stopMusic();
     _tickerTimer?.cancel();
     _engine?.removeListener(_onEngineStateChanged);
     _engine?.dispose();
@@ -278,6 +305,8 @@ class _GameplayScreenState extends State<GameplayScreen> {
       );
     }
 
+    final theme = ThemeService.instance.equippedTheme;
+
     return ValueListenableBuilder<GameStateModel>(
       valueListenable: _engine!,
       builder: (context, state, child) {
@@ -286,13 +315,7 @@ class _GameplayScreenState extends State<GameplayScreen> {
 
         return Scaffold(
           body: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [AppColors.backgroundTop, AppColors.backgroundBottom],
-              ),
-            ),
+            decoration: BoxDecoration(gradient: theme.backgroundGradient),
             child: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -311,16 +334,16 @@ class _GameplayScreenState extends State<GameplayScreen> {
                           children: [
                             Text(
                               'LEVEL ${state.level.id}',
-                              style: const TextStyle(
-                                color: AppColors.textPrimary,
+                              style: TextStyle(
+                                color: theme.textPrimary,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w900,
                               ),
                             ),
                             Text(
                               state.level.name,
-                              style: const TextStyle(
-                                color: AppColors.textSecondary,
+                              style: TextStyle(
+                                color: theme.textSecondary,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -335,19 +358,19 @@ class _GameplayScreenState extends State<GameplayScreen> {
                             vertical: 8.0,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.surface,
+                            color: theme.surfaceColor,
                             borderRadius: BorderRadius.circular(18.0),
                             border: Border.all(
-                              color: AppColors.surfaceElevated,
+                              color: theme.boardFrameColor.withOpacity(0.4),
                               width: 1.5,
                             ),
                           ),
                           child: Row(
                             children: [
-                              const Text(
+                              Text(
                                 'TARGET: ',
                                 style: TextStyle(
-                                  color: AppColors.textSecondary,
+                                  color: theme.textSecondary,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w900,
                                 ),
@@ -360,10 +383,9 @@ class _GameplayScreenState extends State<GameplayScreen> {
                                   borderRadius: BorderRadius.circular(8.0),
                                   boxShadow: [
                                     BoxShadow(
-                                      color:
-                                          AppColors.gamePaletteDark[state
-                                                  .targetColor %
-                                              AppColors.gamePaletteDark.length],
+                                      color: AppColors.gamePaletteDark[state
+                                              .targetColor %
+                                          AppColors.gamePaletteDark.length],
                                       offset: const Offset(0, 2),
                                       blurRadius: 0,
                                     ),
@@ -376,10 +398,14 @@ class _GameplayScreenState extends State<GameplayScreen> {
 
                         // Pause Button
                         IconButton(
-                          onPressed: () => _engine?.pause(),
-                          icon: const Icon(
+                          onPressed: () {
+                            AudioService.instance.playButtonTap();
+                            HapticService.instance.buttonPress();
+                            _engine?.pause();
+                          },
+                          icon: Icon(
                             Icons.pause_circle_filled_rounded,
-                            color: AppColors.textPrimary,
+                            color: theme.textPrimary,
                             size: 36,
                           ),
                         ),
@@ -395,7 +421,7 @@ class _GameplayScreenState extends State<GameplayScreen> {
                         vertical: 10.0,
                       ),
                       decoration: BoxDecoration(
-                        color: AppColors.surface,
+                        color: theme.surfaceColor,
                         borderRadius: BorderRadius.circular(16.0),
                       ),
                       child: Row(
@@ -411,8 +437,8 @@ class _GameplayScreenState extends State<GameplayScreen> {
                               const SizedBox(width: 6),
                               Text(
                                 '${state.timeRemainingSeconds.ceil()}s',
-                                style: const TextStyle(
-                                  color: AppColors.textPrimary,
+                                style: TextStyle(
+                                  color: theme.textPrimary,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -429,8 +455,8 @@ class _GameplayScreenState extends State<GameplayScreen> {
                               const SizedBox(width: 6),
                               Text(
                                 '${state.movesCount}',
-                                style: const TextStyle(
-                                  color: AppColors.textPrimary,
+                                style: TextStyle(
+                                  color: theme.textPrimary,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -474,7 +500,7 @@ class _GameplayScreenState extends State<GameplayScreen> {
                       child: Center(
                         child: GameBoardWidget(
                           board: state.board,
-                          onTileTap: (r, c) => _engine?.tapTile(r, c),
+                          onTileTap: _onTileTapped,
                         ),
                       ),
                     ),
@@ -486,7 +512,7 @@ class _GameplayScreenState extends State<GameplayScreen> {
                         padding: const EdgeInsets.all(12.0),
                         margin: const EdgeInsets.only(bottom: 8.0),
                         decoration: BoxDecoration(
-                          color: AppColors.surfaceElevated,
+                          color: theme.surfaceColor,
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         child: Text(
